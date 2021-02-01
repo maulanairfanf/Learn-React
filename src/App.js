@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
-import './App.css';
-import Form from './component/Form';
-import TodoList from './component/TodoList'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { decrement, increment } from './actions';
+
 
 function App() {
-  const [inputText, setInputText] = useState("");
-  const [todos, setTodos] = useState([]);
- 
+  const counter = useSelector(state => state.counter);
+  const isLogged = useSelector(state => state.isLogged);
+  const dispatch = useDispatch();
   return (
-    <div className="">
-      <h1 className="text-red-50">Hello React {inputText}</h1>
-      <Form inputText={inputText} todos={todos} setTodos={setTodos} setInputText={setInputText} />
-      <TodoList todos={ todos  } />
+    <div className="App">
+      <h1 className="">Counter {counter}</h1>
+      <button onClick={() => dispatch(increment(5))} className="rounded-full bg-aqua p-5">+</button>
+      <button onClick={() => dispatch(decrement(3))} className="rounded-full bg-aqua p-5">-</button>
+      {isLogged ? <h3>Valuable</h3> : ''}
     </div>
   );
 }
