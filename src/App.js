@@ -1,19 +1,23 @@
-import React from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import { decrement, increment } from './actions';
-
+import React from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import { decrement, increment } from "./actions";
+import Sidebar from "./component/Sidebar/Sidebar";
+import Layout from "./component/Layout/Layout";
+import Routes from "./Routes";
 
 function App() {
-  const counter = useSelector(state => state.counter);
-  const isLogged = useSelector(state => state.isLogged);
-  const dispatch = useDispatch();
+  // const counter = useSelector((state) => state.counter);
+  // const isLogged = useSelector((state) => state.isLogged);
+  // const dispatch = useDispatch();
   return (
-    <div className="App">
-      <h1 className="">Counter {counter}</h1>
-      <button onClick={() => dispatch(increment(5))} className="rounded-full bg-aqua p-5">+</button>
-      <button onClick={() => dispatch(decrement(3))} className="rounded-full bg-aqua p-5">-</button>
-      {isLogged ? <h3>Valuable</h3> : ''}
-    </div>
+    <>
+      <div>
+        <div className="md:flex flex-col md:flex-row md:min-h-screen w-full ">
+          <Sidebar />
+          <Layout />
+        </div>
+      </div>
+    </>
   );
 }
 

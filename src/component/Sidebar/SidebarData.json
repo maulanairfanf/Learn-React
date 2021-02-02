@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Home",
+    "path": "/"
+  },
+  {
+    "title": "Blog",
+    "path": "/Blog"
+  },
+  {
+    "title": "Portofolio",
+    "path": "/Portofolio"
+  },
+  {
+    "title": "Contact",
+    "path": "/Contact"
+  }
+]
