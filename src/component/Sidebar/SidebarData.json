@@ -1,7 +1,7 @@
 [
   {
     "title": "Home",
-    "path": "/"
+    "path": "/Home"
   },
   {
     "title": "Blog",
@@ -14,5 +14,9 @@
   {
     "title": "Contact",
     "path": "/Contact"
+  },
+  {
+    "title": "SignOut",
+    "path": "/"
   }
 ]
