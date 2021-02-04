@@ -3,19 +3,17 @@ import ReactDOM from "react-dom";
 import "./assets/main.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createStore } from "redux";
-import allReducer from "./reducers";
-import * as serviceWorker from "./serviceworker";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
+import configureStore from "./redux/configureStore";
 
-const store = createStore(
-  allReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );

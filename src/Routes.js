@@ -5,14 +5,14 @@ import Contact from "./component/Layout/Contact/Contact";
 import Home from "./component/Layout/Home/Home";
 import Portofolio from "./component/Layout/Portofolio/Portofolio";
 import Sidebar from "./component/Sidebar/Sidebar";
-import Login from "./component/Layout/Login/Login";
+import Auth from "./component/Layout/Auth/Auth";
 
 export const Routes = () => {
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Login />
+          <Auth />
         </Route>
         <Router>
           <Sidebar />
