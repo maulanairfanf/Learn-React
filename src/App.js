@@ -1,17 +1,22 @@
 import React from "react";
 import { AuthProvider } from "./contexts/AuthContext";
-import Register from "./component/Pages/Register/Register";
+import Register from "./component/Pages/auth/Register";
+import Routes from "./Routes";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export const App = () => {
   return (
-    <AuthProvider>
-      <div>
-        <div className="md:flex flex-col md:flex-row md:min-h-screen w-full ">
-          {/* <Routes /> */}
-          <Register />
+    <Router>
+      <AuthProvider>
+        <div>
+          <div className="md:flex flex-col md:flex-row md:min-h-screen w-full ">
+            {/* <Routes /> */}
+            {/* <Register /> */}
+            <Routes />
+          </div>
         </div>
-      </div>
-    </AuthProvider>
+      </AuthProvider>
+    </Router>
   );
 };
 

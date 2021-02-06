@@ -7,7 +7,7 @@ import {
   NavLink,
 } from "react-router-dom";
 
-const Item = ({ history, isLogged }) => {
+const Item = () => {
   return (
     <div>
       {SidebarData.map((item, i) => {

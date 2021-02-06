@@ -1,40 +1,34 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../../../contexts/AuthContext";
+import { Link, useHistory } from "react-router-dom";
 
 const Register = () => {
   const emailRef = useRef();
-  const usernameRef = useRef();
+  // const usernameRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { register, currentUser } = useAuth();
+  const { register } = useAuth();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Password do not match");
+      return setError("Passwords do not match");
     }
 
     try {
       setError("");
       setLoading(true);
-      await register(
-        emailRef.current.value,
-
-        passwordRef.current.value
-      );
-    } catch {
-      setError("failed to create an account");
+      await register(emailRef.current.value, passwordRef.current.value);
+      history.push("/Login");
+    } catch (err) {
+      setError(err.message);
     }
-    setLoading(false);
 
-    // register(
-    //   emailRef.current.value,
-    //   usernameRef.current.value,
-    //   passwordRef.current.value,
-    //   passwordConfirmRef.current.value
-    // );
+    setLoading(false);
   }
   return (
     <div className="w-full">
@@ -43,7 +37,8 @@ const Register = () => {
           <h1 className="text-xl text-center border-b-2 border-gray-200 px-3 mb-5 pb-3">
             TaniPedia
           </h1>
-          {currentUser && currentUser.email}
+
+          {/* {currentUser && currentUser.email} */}
           {error && (
             <div
               className="flex items-center bg-red-500 text-white text-sm font-bold px-4 py-3 rounded-lg mb-3"
@@ -59,7 +54,7 @@ const Register = () => {
                 id="email"
                 type="email"
                 className="form-input mt-1 py-3 px-5 block w-full border-2 border-blue-300 rounded-lg focus:border-blue-400 focus:outline-none "
-                placeholder="email"
+                placeholder="Email"
                 ref={emailRef}
                 required
               />
@@ -103,6 +98,15 @@ const Register = () => {
               </button>
             </div>
           </form>
+          <h1 className="mt-4">
+            sudah mempunyai akun ?
+            <Link
+              to="/login"
+              className="text-blue-500 ml-3 hover:text-blue-400 "
+            >
+              Login
+            </Link>
+          </h1>
         </div>
       </div>
     </div>

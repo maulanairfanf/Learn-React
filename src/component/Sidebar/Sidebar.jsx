@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Item from "./Item";
+import Logout from "./Logout";
 
 export const SideBar = () => {
   const [active, setActive] = useState(false);
@@ -43,6 +44,7 @@ export const SideBar = () => {
           }
         >
           <Item />
+          <Logout/>
         </nav>
       </div>
     </div>
