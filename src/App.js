@@ -1,22 +1,18 @@
-import React, { Component } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { decrement, increment } from "./actions";
-import Routes from "./Routes";
-import { Switch, Route } from "react-router-dom";
-import Login from "./component/Layout/Login/Login";
+import React from "react";
+import { AuthProvider } from "./contexts/AuthContext";
+import Register from "./component/Pages/Register/Register";
 
-class App extends Component {
-  render() {
-    return (
-      <>
-        <div>
-          <div className="md:flex flex-col md:flex-row md:min-h-screen w-full ">
-            <Routes />
-          </div>
+export const App = () => {
+  return (
+    <AuthProvider>
+      <div>
+        <div className="md:flex flex-col md:flex-row md:min-h-screen w-full ">
+          {/* <Routes /> */}
+          <Register />
         </div>
-      </>
-    );
-  }
-}
+      </div>
+    </AuthProvider>
+  );
+};
 
 export default App;

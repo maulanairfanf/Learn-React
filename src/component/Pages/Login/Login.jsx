@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { connect } from "react-redux";
 
-import { loginUser } from "../../../redux/actions/auth";
 const Login = ({ dispatchLoginAction }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -64,9 +62,4 @@ const Login = ({ dispatchLoginAction }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatchLoginAction: (username, password, onSucces, onError) =>
-    dispatch(loginUser({ username, password }, onSucces, onError)),
-});
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;

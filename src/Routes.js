@@ -1,23 +1,24 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Blog from "./component/Layout/Blog/Blog";
-import Contact from "./component/Layout/Contact/Contact";
-import Home from "./component/Layout/Home/Home";
-import Portofolio from "./component/Layout/Portofolio/Portofolio";
+import Blog from "./component/Pages/Blog/Blog";
+import Contact from "./component/Pages/Contact/Contact";
+import Home from "./component/Pages/Home/Home";
+import Portofolio from "./component/Pages/Portofolio/Portofolio";
 import Sidebar from "./component/Sidebar/Sidebar";
-import Auth from "./component/Layout/Auth/Auth";
+import Login from "./component/Pages/Login/Login";
+import Register from "./component/Pages/Register/Register";
 
 export const Routes = () => {
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Auth />
+          <Register />
         </Route>
         <Router>
           <Sidebar />
           <Switch>
-            <Route exact path="/Home">
+            <Route exact path="/">
               <Home />
             </Route>
             <Route path="/Contact">
