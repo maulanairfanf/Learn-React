@@ -15,8 +15,9 @@
     "title": "Contact",
     "path": "/Contact"
   },
+
   {
-    "title": "SignOut",
-    "path": "/Login"
+    "title": "Profile",
+    "path": "/UpdateProfile"
   }
 ]

@@ -36,7 +36,6 @@ export const SideBar = () => {
           </button>
         </div>
         <nav
-          // className="flex-grow px-4 pb-4 md:pb-0 md:overflow-y-auto md:block"
           className={
             active
               ? "flex-grow px-4 pb-4 md:pb-0 md:overflow-y-auto md:block hidden"
@@ -44,7 +43,7 @@ export const SideBar = () => {
           }
         >
           <Item />
-          <Logout/>
+          <Logout />
         </nav>
       </div>
     </div>

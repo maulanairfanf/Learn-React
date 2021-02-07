@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 import { Link } from "react-router-dom";
 
 const ForgotPassword = () => {
@@ -57,16 +57,19 @@ const ForgotPassword = () => {
               </button>
             </div>
           </form>
-          <Link
-            to="/Login"
-            className="text-center text-white bg-blue-500 hover:bg-blue-400 py-2 w-full rounded-xl mt-4 block"
-          >
-            Login
-          </Link>
+          <div className=" flex justify-center ">
+            <Link
+              to="/Login"
+              className="text-center text-blue-500 ml-3  hover:text-blue-400 mt-4 "
+            >
+              Login
+            </Link>
+          </div>
+
           <h1 className="mt-4">
             Belum mempunyai akun ?
             <Link
-              to="/Register "
+              to="/Register"
               className=" text-blue-500 ml-3  hover:text-blue-400 "
             >
               Register
