@@ -14,7 +14,7 @@ const Dashboard = ({ handleLogged }) => {
       <Router>
         <SideBar />
         <Switch>
-          <PrivateRoute path="/Home">
+          <PrivateRoute exact path="/">
             <Home />
           </PrivateRoute>
           <PrivateRoute path="/Blog">
