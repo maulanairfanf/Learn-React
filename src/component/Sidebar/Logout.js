@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, history, useHistory } from "react-router-dom";
 
-export const Logout = ({ isLogged }) => {
+export const Logout = () => {
   const [error, setError] = useState("");
   const { currentUser, logout } = useAuth();
   const history = useHistory();
@@ -12,7 +12,7 @@ export const Logout = ({ isLogged }) => {
 
     try {
       await logout();
-      history.push("/");
+      history.push("/Login");
     } catch (err) {
       console.log(err);
     }

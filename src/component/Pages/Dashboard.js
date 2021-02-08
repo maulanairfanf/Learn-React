@@ -8,13 +8,13 @@ import Portofolio from "../Pages/Portofolio/Portofolio";
 import PrivateRoute from "../PrivateRoute";
 import UpdateProfile from "../AuthPages/UpdateProfile";
 
-const Dashboard = ({ handleLogged }) => {
+const Dashboard = () => {
   return (
     <>
       <Router>
         <SideBar />
         <Switch>
-          <PrivateRoute exact path="/">
+          <PrivateRoute exact path="/Home">
             <Home />
           </PrivateRoute>
           <PrivateRoute path="/Blog">

@@ -8,7 +8,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setcurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
   function register(email, password) {
@@ -36,12 +36,12 @@ export function AuthProvider({ children }) {
   }
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrentUser(user);
       setLoading(false);
-      setcurrentUser(user);
     });
 
     return unsubscribe;
-  });
+  }, []);
 
   const value = {
     currentUser,
@@ -58,5 +58,3 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
-
-export default AuthContext;

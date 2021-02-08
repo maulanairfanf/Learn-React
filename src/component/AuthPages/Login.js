@@ -2,13 +2,13 @@ import React, { useRef, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 
-const Login = () => {
+export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [succes, setSucces] = useState("");
+  // const [succes, setSucces] = useState("");
   const history = useHistory();
 
   async function handleSubmit(e) {
@@ -18,7 +18,7 @@ const Login = () => {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      setSucces();
+      // setSucces();
       history.push("/");
     } catch (err) {
       setError(err.message);
@@ -69,12 +69,13 @@ const Login = () => {
             <div className=" flex justify-center ">
               <button
                 disabled={loading}
+                type="submit"
                 className="text-center text-white bg-blue-500 hover:bg-blue-400 py-2 w-full rounded-xl mt-4 block"
               >
                 Submit
               </button>
             </div>
-          </form>{" "}
+          </form>
           <div className=" flex justify-center ">
             <Link
               to="/ForgotPassword"
@@ -96,5 +97,4 @@ const Login = () => {
       </div>
     </div>
   );
-};
-export default Login;
+}

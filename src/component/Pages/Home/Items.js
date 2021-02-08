@@ -1,35 +1,30 @@
 import React from "react";
 
-export const Items = ({ items, deleteItem }) => {
-  const itemList = items.length ? (
-    items.map((item) => {
+export const Users = ({ users, deleteUser }) => {
+  const userList = () =>
+    users.map((user) => {
       return (
         <div
-          key={item.id}
+          key={user.id}
           className="border-indigo-600 px-10 py-3 mt-4 bg-white rounded-lg"
         >
           <h1
             onClick={() => {
-              deleteItem(item.id);
+              deleteUser(user.id);
             }}
             className="text-xl"
           >
-            {item.content}
+            {user.username}
           </h1>
         </div>
       );
-    })
-  ) : (
-    <p className="border-indigo-600 px-10 py-3 mt-4 bg-white rounded-lg text-center">
-      Dream List is nothing
-    </p>
-  );
+    });
 
   return (
     <div>
-      <h1>{itemList}</h1>
+      <h1>{userList}</h1>
     </div>
   );
 };
 
-export default Items;
+export default Users;
