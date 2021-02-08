@@ -1,11 +1,11 @@
 import React from "react";
-import SideBar from "../Sidebar/Sidebar";
+import SideBar from "../../component/Sidebar/Sidebar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "../Pages/Home/Home";
-import Blog from "../Pages/Blog/Blog";
-import Contact from "../Pages/Contact/Contact";
-import Portofolio from "../Pages/Portofolio/Portofolio";
-import PrivateRoute from "../PrivateRoute";
+import Home from "./Home/Home";
+import Blog from "./Blog/Blog";
+import Contact from "./Contact/Contact";
+import Portofolio from "./Portofolio/Portofolio";
+import PrivateRoute from "../../routes/PrivateRoute";
 import UpdateProfile from "../AuthPages/UpdateProfile";
 
 const Dashboard = () => {
