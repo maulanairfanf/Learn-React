@@ -1,55 +1,103 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
+import { Container, Button, Spinner } from "reactstrap";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import ModalUpdate from "../Modal/ModalUpdate";
+import ModalDelete from "../Modal/ModalDelete";
+import ModalCreate from "../Modal/ModalCreate";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-const product = [
-    {
-      id: 1,
-      nama: "affif",
-      alamat: "hi",
-      umur: 23,
-      nohp: "asdasdas",
+function handleClick(e) {
+  e.preventDefault();
+  console.log("The link was clicked.");
+}
+const columns = [
+  {
+    dataField: "id",
+    text: "ID",
+    headerStyle: () => {
+      return { width: "5%" };
     },
-    {
-      id: 2,
-      nama: "affif",
-      alamat: "hi",
-      umur: 23,
-      nohp: "asdasdas",
+    sort: true,
+  },
+  {
+    dataField: "nama",
+    text: "Nama",
+    sort: true,
+  },
+  {
+    dataField: "Action",
+    text: "Action",
+    formatter: (rowContent, row) => {
+      return (
+        <div>
+          <Button onClick={handleClick}>update</Button>
+          <Button className="ml-3" color="primary">
+            <Link className="text-white" to={"portofolio/" + row.id}>
+              detail
+            </Link>
+          </Button>
+          {/* <ModalUpdate onClick={console.log(row.id)} /> <ModalDelete /> */}
+        </div>
+      );
     },
-    {
-      id: 3,
-      nama: "affif",
-      alamat: "hi",
-      umur: 23,
-      nohp: "asdasdas",
-    },
-  ],
-  columns = [
-    {
-      dataField: "id",
-      text: "ID",
-    },
-    {
-      dataField: "nama",
-      text: "Nama",
-    },
-    {
-      dataField: "alamat",
-      text: "Price",
-    },
-  ];
+  },
+];
 
-const TableComponent = () => {
+const defaultSorted = [
+  {
+    dataField: "id",
+    order: "desc",
+  },
+];
+
+const mapStateToProps = (state) => {
+  return {
+    getUsersList: state.users.getUsersList,
+    errorUsersList: state.users.errorUsersList,
+  };
+};
+
+const { SearchBar } = Search;
+const TableComponent = (props) => {
   return (
-    <div>
-      <BootstrapTable
-        className="bg-blue-500"
-        keyField="name"
-        data={product}
-        columns={columns}
-      />
-    </div>
+    <Container>
+      {props.getUsersList ? (
+        <ToolkitProvider
+          bootstrap4
+          className="bg-blue-500"
+          keyField="id"
+          data={props.getUsersList}
+          columns={columns}
+          defaultSorted={defaultSorted}
+          search
+        >
+          {(props) => (
+            <div>
+              <ModalCreate />
+              <div className="float-right">
+                <SearchBar {...props.searchProps} placeholder="Search" />
+              </div>
+              <BootstrapTable
+                {...props.baseProps}
+                pagination={paginationFactory()}
+              />
+            </div>
+          )}
+        </ToolkitProvider>
+      ) : (
+        <div className="text-center">
+          {props.errorUsersList ? (
+            <h2>{props.errorUsersList}</h2>
+          ) : (
+            <Spinner colors="dark" />
+          )}
+        </div>
+      )}
+    </Container>
   );
 };
 
-export default TableComponent;
+export default connect(mapStateToProps, null)(TableComponent);

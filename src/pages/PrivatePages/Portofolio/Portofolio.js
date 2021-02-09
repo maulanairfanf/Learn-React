@@ -1,13 +1,21 @@
-import React from "react";
+import React, { Component } from "react";
+import { Button } from "reactstrap";
+import { connect } from "react-redux";
+import { getUsersDetail } from "../../../actions/userAction";
+import DetailUser from "../../../component/Detail/DetailUser";
 
-export const Portofolio = () => {
-  return (
-    <div className="w-full">
-      <div className="flex h-full justify-center items-center">
-        <h1>This is Portofolio</h1>
+class Portofolio extends Component {
+  componentDidMount() {
+    this.props.dispatch(getUsersDetail(this.props.match.params.id));
+  }
+  render() {
+    return (
+      <div>
+        <h1>Details USer</h1>
+        <DetailUser />
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default Portofolio;
+export default connect()(Portofolio);

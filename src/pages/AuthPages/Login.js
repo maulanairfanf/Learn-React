@@ -1,6 +1,16 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import {
+  Card,
+  Button,
+  Form,
+  Label,
+  FormGroup,
+  Input,
+  FormText,
+  Container,
+} from "reactstrap";
 
 export default function Login() {
   const emailRef = useRef();
@@ -28,73 +38,58 @@ export default function Login() {
     setLoading(false);
   }
   return (
-    <div className="w-full">
-      <div className="flex justify-center content-center h-full items-center border-2 ">
-        <div className=" shadow-2xl px-20 py-10 rounded-xl ">
-          <h1 className="text-xl text-center border-b-2 border-gray-200 px-3 mb-5 pb-3">
-            TaniPedia
-          </h1>
+    <Container className=" h-100">
+      <div className="">
+        <Form action="" onSubmit={handleSubmit} className=" ">
           {error && (
-            <div
-              className="flex items-center bg-red-500 text-white text-sm font-bold px-4 py-3 rounded-lg mb-3"
-              role="alert"
-            >
+            <div className="" role="alert">
               <p>{error}</p>
             </div>
           )}
-          <form action="" onSubmit={handleSubmit}>
-            <label className="block">
-              <span className="text-gray-700">Email</span>
-              <input
-                id="email"
-                type="email"
-                className="form-input mt-1 py-3 px-5 block w-full border-2 border-blue-300 rounded-lg focus:border-blue-400 focus:outline-none "
-                placeholder="Email"
-                ref={emailRef}
-                required
-              />
-            </label>
-
-            <label className="block mt-3">
-              <span className="text-gray-700">Password</span>
-              <input
-                type="password"
-                className="form-input mt-1 p-3 block w-full border-2 border-blue-300 rounded-lg focus:border-blue-400 focus:outline-none "
-                placeholder="Password"
-                ref={passwordRef}
-                required=""
-              />
-            </label>
-
-            <div className=" flex justify-center ">
-              <button
-                disabled={loading}
-                type="submit"
-                className="text-center text-white bg-blue-500 hover:bg-blue-400 py-2 w-full rounded-xl mt-4 block"
-              >
-                Submit
-              </button>
-            </div>
-          </form>
-          <div className=" flex justify-center ">
-            <Link
-              to="/ForgotPassword"
-              className="text-center text-blue-500 ml-3  hover:text-blue-400 mt-4"
-            >
-              Forgot Password
-            </Link>
-          </div>
-          <h1 className="mt-4">
-            Belum mempunyai akun ?
-            <Link
-              to="/Register"
-              className=" text-blue-500 ml-3  hover:text-blue-400 "
-            >
-              Register
-            </Link>
-          </h1>
-        </div>
+          <h1 className=" text-center ">TaniPedia</h1>
+          <FormGroup className="d-block">
+            <Label>Email</Label>
+            <input
+              className="form-control"
+              id="email"
+              type="email"
+              placeholder="Email"
+              ref={emailRef}
+              required
+            />
+          </FormGroup>
+          <FormGroup className="">
+            <Label>Password</Label>
+            <input
+              className="form-control"
+              type="password"
+              placeholder="Password"
+              ref={passwordRef}
+              required=""
+            />
+          </FormGroup>
+          <Button disabled={loading} type="submit" color="primary">
+            Submit
+          </Button>
+        </Form>
+      </div>{" "}
+      <div className="d-block">
+        <Link to="/ForgotPassword">Forgot Password</Link>
       </div>
-    </div>
+      <h6>
+        Belum mempunyai akun ?
+        <Link
+          to="/Register"
+          className=" text-blue-500 ml-3  hover:text-blue-400 "
+        >
+          Register
+        </Link>
+      </h6>
+      <div
+        className="btn-group"
+        role="group"
+        aria-label="Basic mixed styles example"
+      ></div>
+    </Container>
   );
 }

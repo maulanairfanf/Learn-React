@@ -14,21 +14,15 @@ const Dashboard = () => {
       <Router>
         <SideBar />
         <Switch>
-          <PrivateRoute exact path="/Home">
-            <Home />
-          </PrivateRoute>
-          <PrivateRoute path="/Blog">
-            <Blog />
-          </PrivateRoute>
-          <PrivateRoute path="/Contact">
-            <Contact />
-          </PrivateRoute>
-          <PrivateRoute path="/Portofolio">
-            <Portofolio />
-          </PrivateRoute>
-          <PrivateRoute path="/UpdateProfile">
-            <UpdateProfile />
-          </PrivateRoute>
+          <PrivateRoute exact path="/Home" component={Home} />
+
+          <PrivateRoute path="/Blog" component={Blog} />
+
+          <PrivateRoute path="/Contact" component={Contact} />
+
+          <PrivateRoute path="/Portofolio/:id" component={Portofolio} />
+
+          <PrivateRoute path="/UpdateProfile" component={UpdateProfile} />
         </Switch>
       </Router>
     </>

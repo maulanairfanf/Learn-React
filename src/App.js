@@ -11,19 +11,16 @@ function App() {
   return (
     <>
       <div>
-        <div className="md:flex flex-col md:flex-row md:min-h-screen w-full ">
-          <Router>
-            <AuthProvider>
-              <Switch>
-                <PrivateRoute exact path="/" component={Dashboard} />
-
-                <Route path="/Login" component={Login} />
-                <Route path="/Register" component={Register} />
-                <Route path="/ForgotPassword" component={ForgotPassword} />
-              </Switch>
-            </AuthProvider>
-          </Router>
-        </div>
+        <Router>
+          <AuthProvider>
+            <Switch>
+              <PrivateRoute exact path="/" component={Dashboard} />
+              <Route path="/Login" component={Login} />
+              <Route path="/Register" component={Register} />
+              <Route path="/ForgotPassword" component={ForgotPassword} />
+            </Switch>
+          </AuthProvider>
+        </Router>
       </div>
     </>
   );
