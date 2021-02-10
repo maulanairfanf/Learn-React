@@ -7,6 +7,8 @@ import Contact from "./Contact/Contact";
 import Portofolio from "./Portofolio/Portofolio";
 import PrivateRoute from "../../routes/PrivateRoute";
 import UpdateProfile from "../AuthPages/UpdateProfile";
+import CreateUser from "./CreateUser/CreateUser";
+import EditUser from "./EditUser/EditUser";
 
 const Dashboard = () => {
   return (
@@ -23,6 +25,8 @@ const Dashboard = () => {
           <PrivateRoute path="/Portofolio/:id" component={Portofolio} />
 
           <PrivateRoute path="/UpdateProfile" component={UpdateProfile} />
+          <PrivateRoute path="/CreateUser" component={CreateUser} />
+          <PrivateRoute path="/EditUser/:id" component={EditUser} />
         </Switch>
       </Router>
     </>
