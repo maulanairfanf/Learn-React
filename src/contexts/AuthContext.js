@@ -15,8 +15,9 @@ export function AuthProvider({ children }) {
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
-  function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+  function login(username, password) {
+    // return auth.signInWithEmailAndPassword(email, password);
+    console.log(username, password);
   }
 
   function logout() {

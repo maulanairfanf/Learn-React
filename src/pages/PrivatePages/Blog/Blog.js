@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DataUser from "../../../store/DataUser.json";
+// import DataUser from "../../../store/DataUser.json";
 
 export const Blog = () => {
   return (
@@ -13,7 +13,7 @@ export const Blog = () => {
               <th className="text-left p-3 px-5">Action</th>
               <th></th>
             </tr>
-            {DataUser.map((user, i) => {
+            {/* {DataUser.map((user, i) => {
               return (
                 <tr className="border-b hover:bg-orange-100 bg-gray-100">
                   <td className="p-3 px-5">{user.username}</td>
@@ -35,7 +35,7 @@ export const Blog = () => {
                   </td>
                 </tr>
               );
-            })}
+            })} */}
           </tbody>
         </table>
       </div>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import {
@@ -12,31 +12,71 @@ import {
   Container,
 } from "reactstrap";
 
-export default function Login() {
-  const emailRef = useRef();
+import { setUserSession } from "../../Utils/Common";
+
+function Login(props) {
+  const [username, setUsername] = useState("");
+  const [password, setPassowrd] = useState("");
+  const usernameRef = useRef();
   const passwordRef = useRef();
-  const { login } = useAuth();
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  // const [succes, setSucces] = useState("");
+
   const history = useHistory();
 
-  async function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    const axios = require("axios");
+    const data = JSON.stringify({
+      username: usernameRef.current.value,
+      password: passwordRef.current.value,
+      // username: "maul",
+      // password: "maulkeren",
+    });
+    console.log(data);
 
-    try {
-      setError("");
-      setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      // setSucces();
-      history.push("/");
-    } catch (err) {
-      setError(err.message);
-      console.log(err);
-    }
+    var config = {
+      method: "post",
+      url: "http://localhost:8000/login",
+      headers: {
+        "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
+        "Access-Control-Request-Headers": "true",
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        console.log(response.data.data.api_token);
+        setUserSession(
+          response.data.data.api_token,
+          response.data.data.username
+        );
+        props.history.push("/Home");
+      })
+      .catch(function (error) {
+        console.log(error);
+        setError("username atau password yang dimasukan salah !!!");
+      });
 
-    setLoading(false);
-  }
+    // try {
+    //   setError("");
+    //   // setLoading(true);
+    //   // const token = await loginUser({
+    //   //   username,
+    //   //   password,
+    //   // });
+    //   // setToken(token);asd
+    //   // await login(usernameRef.current.value, passwordRef.current.value);
+    //   // history.push("/Login");
+    // } catch (err) {
+    //   setError(err.message);
+    //   console.log(err);
+    // }
+
+    // setLoading(false);
+  };
+
   return (
     <Container className=" h-100">
       <div className="">
@@ -51,11 +91,15 @@ export default function Login() {
             <Label>Email</Label>
             <input
               className="form-control"
-              id="email"
-              type="email"
-              placeholder="Email"
-              ref={emailRef}
+              id="username"
+              type="username"
+              placeholder="username"
+              // onChange={(e) => {
+              //   setUsername(e.target.value);
+              // }}
+              ref={usernameRef}
               required
+              autoComplete="off"
             />
           </FormGroup>
           <FormGroup className="">
@@ -65,15 +109,23 @@ export default function Login() {
               type="password"
               placeholder="Password"
               ref={passwordRef}
+              // onChange={(e) => {
+              //   setPassowrd(e.target.value);
+              // }}
               required=""
             />
           </FormGroup>
-          <Button disabled={loading} type="submit" color="primary">
+          <Button
+            // disabled={loading}
+            // onClick={handleLogin}
+            type="submit"
+            color="primary"
+          >
             Submit
           </Button>
         </Form>
-      </div>{" "}
-      <div className="d-block">
+      </div>
+      {/* <div className="d-block">
         <Link to="/ForgotPassword">Forgot Password</Link>
       </div>
       <h6>
@@ -89,7 +141,9 @@ export default function Login() {
         className="btn-group"
         role="group"
         aria-label="Basic mixed styles example"
-      ></div>
+      ></div> */}
     </Container>
   );
 }
+
+export default Login;

@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, history, useHistory } from "react-router-dom";
+import { removeUserSession } from "../../Utils/Common";
 
 export const Logout = () => {
   const [error, setError] = useState("");
-  const { currentUser, logout } = useAuth();
+  // const { currentUser, logout } = useAuth();
   const history = useHistory();
 
   async function handleLogout() {
     setError("");
 
     try {
-      await logout();
-      history.push("/Login");
+      removeUserSession();
+      history.push("/login");
     } catch (err) {
       console.log(err);
     }
