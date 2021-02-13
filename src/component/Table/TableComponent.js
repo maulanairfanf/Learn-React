@@ -72,6 +72,7 @@ const TableComponent = (props) => {
             <Button className="ml-3" color="primary">
               <Link className="text-white" to={"portofolio/" + row.id}>
                 Detail
+                {console.log(row.id)}
               </Link>
             </Button>
             <Button

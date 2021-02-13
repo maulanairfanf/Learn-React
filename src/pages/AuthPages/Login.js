@@ -32,7 +32,7 @@ function Login(props) {
       // username: "maul",
       // password: "maulkeren",
     });
-    console.log(data);
+    // console.log(data);
 
     var config = {
       method: "post",
@@ -46,8 +46,8 @@ function Login(props) {
     };
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        console.log(response.data.data.api_token);
+        // console.log(JSON.stringify(response.data));
+        // console.log(response.data.data.api_token);
         setUserSession(
           response.data.data.api_token,
           response.data.data.username

@@ -44,6 +44,7 @@ const users = (state = initialState, action) => {
         getResponseDataUser: action.payload.data,
         errorResponseDataUser: action.payload.errorMessage,
       };
+
     default:
       return state;
   }

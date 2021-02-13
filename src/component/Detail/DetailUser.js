@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
   };
 };
 const DetailUser = (props) => {
+  console.log(props.getUsersDetail);
   return (
     <div>
       <h1>{props.getUsersDetail.nama}</h1>
