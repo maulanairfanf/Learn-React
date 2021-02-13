@@ -10,6 +10,10 @@ class App extends Component {
     this.props.dispatch(getUsersList());
   }
 
+  // componentDidUpdate() {
+  //   this.props.dispatch(getUsersList());
+  // }
+
   render() {
     return (
       <div>

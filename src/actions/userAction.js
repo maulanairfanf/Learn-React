@@ -35,8 +35,6 @@ export const getUsersList = () => {
           type: GET_USERS_LIST,
           payload: { data: response.data.data, errorMessage: false },
         });
-        console.log(response.data);
-        console.log(response.data.data[0].nama);
       })
       .catch(function (error) {
         console.log(error);
@@ -111,13 +109,40 @@ export const getUsersDetail = (id) => {
   };
 };
 
+// export const postUserCreate = (data) => {
+//   return (dispatch) => {
+//     axios
+//       .post(
+//         "http://my-json-server.typicode.com/maulanairfanf/reactjs-redux/users",
+//         data
+//       )
+//       .then((response) => {
+//         console.log(response);
+//         dispatch({
+//           type: POST_USERS_CREATE,
+//           payload: { data: response.data, errorMessage: false },
+//         });
+//       })
+//       .catch((err) => {
+//         dispatch({
+//           type: POST_USERS_CREATE,
+//           payload: { data: false, errorMessage: err.errorMessage },
+//         });
+//       });
+//   };
+// };
+
 export const postUserCreate = (data) => {
   return (dispatch) => {
-    axios
-      .post(
-        "http://my-json-server.typicode.com/maulanairfanf/reactjs-redux/users",
-        data
-      )
+    axios({
+      method: "post",
+      url: "http://localhost:8000/profil/",
+      headers: {
+        Authorization: "Gradien " + token,
+        "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
+      },
+      data: data,
+    })
       .then((response) => {
         console.log(response);
         dispatch({
@@ -134,14 +159,49 @@ export const postUserCreate = (data) => {
   };
 };
 
+// export const putUsersUpdate = (data, id) => {
+//   return (dispatch) => {
+//     axios
+//       .put(
+//         "http://my-json-server.typicode.com/maulanairfanf/reactjs-redux/users/" +
+//           id,
+//         data
+//       )
+//       .then(function (response) {
+//         console.log(response);
+
+//         dispatch({
+//           type: PUT_USERS_UPDATE,
+//           payload: {
+//             data: response.data,
+//             errorMessage: false,
+//           },
+//         });
+//       })
+//       .catch(function (error) {
+//         dispatch({
+//           type: PUT_USERS_UPDATE,
+//           payload: {
+//             data: false,
+//             errorMessage: error.message,
+//           },
+//         });
+//       });
+//   };
+// };
+
 export const putUsersUpdate = (data, id) => {
   return (dispatch) => {
-    axios
-      .put(
-        "http://my-json-server.typicode.com/maulanairfanf/reactjs-redux/users/" +
-          id,
-        data
-      )
+    axios({
+      method: "put",
+      url: "http://localhost:8000/profil/" + id,
+      headers: {
+        Authorization: "Gradien " + token,
+        "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
+        "Content-Type": "application/json",
+      },
+      data: data,
+    })
       .then(function (response) {
         console.log(response);
 
@@ -187,11 +247,14 @@ export const deleteDataUser = () => {
 
 export const deleteUser = (id) => {
   return (dispatch) => {
-    axios
-      .delete(
-        "http://my-json-server.typicode.com/maulanairfanf/reactjs-redux/users/" +
-          id
-      )
+    axios({
+      method: "delete",
+      url: "http://localhost:8000/profil/" + id,
+      headers: {
+        Authorization: "Gradien " + token,
+        "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
+      },
+    })
       .then(function (response) {
         console.log(response);
       })

@@ -12,7 +12,7 @@ const DetailUser = (props) => {
   return (
     <div>
       <h1>{props.getUsersDetail.nama}</h1>
-      <h1>{props.getUsersDetail.email}</h1>
+      <h1>{props.getUsersDetail.nik}</h1>
     </div>
   );
 };

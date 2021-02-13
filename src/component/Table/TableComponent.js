@@ -3,9 +3,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import { Container, Button, Spinner } from "reactstrap";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import ModalUpdate from "../Modal/ModalUpdate";
-import ModalDelete from "../Modal/ModalDelete";
-import ModalCreate from "../Modal/ModalCreate";
+
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
@@ -72,7 +70,6 @@ const TableComponent = (props) => {
             <Button className="ml-3" color="primary">
               <Link className="text-white" to={"portofolio/" + row.id}>
                 Detail
-                {console.log(row.id)}
               </Link>
             </Button>
             <Button

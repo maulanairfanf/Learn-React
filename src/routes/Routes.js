@@ -31,8 +31,9 @@ const Routes = () => {
   return (
     <Router>
       {/* <AuthProvider> */}
-
-      <SideBar />
+      <div className={token ? "visible" : "invisible"}>
+        <SideBar />
+      </div>
       <Switch>
         <PrivateRoute path="/Home" component={Home} />
         <PrivateRoute path="/Blog" component={Blog} />
