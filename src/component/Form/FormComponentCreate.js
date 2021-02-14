@@ -45,9 +45,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const auth = getUsersDetail();
-console.log(auth);
-
 class FormComponent extends Component {
   render() {
     return (
@@ -71,18 +68,6 @@ class FormComponent extends Component {
                 name="nik"
                 component={renderField}
                 label="Nik :"
-              />
-            </FormGroup>
-          </Col>
-
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="id"
-                component={renderField}
-                label="Id :"
-                disabled
               />
             </FormGroup>
           </Col>

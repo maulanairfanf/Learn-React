@@ -1,22 +1,21 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-import { Link, useHistory } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import {  useHistory } from "react-router-dom";
 import {
-  Card,
+  // Card,
   Button,
   Form,
   Label,
   FormGroup,
-  Input,
-  FormText,
+  // Input,
+  // FormText,
   Container,
 } from "reactstrap";
 
 import { setUserSession } from "../../Utils/Common";
 
 function Login(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassowrd] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [password, setPassowrd] = useState("");
   const usernameRef = useRef();
   const passwordRef = useRef();
   const [error, setError] = useState("");

@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Spinner } from "reactstrap";
 
 const mapStateToProps = (state) => {
   return {
@@ -11,8 +12,14 @@ const DetailUser = (props) => {
   console.log(props.getUsersDetail);
   return (
     <div>
-      <h1>{props.getUsersDetail.nama}</h1>
-      <h1>{props.getUsersDetail.nik}</h1>
+      {props.getUsersDetail ? (
+        <div>
+          <h1>{props.getUsersDetail.nama}</h1>
+          <h1>{props.getUsersDetail.id}</h1>
+        </div>
+      ) : (
+        <Spinner colors="dark" />
+      )}
     </div>
   );
 };

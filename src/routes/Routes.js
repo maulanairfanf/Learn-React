@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // import { AuthProvider } from "./contexts/AuthContext";
 import Login from "../pages/AuthPages/Login";
 // import { getToken, removeUserSession, setUserSession } from "../Utils/Common";
@@ -18,35 +18,27 @@ import PublicRoute from "../Utils/PublicRoute";
 import { getToken } from "../Utils/Common";
 
 const Routes = () => {
-  const [hide, setHide] = useState(true);
   const token = getToken();
   if (!token) {
     console.log(token);
-    // setHide(true);
   } else {
-    // setHide(true);
-    // console.log(token);
   }
 
   return (
     <Router>
-      {/* <AuthProvider> */}
       <div className={token ? "visible" : "invisible"}>
         <SideBar />
       </div>
       <Switch>
-        <PrivateRoute path="/Home" component={Home} />
+        <PrivateRoute exact path="/Home" component={Home} />
         <PrivateRoute path="/Blog" component={Blog} />
         <PrivateRoute path="/Contact" component={Contact} />
         <PrivateRoute path="/Portofolio/:id" component={Portofolio} />
         <PrivateRoute path="/UpdateProfile" component={UpdateProfile} />
         <PrivateRoute path="/CreateUser" component={CreateUser} />
         <PrivateRoute path="/EditUser/:id" component={EditUser} />
-        <PublicRoute path="/Login" component={Login} />
-        {/* <Route path="/Register" component={Register} />
-              <Route path="/ForgotPassword" component={ForgotPassword} /> */}
+        <PublicRoute exact path="/Login" component={Login} />
       </Switch>
-      {/* </AuthProvider> */}
     </Router>
   );
 };

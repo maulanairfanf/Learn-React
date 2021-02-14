@@ -9,16 +9,6 @@ export const DUMY_LIST = "DUMY_LIST";
 const token = getToken();
 console.log(token);
 
-// const BASE_URL_USERS = "http://localhost:8000/profil";
-
-// var configUsers = {
-//   method: "get",
-//   url: "http://localhost:8000/profil",
-//   headers: {
-//     Authorization: "Gradien " + token,
-//     "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
-//   },
-// };
 
 export const getUsersList = () => {
   return (dispatch) => {
@@ -190,11 +180,11 @@ export const postUserCreate = (data) => {
 //   };
 // };
 
-export const putUsersUpdate = (data, id) => {
+export const putUsersUpdate = (data) => {
   return (dispatch) => {
     axios({
       method: "put",
-      url: "http://localhost:8000/profil/" + id,
+      url: "http://localhost:8000/profil/",
       headers: {
         Authorization: "Gradien " + token,
         "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",

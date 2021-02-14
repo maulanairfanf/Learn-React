@@ -3,7 +3,6 @@ import BootstrapTable from "react-bootstrap-table-next";
 import { Container, Button, Spinner } from "reactstrap";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
-
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
@@ -26,12 +25,16 @@ const handleClick = (dispatch, id, nama) => {
   });
 };
 
+//buat sorted
 const defaultSorted = [
   {
     dataField: "id",
     order: "desc",
   },
 ];
+
+//buat search
+const { SearchBar } = Search;
 
 const mapStateToProps = (state) => {
   return {
@@ -40,7 +43,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const { SearchBar } = Search;
 const TableComponent = (props) => {
   const columns = [
     {
