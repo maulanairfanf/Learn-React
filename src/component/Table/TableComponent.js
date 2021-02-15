@@ -6,10 +6,13 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import { deleteUser } from "../../actions/userAction";
+import {
+  deleteDataUser,
+  deleteUser,
+  getUsersList,
+} from "../../actions/userAction";
 
 const handleClick = (dispatch, id, nama) => {
-  console.log("click", +id + nama);
   swal({
     title: "Apakah Anda yakin akan menghapus user dengan nama : " + nama,
     icon: "warning",
@@ -18,6 +21,7 @@ const handleClick = (dispatch, id, nama) => {
   }).then((willDelete) => {
     if (willDelete) {
       dispatch(deleteUser(id));
+      // dispatch(getUsersList());
       swal("Data User Sukses dihapus", {
         icon: "success",
       });
@@ -64,16 +68,17 @@ const TableComponent = (props) => {
       formatter: (rowContent, row) => {
         return (
           <div>
-            <Button className="ml-3" color="primary">
-              <Link className="text-white" to={"EditUser/" + row.id}>
+            <Link className="text-white" to={"EditUser/" + row.id}>
+              <Button className="ml-3" color="primary">
                 Update
-              </Link>
-            </Button>
-            <Button className="ml-3" color="primary">
-              <Link className="text-white" to={"portofolio/" + row.id}>
+              </Button>
+            </Link>
+
+            <Link className="text-white" to={"detail/" + row.id}>
+              <Button className="ml-3" color="primary">
                 Detail
-              </Link>
-            </Button>
+              </Button>
+            </Link>
             <Button
               className="ml-3"
               color="primary"
@@ -89,6 +94,7 @@ const TableComponent = (props) => {
 
   return (
     <Container>
+      {/* {console.log(props.getUsersList)} */}
       {props.getUsersList ? (
         <ToolkitProvider
           bootstrap4

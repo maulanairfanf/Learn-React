@@ -1,14 +1,20 @@
-import React, { Component } from "react";
-import App from "./App";
+import React, { useEffect, Component } from "react";
+import TableComponent from "../../../component/Table/TableComponent";
+import { connect } from "react-redux";
+import { getUsersList } from "../../../actions/userAction";
 
-export const Home = () => {
-  return (
-    <div className="w-full ">
-      <div className="flex h-full justify-center items-center">
-        <App />
+class Home extends Component {
+  componentDidMount() {
+    this.props.dispatch(getUsersList());
+  }
+
+  render() {
+    return (
+      <div>
+        <TableComponent />
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
-export default Home;
+export default connect()(Home);

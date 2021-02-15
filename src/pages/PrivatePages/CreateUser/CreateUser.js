@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FormComponentCreate from "../../../component/Form/FormComponentCreate";
+import FormComponent from "../../../component/Form/FormComponent";
 import { reduxForm, field } from "react-redux";
 import { Container } from "reactstrap";
 import { connect } from "react-redux";
@@ -19,7 +19,7 @@ class CreateUser extends Component {
   render() {
     if (this.props.getResponseDataUser || this.props.errorResponseDataUser) {
       if (this.props.getResponseDataUser) {
-        swal("User Created", "success");
+        swal("User Created", { icon: "success" });
       } else {
         swal("Failed Created", "error");
       }
@@ -27,7 +27,7 @@ class CreateUser extends Component {
     return (
       <Container>
         <h1>haii from create user</h1>
-        <FormComponentCreate onSubmit={(data) => this.handleSubmit(data)} />
+        <FormComponent onSubmit={(data) => this.handleSubmit(data)} />
       </Container>
     );
   }

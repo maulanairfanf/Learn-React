@@ -24,14 +24,12 @@ const users = (state = initialState, action) => {
         getUsersList: action.payload.data,
         errorUsersList: action.payload.errorMessage,
       };
-      break;
     case GET_USERS_DETAIL:
       return {
         ...state,
         getUsersDetail: action.payload.data,
         errorUsersDetail: action.payload.errorMessage,
       };
-      break;
     case POST_USERS_CREATE:
       return {
         ...state,
