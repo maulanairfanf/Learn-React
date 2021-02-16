@@ -81,6 +81,7 @@ export const postPupukCreate = (data) => {
 };
 
 export const putPupukUpdate = (data) => {
+
   return (dispatch) => {
     axios({
       method: "put",
@@ -88,17 +89,28 @@ export const putPupukUpdate = (data) => {
       headers: {
         Authorization: "Gradien " + token,
         "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
+        "Content-Type": "application/json",
       },
+      data: data,
     })
-      .then(function (response) {
-        console.log(response.data.data);
+      .then((response) => {
+        console.log(response);
         dispatch({
           type: PUT_PUPUK_UPDATE,
-          payload: { data: response.data.data, errorMessage: false },
+          payload: {
+            data: response.data,
+            errorMessage: false,
+          },
         });
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((error) => {
+        dispatch({
+          type: PUT_PUPUK_UPDATE,
+          payload: {
+            data: false,
+            errorMessage: error.message,
+          },
+        });
       });
   };
 };

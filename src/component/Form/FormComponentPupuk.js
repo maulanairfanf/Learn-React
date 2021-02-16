@@ -27,7 +27,6 @@ const renderField = ({
         placeholder={placeholder}
         disabled={disabled}
         readOnly={readOnly}
-        value={value}
       ></Input>
       {touched &&
         ((error && <p style={{ color: "red" }}>{error}</p>) ||
@@ -39,10 +38,12 @@ const renderField = ({
 const mapStateToProps = (state) => {
   return {
     initialValues: {
+      id: state.pupuk.getPupukDetail.id,
       jenis_pupuk: state.pupuk.getPupukDetail.jenis_pupuk,
       kapasitas: state.pupuk.getPupukDetail.kapasitas,
       satuan: state.pupuk.getPupukDetail.satuan,
       id_poktan: state.pupuk.getPupukDetail.id_poktan,
+      id_petani: state.pupuk.getPupukDetail.id_petani,
       tgl_distribusi: state.pupuk.getPupukDetail.tgl_distribusi,
       id_instansi: state.pupuk.getPupukDetail.id_instansi,
     },
@@ -102,9 +103,20 @@ class FormComponentPupuk extends Component {
             <FormGroup>
               <Field
                 type="text"
+                name="id_petani"
+                component={renderField}
+                label="ID Petani :"
+              />
+            </FormGroup>
+          </Col>
+
+          <Col md={6}>
+            <FormGroup>
+              <Field
+                type="text"
                 name="tgl_distribusi"
                 component={renderField}
-                label="Tanggal Distribusi :"
+                label="Tanggal Terdistribusi :"
               />
             </FormGroup>
           </Col>
@@ -142,6 +154,6 @@ class FormComponentPupuk extends Component {
 FormComponentPupuk = reduxForm({
   form: "CreatePupuk",
   validate: UserValidation,
-  enableReinitialize: false,
+  enableReinitialize: true,
 })(FormComponentPupuk);
 export default connect(mapStateToProps, null)(FormComponentPupuk);

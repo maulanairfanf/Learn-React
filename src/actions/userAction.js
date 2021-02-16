@@ -96,7 +96,6 @@ export const putUsersUpdate = (data) => {
     })
       .then(function (response) {
         console.log(response);
-
         dispatch({
           type: PUT_USERS_UPDATE,
           payload: {

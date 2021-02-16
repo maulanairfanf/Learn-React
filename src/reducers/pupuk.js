@@ -34,13 +34,13 @@ const pupuk = (state = initialState, action) => {
       return {
         ...state,
         getResponseDataPupuk: action.payload.data,
-        errorResponseDataPupuk: action.payload.data,
+        errorResponseDataPupuk: action.payload.errorMessage,
       };
     case PUT_PUPUK_UPDATE:
       return {
         ...state,
         getResponseDataPupuk: action.payload.data,
-        errorResponseDataPupuk: action.payload.data,
+        errorResponseDataPupuk: action.payload.errorMessage,
       };
     default:
       return state;

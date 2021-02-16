@@ -1,52 +1,39 @@
 import React, { Component } from "react";
 import FormComponentPupuk from "../../../component/Form/FormComponentPupuk";
-import { getUsersDetail, putUsersUpdate } from "../../../actions/userAction";
+import { getPupukDetail, putPupukUpdate } from "../../../actions/pupukAction";
 import swal from "sweetalert";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
-    getResponseDataUser: state.users.getResponseDataUser,
-    errorResponseDataUser: state.users.errorResponseDataUser,
+    getResponseDataPupuk: state.pupuk.getResponseDataPupuk,
+    errorResponseDataPupuk: state.pupuk.errorResponseDataPupuk,
   };
 };
 
 class EditPupuk extends Component {
   componentDidMount() {
-    this.props.dispatch(getUsersDetail(this.props.match.params.id));
+    this.props.dispatch(getPupukDetail(this.props.match.params.id));
   }
 
   handleSubmit(data) {
-    this.props.dispatch(putUsersUpdate(data, this.props.match.params.id));
-    if (this.props.getResponseDataUser || this.props.errorResponseDataUser) {
-      if (this.props.errorResponseDataUser) {
-        swal("Failed!", this.props.errorResponseDataUser, "error");
-      } else {
-        swal(
-          "User Updated!",
-          "Nama : " +
-            this.props.getResponseDataUser.nama +
-            " , nik : " +
-            this.props.getResponseDataUser.nik,
-          "success"
-        );
-      }
-    }
+    console.log(data);
+    this.props.dispatch(putPupukUpdate(data, this.props.match.params.id));
   }
 
   render() {
-    console.log(this.props.getResponseDataUser);
-    if (this.props.getResponseDataUser || this.props.errorResponseDataUser) {
-      if (this.props.errorResponseDataUser) {
-        swal("Failed!", this.props.errorResponseDataUser, "error");
+    console.log(this.props.getResponseDataPupuk);
+    console.log(this.props.errorResponseDataPupuk);
+
+    if (this.props.getResponseDataPupuk || this.props.errorResponseDataPupuk) {
+      console.log("haii");
+      if (this.props.errorResponseDataPupuk) {
+        console.log("failed");
+        swal("Failed!", this.props.errorResponseDataPupuk, "error");
       } else {
         swal(
-          "User Updated!",
-          "Nama : " +
-            this.props.getResponseDataUser.nama +
-            " , nik : " +
-            this.props.getResponseDataUser.nik,
-          "success"
+          "Pupuk Updated!",
+          { icon: "success" }
         );
       }
     }

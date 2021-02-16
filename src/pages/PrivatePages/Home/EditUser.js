@@ -18,20 +18,6 @@ class EditUser extends Component {
 
   handleSubmit(data) {
     this.props.dispatch(putUsersUpdate(data, this.props.match.params.id));
-    if (this.props.getResponseDataUser || this.props.errorResponseDataUser) {
-      if (this.props.errorResponseDataUser) {
-        swal("Failed!", this.props.errorResponseDataUser, "error");
-      } else {
-        swal(
-          "User Updated!",
-          "Nama : " +
-            this.props.getResponseDataUser.nama +
-            " , nik : " +
-            this.props.getResponseDataUser.nik,
-          "success"
-        );
-      }
-    }
   }
 
   render() {

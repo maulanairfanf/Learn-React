@@ -36,6 +36,11 @@ const DetailPupuk = (props) => {
             <td>{props.getPupukDetail.id_poktan}</td>
           </tr>
           <tr>
+            <td width="200">ID Petani</td>
+            <td width="10">:</td>
+            <td>{props.getPupukDetail.id_petani}</td>
+          </tr>
+          <tr>
             <td width="200">Tanggal Distribusi</td>
             <td width="10">:</td>
             <td>{props.getPupukDetail.tgl_distribusi}</td>

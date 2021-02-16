@@ -66,10 +66,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-class FormComponent extends Component {
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
+class FormComponentUser extends Component {
+
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
@@ -304,18 +302,6 @@ class FormComponent extends Component {
               />
             </FormGroup>
           </Col>
-
-          {/* <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="id"
-                component={renderField}
-                label="Id :"
-                disabled
-              />
-            </FormGroup>
-          </Col> */}
         </FormGroup>
 
         <FormGroup row>
@@ -336,9 +322,9 @@ class FormComponent extends Component {
   }
 }
 
-FormComponent = reduxForm({
+FormComponentUser = reduxForm({
   form: "CreateUser",
   validate: UserValidation,
   enableReinitialize: true,
-})(FormComponent);
-export default connect(mapStateToProps, null)(FormComponent);
+})(FormComponentUser);
+export default connect(mapStateToProps, null)(FormComponentUser);

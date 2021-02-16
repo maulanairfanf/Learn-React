@@ -21,7 +21,7 @@ class CreateUser extends Component {
       if (this.props.getResponseDataUser) {
         swal("User Created", { icon: "success" });
       } else {
-        swal("Failed Created", "error");
+        swal("Failed Created", { icon: "error" });
       }
     }
     return (
