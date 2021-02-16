@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import FormComponent from "../../component/Form/FormComponent";
-import { getUsersDetail, putUsersUpdate } from "../../actions/userAction";
+import FormComponentUser from "../../../component/Form/FormComponentUser";
+import { getUsersDetail, putUsersUpdate } from "../../../actions/userAction";
 import swal from "sweetalert";
 import { connect } from "react-redux";
 
@@ -53,7 +53,7 @@ class EditUser extends Component {
     return (
       <>
         <h1>Edit User</h1>
-        <FormComponent onSubmit={(data) => this.handleSubmit(data)} />
+        <FormComponentUser onSubmit={(data) => this.handleSubmit(data)} />
       </>
     );
   }

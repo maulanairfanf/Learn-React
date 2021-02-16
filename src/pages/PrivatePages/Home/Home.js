@@ -1,7 +1,7 @@
 import React, { useEffect, Component } from "react";
-import TableComponent from "../../component/Table/TableComponent";
 import { connect } from "react-redux";
-import { getUsersList, deleteDataUser } from "../../actions/userAction";
+import { getUsersList, deleteDataUser } from "../../../actions/userAction";
+import TableComponentUser from "../../../component/Table/TableComponentUser";
 
 class Home extends Component {
   componentDidMount() {
@@ -12,7 +12,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <TableComponent />
+        <TableComponentUser />
       </div>
     );
   }

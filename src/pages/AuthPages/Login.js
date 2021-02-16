@@ -21,32 +21,32 @@ function Login(props) {
   const [error, setError] = useState("");
 
   const history = useHistory();
+  const axios = require("axios");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const axios = require("axios");
     const data = JSON.stringify({
       username: usernameRef.current.value,
       password: passwordRef.current.value,
       // username: "maul",
       // password: "maulkeren",
     });
-    // console.log(data);
+    console.log(data);
 
-    var config = {
+    const config = {
       method: "post",
       url: "http://localhost:8000/login",
       headers: {
         "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
-        "Access-Control-Request-Headers": "true",
+        Authorization:
+          "Gradien 21232f297a57a5a743894a0e4a801fc3MAv5xkShGiocbZtloZJMyoyHJEWOSRwv3jXLrV71FxyuLs8jVVEQMDC54DBP23dDhuwDu9CEYYu3IiMNVMtqU0Lzj5vtWCWYBS9SlYD3EzIZDJesQ1UeD930qkkjo9HU",
+        "Access-Control-Request-Headers": "APP-KEY",
         "Content-Type": "application/json",
       },
       data: data,
     };
     axios(config)
       .then(function (response) {
-        // console.log(JSON.stringify(response.data));
-        // console.log(response.data.data.api_token);
         setUserSession(
           response.data.data.api_token,
           response.data.data.username
@@ -56,7 +56,7 @@ function Login(props) {
       })
       .catch(function (error) {
         console.log(error);
-        setError("username atau password yang dimasukan salah !!!");
+        // setError("username atau password yang dimasukan salah !!!");
       });
 
     // try {
@@ -94,9 +94,6 @@ function Login(props) {
               id="username"
               type="username"
               placeholder="username"
-              // onChange={(e) => {
-              //   setUsername(e.target.value);
-              // }}
               ref={usernameRef}
               required
               autoComplete="off"
@@ -109,39 +106,14 @@ function Login(props) {
               type="password"
               placeholder="Password"
               ref={passwordRef}
-              // onChange={(e) => {
-              //   setPassowrd(e.target.value);
-              // }}
               required=""
             />
           </FormGroup>
-          <Button
-            // disabled={loading}
-            // onClick={handleLogin}
-            type="submit"
-            color="primary"
-          >
+          <Button type="submit" color="primary">
             Submit
           </Button>
         </Form>
       </div>
-      {/* <div className="d-block">
-        <Link to="/ForgotPassword">Forgot Password</Link>
-      </div>
-      <h6>
-        Belum mempunyai akun ?
-        <Link
-          to="/Register"
-          className=" text-blue-500 ml-3  hover:text-blue-400 "
-        >
-          Register
-        </Link>
-      </h6>
-      <div
-        className="btn-group"
-        role="group"
-        aria-label="Basic mixed styles example"
-      ></div> */}
     </Container>
   );
 }

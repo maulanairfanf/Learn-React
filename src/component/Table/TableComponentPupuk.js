@@ -6,18 +6,17 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import { deleteUser } from "../../actions/userAction";
+import { deletePupuk } from "../../actions/pupukAction";
 
-const handleClick = (dispatch, id, nama) => {
+const handleClick = (dispatch, id) => {
   swal({
-    title: "Apakah Anda yakin akan menghapus user dengan nama : " + nama,
+    title: "Apakah Anda yakin akan pupuk dengan nama  : ",
     icon: "warning",
     buttons: true,
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      dispatch(deleteUser(id));
-
+      dispatch(deletePupuk(id));
       swal("Data User Sukses dihapus", {
         icon: "success",
       });
@@ -38,12 +37,12 @@ const { SearchBar } = Search;
 
 const mapStateToProps = (state) => {
   return {
-    getUsersList: state.users.getUsersList,
-    errorUsersList: state.users.errorUsersList,
+    getPupukList: state.pupuk.getPupukList,
+    errorPupukList: state.pupuk.errorPupukList,
   };
 };
 
-const TableComponent = (props) => {
+const TableComponentPupuk = (props) => {
   const columns = [
     {
       dataField: "id",
@@ -54,8 +53,8 @@ const TableComponent = (props) => {
       sort: true,
     },
     {
-      dataField: "nama",
-      text: "Nama",
+      dataField: "jenis_pupuk",
+      text: "Jenis",
       sort: true,
     },
     {
@@ -64,13 +63,13 @@ const TableComponent = (props) => {
       formatter: (rowContent, row) => {
         return (
           <div>
-            <Link className="text-white" to={"EditUser/" + row.id}>
+            <Link className="text-white" to={"EditPupuk/" + row.id}>
               <Button className="ml-3" color="primary">
                 Update
               </Button>
             </Link>
 
-            <Link className="text-white" to={"detail/" + row.id}>
+            <Link className="text-white" to={"DetailPupukContainer/" + row.id}>
               <Button className="ml-3" color="primary">
                 Detail
               </Button>
@@ -90,20 +89,20 @@ const TableComponent = (props) => {
 
   return (
     <Container>
-      {props.getUsersList ? (
+      {props.getPupukList ? (
         <ToolkitProvider
           bootstrap4
           className="bg-blue-500"
           keyField="id"
-          data={props.getUsersList}
+          data={props.getPupukList}
           columns={columns}
           defaultSorted={defaultSorted}
           search
         >
           {(props) => (
             <div>
-              <Link to="/CreateUser">
-                <Button color="primary">CreateUser </Button>
+              <Link to="/CreatePupuk">
+                <Button color="primary">AddPupuk </Button>
               </Link>
 
               <div className="float-right">
@@ -118,8 +117,8 @@ const TableComponent = (props) => {
         </ToolkitProvider>
       ) : (
         <div className="text-center">
-          {props.errorUsersList ? (
-            <h2>{props.errorUsersList}</h2>
+          {props.errorPupukList ? (
+            <h2>{props.errorPupukList}</h2>
           ) : (
             <Spinner colors="dark" />
           )}
@@ -129,4 +128,4 @@ const TableComponent = (props) => {
   );
 };
 
-export default connect(mapStateToProps, null)(TableComponent);
+export default connect(mapStateToProps, null)(TableComponentPupuk);

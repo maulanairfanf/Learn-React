@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import FormComponent from "../../component/Form/FormComponent";
+import FormComponentUser from "../../../component/Form/FormComponentUser";
 import { reduxForm, field } from "react-redux";
 import { Container } from "reactstrap";
 import { connect } from "react-redux";
-import { postUserCreate } from "../../actions/userAction";
+import { postUserCreate } from "../../../actions/userAction";
 import swal from "sweetalert";
 
 const mapStateToProps = (state) => {
@@ -27,7 +27,7 @@ class CreateUser extends Component {
     return (
       <Container>
         <h1>haii from create user</h1>
-        <FormComponent onSubmit={(data) => this.handleSubmit(data)} />
+        <FormComponentUser onSubmit={(data) => this.handleSubmit(data)} />
       </Container>
     );
   }
