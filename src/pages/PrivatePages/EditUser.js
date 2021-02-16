@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import FormComponent from "../../../component/Form/FormComponent";
-import { getUsersDetail, putUsersUpdate } from "../../../actions/userAction";
+import FormComponent from "../../component/Form/FormComponent";
+import { getUsersDetail, putUsersUpdate } from "../../actions/userAction";
 import swal from "sweetalert";
 import { connect } from "react-redux";
 

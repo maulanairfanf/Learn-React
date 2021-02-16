@@ -42,15 +42,12 @@ export const getUsersDetail = (id) => {
       },
     })
       .then(function (response) {
-        dispatch({
-          type: GET_USERS_DETAIL,
-          payload: { data: "", errorMessage: false },
-        });
-        console.log("jalan");
+        console.log("masuk");
         dispatch({
           type: GET_USERS_DETAIL,
           payload: { data: response.data.data, errorMessage: false },
         });
+        console.log("keluar");
       })
       .catch(function (error) {
         console.log(error);

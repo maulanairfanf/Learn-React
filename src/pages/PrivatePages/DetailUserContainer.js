@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getUsersDetail } from "../../../actions/userAction";
-import DetailUser from "../../../component/Detail/DetailUser";
+import { getUsersDetail } from "../../actions/userAction";
+import BackComponent from "../../component/BackComponent";
+import DetailUser from "../../component/Detail/DetailUser";
 
 class DetailUserContainer extends Component {
   componentDidMount() {
-    console.log(this.props.match.params.id);
     this.props.dispatch(getUsersDetail(this.props.match.params.id));
   }
 
@@ -13,6 +13,7 @@ class DetailUserContainer extends Component {
     return (
       <div>
         <h1>Detail User</h1>
+        <BackComponent />
         <DetailUser />
       </div>
     );

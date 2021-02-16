@@ -19,24 +19,31 @@ let initialState = {
 const users = (state = initialState, action) => {
   switch (action.type) {
     case GET_USERS_LIST:
+      console.log(action.payload.data);
+
       return {
         ...state,
         getUsersList: action.payload.data,
         errorUsersList: action.payload.errorMessage,
       };
     case GET_USERS_DETAIL:
+      console.log(action.payload.data);
       return {
         ...state,
         getUsersDetail: action.payload.data,
         errorUsersDetail: action.payload.errorMessage,
       };
     case POST_USERS_CREATE:
+      console.log(action.payload.data);
+
       return {
         ...state,
         getResponseDataUser: action.payload.data,
         errorResponseDataUser: action.payload.errorMessage,
       };
     case PUT_USERS_UPDATE:
+      console.log(action.payload.data);
+
       return {
         ...state,
         getResponseDataUser: action.payload.data,

@@ -11,6 +11,7 @@ export const Logout = () => {
     setError("");
 
     try {
+      window.location.reload();
       removeUserSession();
       history.push("/login");
     } catch (err) {

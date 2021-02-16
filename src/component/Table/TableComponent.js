@@ -6,11 +6,7 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import {
-  deleteDataUser,
-  deleteUser,
-  getUsersList,
-} from "../../actions/userAction";
+import { deleteUser } from "../../actions/userAction";
 
 const handleClick = (dispatch, id, nama) => {
   swal({
@@ -21,7 +17,7 @@ const handleClick = (dispatch, id, nama) => {
   }).then((willDelete) => {
     if (willDelete) {
       dispatch(deleteUser(id));
-      // dispatch(getUsersList());
+
       swal("Data User Sukses dihapus", {
         icon: "success",
       });
@@ -94,7 +90,6 @@ const TableComponent = (props) => {
 
   return (
     <Container>
-      {/* {console.log(props.getUsersList)} */}
       {props.getUsersList ? (
         <ToolkitProvider
           bootstrap4
@@ -112,7 +107,7 @@ const TableComponent = (props) => {
               </Link>
 
               <div className="float-right">
-                <SearchBar {...props.searchProps} placeholder="Search" />
+                <SearchBar {...props.searchProps} placeholder="Search..." />
               </div>
               <BootstrapTable
                 {...props.baseProps}

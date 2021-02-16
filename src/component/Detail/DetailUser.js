@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
   };
 };
 const DetailUser = (props) => {
-  console.log(props.getUsersDetail.gender);
+  console.log(props.getUsersDetail);
   return (
     <div>
       {/* {props.getUsersDetail ? ( */}

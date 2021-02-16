@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import {  useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   // Card,
   Button,
@@ -52,6 +52,7 @@ function Login(props) {
           response.data.data.username
         );
         props.history.push("/Home");
+        window.location.reload();
       })
       .catch(function (error) {
         console.log(error);

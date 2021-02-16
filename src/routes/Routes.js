@@ -1,22 +1,17 @@
 import React, { Component } from "react";
-// import { AuthProvider } from "./contexts/AuthContext";
 import Login from "../pages/AuthPages/Login";
-// import { getToken, removeUserSession, setUserSession } from "../Utils/Common";
-// import ForgotPassword from "./pages/AuthPages/ForgotPassword";
-// import Register from "./pages/AuthPages/Register";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Home from "../pages/PrivatePages/Home/Home";
-import Blog from "../pages/PrivatePages/Blog/Blog";
-import Contact from "../pages/PrivatePages/Contact/Contact";
-import UpdateProfile from "../pages/AuthPages/UpdateProfile";
-import CreateUser from "../pages/PrivatePages/CreateUser/CreateUser";
-import EditUser from "../pages/PrivatePages/EditUser/EditUser";
+import Home from "../pages/PrivatePages/Home";
+import Blog from "../pages/PrivatePages/Blog";
+import Contact from "../pages/PrivatePages/Contact";
+import CreateUser from "../pages/PrivatePages/CreateUser";
+import EditUser from "../pages/PrivatePages/EditUser";
 import SideBar from "../component/Sidebar/Sidebar";
 import PrivateRoute from "../Utils/PrivateRoute";
 import PublicRoute from "../Utils/PublicRoute";
 import { getToken } from "../Utils/Common";
 import { render } from "@testing-library/react";
-import DetailUserContainer from "../pages/PrivatePages/DetailUser/DetailUserContainer";
+import DetailUserContainer from "../pages/PrivatePages/DetailUserContainer";
 
 export default class Routes extends Component {
   render() {
@@ -29,7 +24,7 @@ export default class Routes extends Component {
       <BrowserRouter>
         <div className={token ? "visible" : "invisible"}>
           <SideBar />
-        </div>{" "}
+        </div>
         <PublicRoute exact path="/login" component={Login} />
         <Switch>
           <PrivateRoute exact path="/" component={Home} />
@@ -40,7 +35,7 @@ export default class Routes extends Component {
             exact
             component={DetailUserContainer}
           />
-          <PrivateRoute path="/UpdateProfile" component={UpdateProfile} />
+          {/* <PrivateRoute path="/UpdateProfile" component={UpdateProfile} /> */}
           <PrivateRoute path="/CreateUser" component={CreateUser} />
           <PrivateRoute path="/EditUser/:id" component={EditUser} />
         </Switch>

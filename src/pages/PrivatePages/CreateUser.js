@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import FormComponent from "../../../component/Form/FormComponent";
+import FormComponent from "../../component/Form/FormComponent";
 import { reduxForm, field } from "react-redux";
 import { Container } from "reactstrap";
 import { connect } from "react-redux";
-import { postUserCreate } from "../../../actions/userAction";
+import { postUserCreate } from "../../actions/userAction";
 import swal from "sweetalert";
 
 const mapStateToProps = (state) => {
