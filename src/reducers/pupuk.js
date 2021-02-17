@@ -28,7 +28,7 @@ const pupuk = (state = initialState, action) => {
       return {
         ...state,
         getPupukDetail: action.payload.data,
-        errorPupukList: action.payload.errorMessage,
+        errorPupukDetail: action.payload.errorMessage,
       };
     case POST_PUPUK_CREATE:
       return {

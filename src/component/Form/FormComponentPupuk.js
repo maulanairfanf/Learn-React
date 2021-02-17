@@ -113,8 +113,7 @@ class FormComponentPupuk extends Component {
           <Col md={6}>
             <FormGroup>
               <Field
-                type="text"
-                placeholder="DD-MM-YYYY"
+                type="date"
                 name="tgl_distribusi"
                 component={renderField}
                 label="Tanggal Terdistribusi :"

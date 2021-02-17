@@ -18,6 +18,11 @@ import Pupuk from "../pages/PrivatePages/Pupuk/Pupuk";
 import DetailPupukContainer from "../pages/PrivatePages/Pupuk/DetailPupukContainer";
 import CreatePupuk from "../pages/PrivatePages/Pupuk/CreatePupuk";
 import EditPupuk from "../pages/PrivatePages/Pupuk/EditPupuk";
+//Lahan
+import Lahan from "../pages/PrivatePages/Lahan/Lahan";
+import DetaillahanContainer from "../pages/PrivatePages/Lahan/DetailLahanContainer";
+import CreateLahan from "../pages/PrivatePages/Pupuk/CreateLahan";
+import EditLahan from "../pages/PrivatePages/Pupuk/EditLahan";
 
 export default class Routes extends Component {
   render() {
@@ -35,6 +40,8 @@ export default class Routes extends Component {
         <Switch>
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute path="/Pupuk" component={Pupuk} />
+          <PrivateRoute path="/Lahan" component={Lahan} />
+
           <PrivateRoute
             path="/DetailUserContainer/:id"
             exact
@@ -45,10 +52,17 @@ export default class Routes extends Component {
             exact
             component={DetailPupukContainer}
           />
+          <PrivateRoute
+            path="/DetailPupukContainer/:id"
+            exact
+            component={DetaillahanContainer}
+          />
           <PrivateRoute path="/CreateUser" component={CreateUser} />
           <PrivateRoute path="/CreatePupuk" component={CreatePupuk} />
+          <PrivateRoute path="/CreateLahan" component={CreateLahan} />
           <PrivateRoute path="/EditUser/:id" component={EditUser} />
           <PrivateRoute path="/EditPupuk/:id" component={EditPupuk} />
+          <PrivateRoute path="/EditLahan/:id" component={EditLahan} />
         </Switch>
       </BrowserRouter>
     );

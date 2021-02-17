@@ -267,7 +267,7 @@ class FormComponentUser extends Component {
           <Col md={6}>
             <FormGroup>
               <Field
-                type="text"
+                type="date"
                 name="tgl_lahir"
                 component={renderField}
                 label="tgl_lahir"
