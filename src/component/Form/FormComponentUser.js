@@ -11,27 +11,115 @@ const renderField = ({
   label,
   disabled,
   readOnly,
-  value,
   meta: { touched, error, warning },
 }) => (
   <Row>
     <Col md="12">
-      <Label htmlFor="{input}" className="col-form-label">
+      <Label htmlFor="{label}" className="col-form-label">
         {label}
       </Label>
     </Col>
     <Col md="12">
-      <Input
-        {...input}
-        type={type}
-        placeholder={placeholder}
-        disabled={disabled}
-        readOnly={readOnly}
-        // value={value}
-      >
-        <option value={1}>Laki-laki</option>
-        <option value={2}>Perempuan</option>
-      </Input>
+      {label === "gender" ? (
+        <>
+          <Input
+            {...input}
+            type={type}
+            placeholder={placeholder}
+            disabled={disabled}
+            readOnly={readOnly}
+          >
+            <option value={1000101}>Laki-laki</option>
+            <option value={1000102}>Perempuan</option>
+          </Input>
+        </>
+      ) : label === "agama" ? (
+        <>
+          <Input
+            {...input}
+            type={type}
+            placeholder={placeholder}
+            disabled={disabled}
+            readOnly={readOnly}
+          >
+            <option value={1000201}>Islam</option>
+            <option value={1000202}>Kristen</option>
+            <option value={1000203}>Katolik</option>
+            <option value={1000204}>Hindu</option>
+            <option value={1000205}>Budha</option>
+          </Input>
+        </>
+      ) : label === "pendidikan" ? (
+        <>
+          <Input
+            {...input}
+            type={type}
+            placeholder={placeholder}
+            disabled={disabled}
+            readOnly={readOnly}
+          >
+            <option value={1000301}>Tidak Sekolah</option>
+            <option value={1000302}>SD</option>
+            <option value={1000303}>SMP</option>
+            <option value={1000304}>S1</option>
+            <option value={1000306}>S2</option>
+            <option value={1000307}>S3</option>
+          </Input>
+        </>
+      ) : label === "suku" ? (
+        <>
+          <Input
+            {...input}
+            type={type}
+            placeholder={placeholder}
+            disabled={disabled}
+            readOnly={readOnly}
+          >
+            <option value={1000501}>Jawa</option>
+            <option value={1000502}>Sunda</option>
+            <option value={1000503}>Lampung</option>
+            <option value={1000504}>Bugis</option>
+            <option value={1000505}>Palembang</option>
+            <option value={1000501}>Padang</option>
+          </Input>
+        </>
+      ) : label === "pekerjaan" ? (
+        <>
+          <Input
+            {...input}
+            type={type}
+            placeholder={placeholder}
+            disabled={disabled}
+            readOnly={readOnly}
+          >
+            <option value={1000601}>Petani</option>
+            <option value={1000602}>Buruh</option>
+            <option value={1000603}>ASN</option>
+            <option value={1000604}>Pedagang</option>
+            <option value={1000605}>Penyuluh</option>
+            <option value={1000606}>Dosen</option>
+            <option value={1000001}>Pegawai Swasta</option>
+            <option value={1000002}>Honorer</option>
+          </Input>
+        </>
+      ) : (
+        <>
+          <Input
+            {...input}
+            type={type}
+            placeholder={placeholder}
+            disabled={disabled}
+            readOnly={readOnly}
+          ></Input>
+        </>
+      )}
+
+      {/* 
+        <option value={1000401}>A</option>
+        <option value={1000402}>B</option>
+        <option value={1000403}>AB</option>
+         */}
+
       {touched &&
         ((error && <p style={{ color: "red" }}>{error}</p>) ||
           (warning && <p style={{ color: "brown" }}>{warning}</p>))}
@@ -67,7 +155,6 @@ const mapStateToProps = (state) => {
 };
 
 class FormComponentUser extends Component {
-
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
@@ -78,7 +165,7 @@ class FormComponentUser extends Component {
                 type="text"
                 name="nama"
                 component={renderField}
-                label="Nama :"
+                label="Nama"
               />
             </FormGroup>
           </Col>
@@ -89,7 +176,7 @@ class FormComponentUser extends Component {
                 type="text"
                 name="email"
                 component={renderField}
-                label="Email :"
+                label="Email"
               />
             </FormGroup>
           </Col>
@@ -100,7 +187,7 @@ class FormComponentUser extends Component {
                 type="text"
                 name="telp"
                 component={renderField}
-                label="telp :"
+                label="telp"
               />
             </FormGroup>
           </Col>
@@ -111,19 +198,14 @@ class FormComponentUser extends Component {
                 type="text"
                 name="nik"
                 component={renderField}
-                label="Nik :"
+                label="Nik"
               />
             </FormGroup>
           </Col>
 
           <Col md={6}>
             <FormGroup>
-              <Field
-                type="text"
-                name="kk"
-                component={renderField}
-                label="kk :"
-              />
+              <Field type="text" name="kk" component={renderField} label="kk" />
             </FormGroup>
           </Col>
 
@@ -133,7 +215,7 @@ class FormComponentUser extends Component {
                 type="text"
                 name="kategori"
                 component={renderField}
-                label="kategori :"
+                label="kategori"
               />
             </FormGroup>
           </Col>
@@ -141,10 +223,10 @@ class FormComponentUser extends Component {
           <Col md={6}>
             <FormGroup>
               <Field
-                type="text"
+                type="select"
                 name="pekerjaan"
                 component={renderField}
-                label="pekerjaan :"
+                label="pekerjaan"
               />
             </FormGroup>
           </Col>
@@ -152,12 +234,10 @@ class FormComponentUser extends Component {
           <Col md={6}>
             <FormGroup>
               <Field
-                type="text"
-                label="gender : "
+                label="gender"
                 type="select"
                 name="gender"
                 component={renderField}
-                placeholder="laki - laki / perempuan"
               />
             </FormGroup>
           </Col>
@@ -165,10 +245,10 @@ class FormComponentUser extends Component {
           <Col md={6}>
             <FormGroup>
               <Field
-                type="text"
+                type="select"
                 name="agama"
                 component={renderField}
-                label="agama :"
+                label="agama"
               />
             </FormGroup>
           </Col>
@@ -176,10 +256,10 @@ class FormComponentUser extends Component {
           <Col md={6}>
             <FormGroup>
               <Field
-                type="text"
+                type="select"
                 name="suku"
                 component={renderField}
-                label="suku :"
+                label="suku"
               />
             </FormGroup>
           </Col>
@@ -190,7 +270,7 @@ class FormComponentUser extends Component {
                 type="text"
                 name="tgl_lahir"
                 component={renderField}
-                label="tgl_lahir :"
+                label="tgl_lahir"
               />
             </FormGroup>
           </Col>
@@ -201,7 +281,7 @@ class FormComponentUser extends Component {
                 type="text"
                 name="pendidikan"
                 component={renderField}
-                label="pendidikan :"
+                label="pendidikan"
               />
             </FormGroup>
           </Col>
@@ -212,30 +292,20 @@ class FormComponentUser extends Component {
                 type="text"
                 name="alamat"
                 component={renderField}
-                label="alamat :"
+                label="alamat"
               />
             </FormGroup>
           </Col>
 
           <Col md={6}>
             <FormGroup>
-              <Field
-                type="text"
-                name="rt"
-                component={renderField}
-                label="rt :"
-              />
+              <Field type="text" name="rt" component={renderField} label="rt" />
             </FormGroup>
           </Col>
 
           <Col md={6}>
             <FormGroup>
-              <Field
-                type="text"
-                name="rw"
-                component={renderField}
-                label="rw :"
-              />
+              <Field type="text" name="rw" component={renderField} label="rw" />
             </FormGroup>
           </Col>
 
@@ -245,7 +315,7 @@ class FormComponentUser extends Component {
                 type="text"
                 name="id_desa"
                 component={renderField}
-                label="id_desa :"
+                label="id_desa"
               />
             </FormGroup>
           </Col>
@@ -255,7 +325,7 @@ class FormComponentUser extends Component {
                 type="text"
                 name="id_kecamatan"
                 component={renderField}
-                label="id_kecamatan :"
+                label="id_kecamatan"
               />
             </FormGroup>
           </Col>
@@ -265,7 +335,7 @@ class FormComponentUser extends Component {
                 type="text"
                 name="id_kabupaten"
                 component={renderField}
-                label="id_kabupaten :"
+                label="id_kabupaten"
               />
             </FormGroup>
           </Col>
@@ -276,7 +346,7 @@ class FormComponentUser extends Component {
                 type="text"
                 name="id_provinsi"
                 component={renderField}
-                label="id_provinsi :"
+                label="id_provinsi"
               />
             </FormGroup>
           </Col>
@@ -287,7 +357,7 @@ class FormComponentUser extends Component {
                 type="text"
                 name="kodepos"
                 component={renderField}
-                label="kodepos :"
+                label="kodepos"
               />
             </FormGroup>
           </Col>
@@ -298,7 +368,7 @@ class FormComponentUser extends Component {
                 type="text"
                 name="facebook"
                 component={renderField}
-                label="facebook :"
+                label="facebook"
               />
             </FormGroup>
           </Col>

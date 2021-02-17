@@ -22,19 +22,16 @@ class EditPupuk extends Component {
   }
 
   render() {
-    console.log(this.props.getResponseDataPupuk);
-    console.log(this.props.errorResponseDataPupuk);
-
     if (this.props.getResponseDataPupuk || this.props.errorResponseDataPupuk) {
       console.log("haii");
       if (this.props.errorResponseDataPupuk) {
-        console.log("failed");
         swal("Failed!", this.props.errorResponseDataPupuk, "error");
       } else {
-        swal(
-          "Pupuk Updated!",
-          { icon: "success" }
-        );
+        swal({
+          title: "Pupuk Updated !",
+          icon: "success",
+          button: "Oke",
+        });
       }
     }
     return (

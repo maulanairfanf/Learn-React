@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import { Link, history, useHistory } from "react-router-dom";
 import { removeUserSession } from "../../Utils/Common";
+import { getToken } from "../../Utils/Common";
 
 export const Logout = () => {
   const [error, setError] = useState("");
 
   const history = useHistory();
+  const token = getToken();
+  console.log(token);
 
   async function handleLogout() {
-    setError("");
-
     try {
-      window.location.reload();
       removeUserSession();
-      history.push("/login");
+      if (!token) {
+        window.location.reload();
+        history.push("/login");
+      }
     } catch (err) {
       console.log(err);
+      setError(err);
     }
   }
   return (

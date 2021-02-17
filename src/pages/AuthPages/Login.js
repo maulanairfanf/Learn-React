@@ -51,7 +51,7 @@ function Login(props) {
           response.data.data.api_token,
           response.data.data.username
         );
-        props.history.push("/Home");
+        props.history.push("/");
         window.location.reload();
       })
       .catch(function (error) {

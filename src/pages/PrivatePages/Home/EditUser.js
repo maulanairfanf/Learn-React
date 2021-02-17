@@ -26,14 +26,12 @@ class EditUser extends Component {
       if (this.props.errorResponseDataUser) {
         swal("Failed!", this.props.errorResponseDataUser, "error");
       } else {
-        swal(
-          "User Updated!",
-          "Nama : " +
-            this.props.getResponseDataUser.nama +
-            " , nik : " +
-            this.props.getResponseDataUser.nik,
-          "success"
-        );
+        swal({
+          title: "User Updated !",
+
+          icon: "success",
+          button: "Oke",
+        });
       }
     }
     return (

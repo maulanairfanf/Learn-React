@@ -17,8 +17,10 @@ const handleClick = (dispatch, id) => {
   }).then((willDelete) => {
     if (willDelete) {
       dispatch(deletePupuk(id));
-      swal("Data User Sukses dihapus", {
+      swal({
+        title: "Berhasil Delete Pupuk!",
         icon: "success",
+        button: "Oke",
       });
     }
   });

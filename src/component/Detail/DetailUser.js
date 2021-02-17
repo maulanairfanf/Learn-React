@@ -30,11 +30,6 @@ const DetailUser = (props) => {
             <td width="10">:</td>
             <td>{props.getUsersDetail.telp}</td>
           </tr>
-          {/* <tr>
-            <td width="200">id</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.id}</td>
-          </tr> */}
           <tr>
             <td width="200">nik</td>
             <td width="10">:</td>
@@ -53,26 +48,72 @@ const DetailUser = (props) => {
           <tr>
             <td width="200">pekerjaan</td>
             <td width="10">:</td>
-            <td>{props.getUsersDetail.pekerjaan}</td>
+            <td>
+              {props.getUsersDetail.pekerjaan === 1000601
+                ? "Petani"
+                : props.getUsersDetail.pekerjaan === 1000602
+                ? "Buruh"
+                : props.getUsersDetail.pekerjaan === 1000603
+                ? "ASN"
+                : props.getUsersDetail.pekerjaan === 1000604
+                ? "Pedagang"
+                : props.getUsersDetail.pekerjaan === 1000605
+                ? "Penyuluh"
+                : props.getUsersDetail.pekerjaan === 1000606
+                ? "Dosen"
+                : props.getUsersDetail.pekerjaan === 1000607
+                ? "Pegawai Swasta"
+                : props.getUsersDetail.pekerjaan === 1000608
+                ? "Honorer"
+                : ""}
+            </td>
           </tr>
           <tr>
             <td width="200">gender</td>
             <td width="10">:</td>
             <td>
-              {props.getUsersDetail.gender === 1
+              {props.getUsersDetail.gender === 1000101
                 ? "laki-laki"
-                : "perempuan"}
+                : props.getUsersDetail.gender === 1000102
+                ? "perempuan"
+                : ""}
             </td>
           </tr>
           <tr>
             <td width="200">agama</td>
             <td width="10">:</td>
-            <td>{props.getUsersDetail.agama}</td>
+            <td>
+              {props.getUsersDetail.agama === 1000201
+                ? "Islam"
+                : props.getUsersDetail.agama === 1000202
+                ? "Kristen"
+                : props.getUsersDetail.agama === 1000203
+                ? "Katolik"
+                : props.getUsersDetail.agama === 1000204
+                ? "Hindu"
+                : props.getUsersDetail.agama === 1000205
+                ? "Budha"
+                : ""}
+            </td>
           </tr>
           <tr>
             <td width="200">suku</td>
             <td width="10">:</td>
-            <td>{props.getUsersDetail.suku}</td>
+            <td>
+              {props.getUsersDetail.suku === 1000501
+                ? "Jawa"
+                : props.getUsersDetail.suku === 1000502
+                ? "Sunda"
+                : props.getUsersDetail.suku === 1000503
+                ? "Lampung"
+                : props.getUsersDetail.suku === 1000504
+                ? "Bugis"
+                : props.getUsersDetail.suku === 1000505
+                ? "Palembang"
+                : props.getUsersDetail.suku === 1000506
+                ? "Padang"
+                : ""}
+            </td>
           </tr>
           <tr>
             <td width="200">tanggal lahir</td>
