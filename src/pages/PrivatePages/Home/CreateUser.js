@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import FormComponentUser from "../../../component/Form/FormComponentUser";
-import { reduxForm, field } from "react-redux";
 import { Container } from "reactstrap";
 import { connect } from "react-redux";
 import { postUserCreate } from "../../../actions/userAction";

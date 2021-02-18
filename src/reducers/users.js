@@ -1,4 +1,3 @@
-import React from "react";
 import {
   GET_USERS_LIST,
   GET_USERS_DETAIL,

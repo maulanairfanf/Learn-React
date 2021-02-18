@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { Spinner, Table } from "reactstrap";
+import {  Table } from "reactstrap";
 
 const mapStateToProps = (state) => {
   return {

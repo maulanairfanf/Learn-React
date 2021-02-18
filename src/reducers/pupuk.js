@@ -1,4 +1,3 @@
-import React from "react";
 import {
   GET_PUPUK_LIST,
   GET_PUPUK_DETAIL,

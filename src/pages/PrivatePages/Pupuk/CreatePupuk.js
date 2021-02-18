@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { reduxForm, field } from "react-redux";
 import { Container } from "reactstrap";
 import { connect } from "react-redux";
 import swal from "sweetalert";

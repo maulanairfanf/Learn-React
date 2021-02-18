@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Login from "../pages/AuthPages/Login";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Switch } from "react-router-dom";
 
 //component
 import SideBar from "../component/Sidebar//Sidebar";
@@ -20,17 +20,14 @@ import CreatePupuk from "../pages/PrivatePages/Pupuk/CreatePupuk";
 import EditPupuk from "../pages/PrivatePages/Pupuk/EditPupuk";
 //Lahan
 import Lahan from "../pages/PrivatePages/Lahan/Lahan";
-import DetaillahanContainer from "../pages/PrivatePages/Lahan/DetailLahanContainer";
-import CreateLahan from "../pages/PrivatePages/Pupuk/CreateLahan";
-import EditLahan from "../pages/PrivatePages/Pupuk/EditLahan";
+import DetailLahanContainer from "../pages/PrivatePages/Lahan/DetailLahanContainer";
+import CreateLahan from "../pages/PrivatePages/Lahan/CreateLahan";
+import EditLahan from "../pages/PrivatePages/Lahan/EditLahan";
 
 export default class Routes extends Component {
   render() {
     const token = getToken();
-    if (!token) {
-      console.log(token);
-    } else {
-    }
+
     return (
       <BrowserRouter>
         <div className={token ? "visible" : "invisible"}>
@@ -53,9 +50,9 @@ export default class Routes extends Component {
             component={DetailPupukContainer}
           />
           <PrivateRoute
-            path="/DetailPupukContainer/:id"
+            path="/DetailLahanContainer/:id"
             exact
-            component={DetaillahanContainer}
+            component={DetailLahanContainer}
           />
           <PrivateRoute path="/CreateUser" component={CreateUser} />
           <PrivateRoute path="/CreatePupuk" component={CreatePupuk} />

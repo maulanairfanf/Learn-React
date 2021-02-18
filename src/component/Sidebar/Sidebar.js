@@ -3,7 +3,7 @@ import Item from "./Item";
 import Logout from "./Logout";
 
 export const SideBar = () => {
-  const [active, setActive] = useState(false);
+  // const [active, setActive] = useState(false);
 
   return (
     <>
@@ -59,11 +59,11 @@ export const SideBar = () => {
         </div> */}
       </div>
       <nav
-        className={
-          active
-            ? "flex-grow px-4 pb-4 md:pb-0 md:overflow-y-auto md:block hidden"
-            : "flex-grow px-4 pb-4 md:pb-0 md:overflow-y-auto md:block "
-        }
+      // className={
+      //   active
+      //     ? "flex-grow px-4 pb-4 md:pb-0 md:overflow-y-auto md:block hidden"
+      //     : "flex-grow px-4 pb-4 md:pb-0 md:overflow-y-auto md:block "
+      // }
       >
         <Item />
         <Logout />

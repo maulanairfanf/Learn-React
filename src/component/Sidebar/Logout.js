@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, history, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { removeUserSession } from "../../Utils/Common";
 import { getToken } from "../../Utils/Common";
 
@@ -8,7 +8,6 @@ export const Logout = () => {
 
   const history = useHistory();
   const token = getToken();
-  console.log(token);
 
   async function handleLogout() {
     try {
