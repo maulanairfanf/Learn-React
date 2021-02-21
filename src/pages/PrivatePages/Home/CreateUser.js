@@ -18,12 +18,16 @@ class CreateUser extends Component {
   render() {
     if (this.props.getResponseDataUser || this.props.errorResponseDataUser) {
       if (this.props.getResponseDataUser) {
-        swal("Failed!", this.props.errorResponseDataUser, "error");
+        swal({
+          title: "User Created",
+          // text: "You clicked the button!",
+          icon: "success",
+        });
       } else {
         swal({
-          title: "User Created !",
-          icon: "success",
-          button: "Oke",
+          title: "Good job!",
+          // text: "You clicked the button!",
+          icon: "error",
         });
       }
     }

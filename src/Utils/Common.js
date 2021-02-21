@@ -1,6 +1,6 @@
 // return the user data from the session storage
 export const getUser = () => {
-  const userStr = sessionStorage.getItem("user");
+  const userStr = localStorage.getItem("user");
   if (userStr) return JSON.parse(userStr);
   else return null;
 };

@@ -4,6 +4,7 @@ export const GET_USERS_LIST = "GET_USERS_LIST";
 export const GET_USERS_DETAIL = "GET_USERS_DETAIL";
 export const POST_USERS_CREATE = "POST_USERS_CREATE";
 export const PUT_USERS_UPDATE = "PUT_USERS_UPDATE";
+export const PUT_USERS_UPDATE_IMAGE = "PUT_USERS_UPDATE_IMAGE";
 
 const token = getToken();
 
@@ -41,12 +42,10 @@ export const getUsersDetail = (id) => {
       },
     })
       .then(function (response) {
-        console.log("masuk");
         dispatch({
           type: GET_USERS_DETAIL,
           payload: { data: response.data.data, errorMessage: false },
         });
-        console.log("keluar");
       })
       .catch(function (error) {
         console.log(error);
@@ -69,7 +68,7 @@ export const postUserCreate = (data) => {
         console.log(response);
         dispatch({
           type: POST_USERS_CREATE,
-          payload: { data: response.data, errorMessage: false },
+          payload: { data: response.data.data, errorMessage: false },
         });
       })
       .catch((err) => {
@@ -104,8 +103,44 @@ export const putUsersUpdate = (data) => {
         });
       })
       .catch(function (error) {
+        console.log(error);
         dispatch({
           type: PUT_USERS_UPDATE,
+          payload: {
+            data: false,
+            errorMessage: error.message,
+          },
+        });
+      });
+  };
+};
+
+export const putUsersUpdateImage = (data) => {
+  return (dispatch) => {
+    axios({
+      method: "put",
+      url: "http://localhost:8000/profil/image",
+      headers: {
+        Authorization: "Gradien " + token,
+        "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
+        "Content-Type": "application/json",
+      },
+      data: data,
+    })
+      .then(function (response) {
+        console.log(response);
+        dispatch({
+          type: PUT_USERS_UPDATE_IMAGE,
+          payload: {
+            data: response.data,
+            errorMessage: false,
+          },
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+        dispatch({
+          type: PUT_USERS_UPDATE_IMAGE,
           payload: {
             data: false,
             errorMessage: error.message,

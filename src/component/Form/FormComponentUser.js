@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { FormGroup, Col, Label, Input, Row, Button } from "reactstrap";
+import React, { Component, useState } from "react";
+import { Form, FormGroup, Col, Label, Input, Row, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import UserValidation from "../../Validations/UserValidation";
@@ -11,6 +11,7 @@ const renderField = ({
   label,
   disabled,
   readOnly,
+  value,
   meta: { touched, error, warning },
 }) => (
   <Row>
@@ -98,9 +99,31 @@ const renderField = ({
             <option value={1000604}>Pedagang</option>
             <option value={1000605}>Penyuluh</option>
             <option value={1000606}>Dosen</option>
-            <option value={1000001}>Pegawai Swasta</option>
-            <option value={1000002}>Honorer</option>
+            <option value={1000607}>Pegawai Swasta</option>
+            <option value={1000608}>Honorer</option>
           </Input>
+        </>
+      ) : label === "foto_profil_convert" ? (
+        <>
+          <Input
+            {...input}
+            type={type}
+            placeholder={placeholder}
+            disabled={disabled}
+            readOnly={readOnly}
+            value={value}
+          ></Input>
+        </>
+      ) : label === "foto_profil" ? (
+        <>
+          <input
+            {...input}
+            type={type}
+            placeholder={placeholder}
+            disabled={disabled}
+            readOnly={readOnly}
+            value={value}
+          ></input>
         </>
       ) : (
         <>
@@ -150,22 +173,81 @@ const mapStateToProps = (state) => {
       id_kabupaten: state.users.getUsersDetail.id_kabupaten,
       id_provinsi: state.users.getUsersDetail.id_provinsi,
       kodepos: state.users.getUsersDetail.kodepos,
+      foto_profil: state.users.getUsersDetail.foto_profil,
+      foto_kk: state.users.getUsersDetail.foto_kk,
+      foto_ktp: state.users.getUsersDetail.foto_ktp,
     },
   };
 };
 
 class FormComponentUser extends Component {
+  state = {
+    file: null,
+    base64URL: "",
+  };
+
+  getBase64 = (file) => {
+    return new Promise((resolve) => {
+      let fileInfo;
+      let baseURL = "";
+      // Make new FileReader
+      let reader = new FileReader();
+
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        // Make a fileInfo Object
+        // console.log("Called", reader);
+        baseURL = reader.result;
+        // console.log(baseURL);
+        resolve(baseURL);
+      };
+      console.log(fileInfo);
+    });
+  };
+
+  handleFileInputChange = (e) => {
+    console.log(e.target.files[0]);
+    let { file } = this.state;
+
+    file = e.target.files[0];
+
+    this.getBase64(file)
+      .then((result) => {
+        file["base64"] = result;
+        // console.log("File Is", file);
+        this.setState({
+          base64URL: result,
+          file,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    this.setState({
+      file: e.target.files[0],
+    });
+  };
+
   render() {
+    console.log("base pict : ", this.state.base64URL);
+    const value = this.state.base64URL;
     return (
-      <form onSubmit={this.props.handleSubmit}>
-        <FormGroup row>
-          <Col md={6}>
+      <>
+        <Form onSubmit={this.props.handleSubmit}>
+          {/* <Col md={6}>
             <FormGroup>
-              <Field
-                type="text"
-                name="nama"
-                component={renderField}
-                label="Nama"
+              <input
+                type="file"
+                name="foto_profil_convert"
+                accept=".jpg, .png, .jpeg"
+                // component={renderField}
+                // label="foto_profil"
+                onChange={this.handleFileInputChange}
+                // value={this.state.base64URL}
               />
             </FormGroup>
           </Col>
@@ -174,220 +256,264 @@ class FormComponentUser extends Component {
             <FormGroup>
               <Field
                 type="text"
-                name="email"
+                name="foto_profil"
                 component={renderField}
-                label="Email"
+                label="foto_profil"
+                value="alsla"
+                // placeholder={this.state.base64URL}
+                // onChange={this.handleFileInputChange}
+                // value=
               />
+              <p>{value}</p>
             </FormGroup>
-          </Col>
+          </Col> */}
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="telp"
-                component={renderField}
-                label="telp"
-              />
-            </FormGroup>
-          </Col>
+          <FormGroup row>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="nama"
+                  component={renderField}
+                  label="Nama"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="nik"
-                component={renderField}
-                label="Nik"
-              />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="email"
+                  component={renderField}
+                  label="Email"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field type="text" name="kk" component={renderField} label="kk" />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="telp"
+                  component={renderField}
+                  label="telp"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="kategori"
-                component={renderField}
-                label="kategori"
-              />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="nik"
+                  component={renderField}
+                  label="Nik"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="select"
-                name="pekerjaan"
-                component={renderField}
-                label="pekerjaan"
-              />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="kk"
+                  component={renderField}
+                  label="kk"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                label="gender"
-                type="select"
-                name="gender"
-                component={renderField}
-              />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="kategori"
+                  component={renderField}
+                  label="kategori"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="select"
-                name="agama"
-                component={renderField}
-                label="agama"
-              />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="select"
+                  name="pekerjaan"
+                  component={renderField}
+                  label="pekerjaan"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="select"
-                name="suku"
-                component={renderField}
-                label="suku"
-              />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  label="gender"
+                  type="select"
+                  name="gender"
+                  component={renderField}
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="date"
-                name="tgl_lahir"
-                component={renderField}
-                label="tgl_lahir"
-              />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="select"
+                  name="agama"
+                  component={renderField}
+                  label="agama"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="pendidikan"
-                component={renderField}
-                label="pendidikan"
-              />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="select"
+                  name="suku"
+                  component={renderField}
+                  label="suku"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="alamat"
-                component={renderField}
-                label="alamat"
-              />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="date"
+                  name="tgl_lahir"
+                  component={renderField}
+                  label="tgl_lahir"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field type="text" name="rt" component={renderField} label="rt" />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="select"
+                  name="pendidikan"
+                  component={renderField}
+                  label="pendidikan"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field type="text" name="rw" component={renderField} label="rw" />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="alamat"
+                  component={renderField}
+                  label="alamat"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="id_desa"
-                component={renderField}
-                label="id_desa"
-              />
-            </FormGroup>
-          </Col>
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="id_kecamatan"
-                component={renderField}
-                label="id_kecamatan"
-              />
-            </FormGroup>
-          </Col>
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="id_kabupaten"
-                component={renderField}
-                label="id_kabupaten"
-              />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="rt"
+                  component={renderField}
+                  label="rt"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="id_provinsi"
-                component={renderField}
-                label="id_provinsi"
-              />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="rw"
+                  component={renderField}
+                  label="rw"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="kodepos"
-                component={renderField}
-                label="kodepos"
-              />
-            </FormGroup>
-          </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="id_desa"
+                  component={renderField}
+                  label="id_desa"
+                />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="id_kecamatan"
+                  component={renderField}
+                  label="id_kecamatan"
+                />
+              </FormGroup>
+            </Col>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="id_kabupaten"
+                  component={renderField}
+                  label="id_kabupaten"
+                />
+              </FormGroup>
+            </Col>
 
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="facebook"
-                component={renderField}
-                label="facebook"
-              />
-            </FormGroup>
-          </Col>
-        </FormGroup>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="id_provinsi"
+                  component={renderField}
+                  label="id_provinsi"
+                />
+              </FormGroup>
+            </Col>
 
-        <FormGroup row>
-          <Col md="12">
-            <FormGroup>
-              <Button
-                color="dark"
-                type="submit"
-                disabled={this.props.submitting}
-              >
-                Submit
-              </Button>
-            </FormGroup>
-          </Col>
-        </FormGroup>
-      </form>
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="kodepos"
+                  component={renderField}
+                  label="kodepos"
+                />
+              </FormGroup>
+            </Col>
+
+            <Col md={6}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="facebook"
+                  component={renderField}
+                  label="facebook"
+                />
+              </FormGroup>
+            </Col>
+          </FormGroup>
+
+          <FormGroup row>
+            <Col md="12">
+              <FormGroup>
+                <Button
+                  color="dark"
+                  type="submit"
+                  disabled={this.props.submitting}
+                >
+                  Submit
+                </Button>
+              </FormGroup>
+            </Col>
+          </FormGroup>
+        </Form>
+      </>
     );
   }
 }

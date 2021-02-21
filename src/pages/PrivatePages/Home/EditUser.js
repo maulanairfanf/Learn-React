@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import FormComponentUser from "../../../component/Form/FormComponentUser";
-import { getUsersDetail, putUsersUpdate } from "../../../actions/userAction";
+import {
+  getUsersDetail,
+  putUsersUpdate,
+  putUsersUpdateImage,
+} from "../../../actions/userAction";
 import swal from "sweetalert";
 import { connect } from "react-redux";
 
@@ -18,10 +22,10 @@ class EditUser extends Component {
 
   handleSubmit(data) {
     this.props.dispatch(putUsersUpdate(data, this.props.match.params.id));
+    this.props.dispatch(putUsersUpdateImage(data, this.props.match.params.id));
   }
 
   render() {
-    console.log(this.props.getResponseDataUser);
     if (this.props.getResponseDataUser || this.props.errorResponseDataUser) {
       if (this.props.errorResponseDataUser) {
         swal("Failed!", this.props.errorResponseDataUser, "error");

@@ -1,75 +1,84 @@
-import React, { useState } from "react";
-import Item from "./Item";
-import Logout from "./Logout";
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faBriefcase,
+  faPaperPlane,
+  faQuestion,
+  faImage,
+  faCopy,
+} from "@fortawesome/free-solid-svg-icons";
+import { NavItem, NavLink, Nav } from "reactstrap";
+import classNames from "classnames";
+import { Link } from "react-router-dom";
+import SubMenu from "./SubMenu";
 
-export const SideBar = () => {
-  // const [active, setActive] = useState(false);
+const SideBar = ({ isOpen, toggle }) => (
+  <div className={classNames("sidebar", { "is-open": isOpen })}>
+    <div className="sidebar-header">
+      <span color="info" onClick={toggle} style={{ color: "#fff" }}>
+        &times;
+      </span>
+      <h3>Bootstrap Sidebar</h3>
+    </div>
+    <div className="side-menu">
+      <Nav vertical className="list-unstyled pb-3">
+        {/* <SubMenu title="Home" icon={faHome} items={submenus[0]} /> */}
+        <NavItem>
+          <NavLink tag={Link} to={"/"}>
+            <FontAwesomeIcon icon={faHome} className="mr-2" />
+            Home
+          </NavLink>
+        </NavItem>
+        {/* <SubMenu title="Pages" icon={faCopy} items={submenus[1]} /> */}
+        <NavItem>
+          <NavLink tag={Link} to={"/Pupuk"}>
+            <FontAwesomeIcon icon={faImage} className="mr-2" />
+            Pupuk
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} to={"/Lahan"}>
+            <FontAwesomeIcon icon={faQuestion} className="mr-2" />
+            Lahan
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} to={"/Panen"}>
+            <FontAwesomeIcon icon={faPaperPlane} className="mr-2" />
+            Panen
+          </NavLink>
+        </NavItem>
+      </Nav>
+    </div>
+  </div>
+);
 
-  return (
-    <>
-      <div>
-        <h1>Tanipedia</h1>
-        {/* <nav id="sidebar">
-          <div class="sidebar-header">
-            <h3>Collapsible Sidebar</h3>
-          </div>
-
-          <ul class="list-unstyled components">
-            <li class="active">
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-            <li>
-              <a
-                href="#homeSubmenu"
-                data-toggle="collapse"
-                aria-expanded="false"
-              >
-                Pages
-              </a>
-              <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                  <a href="#">Page</a>
-                </li>
-                <li>
-                  <a href="#">Page</a>
-                </li>
-                <li>
-                  <a href="#">Page</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Portfolio</a>
-            </li>
-            <li>
-              <a href="#">Contact</a>
-            </li>
-          </ul>
-        </nav>
-
-        <div id="content">
-          <button type="button" id="sidebarCollapse" class="navbar-btn">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div> */}
-      </div>
-      <nav
-      // className={
-      //   active
-      //     ? "flex-grow px-4 pb-4 md:pb-0 md:overflow-y-auto md:block hidden"
-      //     : "flex-grow px-4 pb-4 md:pb-0 md:overflow-y-auto md:block "
-      // }
-      >
-        <Item />
-        <Logout />
-      </nav>
-    </>
-  );
-};
+const submenus = [
+  [
+    {
+      title: "Home 1",
+      target: "Home-1",
+    },
+    {
+      title: "Home 2",
+      target: "Home-2",
+    },
+    {
+      itle: "Home 3",
+      target: "Home-3",
+    },
+  ],
+  [
+    {
+      title: "Page 1",
+      target: "Page-1",
+    },
+    {
+      title: "Page 2",
+      target: "Page-2",
+    },
+  ],
+];
 
 export default SideBar;

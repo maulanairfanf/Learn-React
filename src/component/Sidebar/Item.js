@@ -1,6 +1,5 @@
 import React from "react";
-import { BrowserRouter as NavLink } from "react-router-dom";
-
+import { BrowserRouter as Router, NavLink } from "react-router-dom";
 const Item = () => {
   return (
     <div>
@@ -24,6 +23,13 @@ const Item = () => {
         className="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
       >
         Lahan
+      </NavLink>
+      <NavLink
+        activeClassName="bg-gray-200"
+        to="/Panen"
+        className="block px-4 py-2 mt-2 text-sm font-semibold text-gray-900 bg-transparent rounded-lg hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+      >
+        Panen
       </NavLink>
     </div>
   );

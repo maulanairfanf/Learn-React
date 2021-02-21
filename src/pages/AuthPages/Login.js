@@ -33,46 +33,39 @@ function Login(props) {
     });
     console.log(data);
 
-    const config = {
-      method: "post",
-      url: "http://localhost:8000/login",
-      headers: {
-        "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
-        Authorization:
-          "Gradien 21232f297a57a5a743894a0e4a801fc3MAv5xkShGiocbZtloZJMyoyHJEWOSRwv3jXLrV71FxyuLs8jVVEQMDC54DBP23dDhuwDu9CEYYu3IiMNVMtqU0Lzj5vtWCWYBS9SlYD3EzIZDJesQ1UeD930qkkjo9HU",
-        "Access-Control-Request-Headers": "APP-KEY",
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
-    axios(config)
-      .then(function (response) {
-        setUserSession(
-          response.data.data.api_token,
-          response.data.data.username
-        );
-        props.history.push("/");
-        window.location.reload();
-      })
-      .catch(function (error) {
-        console.log(error);
-        // setError("username atau password yang dimasukan salah !!!");
-      });
+    try {
+      setError("");
+      const config = {
+        method: "post",
+        url: "http://localhost:8000/login",
+        headers: {
+          "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
+          Authorization:
+            "Gradien 21232f297a57a5a743894a0e4a801fc3MAv5xkShGiocbZtloZJMyoyHJEWOSRwv3jXLrV71FxyuLs8jVVEQMDC54DBP23dDhuwDu9CEYYu3IiMNVMtqU0Lzj5vtWCWYBS9SlYD3EzIZDJesQ1UeD930qkkjo9HU",
+          "Access-Control-Request-Headers": "APP-KEY",
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+      axios(config)
+        .then(function (response) {
+          setUserSession(
+            response.data.data.api_token,
+            response.data.data.username
+          );
+          props.history.push("/");
+          window.location.reload();
+        })
+        .catch(function (error) {
+          console.log(error);
+          setError("username atau password yang dimasukan salah !!!");
+        });
 
-    // try {
-    //   setError("");
-    //   // setLoading(true);
-    //   // const token = await loginUser({
-    //   //   username,
-    //   //   password,
-    //   // });
-    //   // setToken(token);asd
-    //   // await login(usernameRef.current.value, passwordRef.current.value);
-    //   // history.push("/Login");
-    // } catch (err) {
-    //   setError(err.message);
-    //   console.log(err);
-    // }
+      // history.push("/Login");
+    } catch (err) {
+      setError(err.message);
+      console.log(err);
+    }
 
     // setLoading(false);
   };

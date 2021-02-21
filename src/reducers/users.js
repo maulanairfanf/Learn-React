@@ -3,6 +3,7 @@ import {
   GET_USERS_DETAIL,
   POST_USERS_CREATE,
   PUT_USERS_UPDATE,
+  PUT_USERS_UPDATE_IMAGE,
 } from "../actions/userAction";
 
 let initialState = {
@@ -43,6 +44,16 @@ const users = (state = initialState, action) => {
     case PUT_USERS_UPDATE:
       console.log(action.payload.data);
 
+      console.log(action.payload.errorMessage);
+
+      return {
+        ...state,
+        getResponseDataUser: action.payload.data,
+        errorResponseDataUser: action.payload.errorMessage,
+      };
+    case PUT_USERS_UPDATE_IMAGE:
+      console.log(action.payload.data);
+      console.log(action.payload.errorMessage);
       return {
         ...state,
         getResponseDataUser: action.payload.data,
