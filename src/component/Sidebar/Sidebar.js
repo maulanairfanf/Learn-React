@@ -2,11 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
-  faBriefcase,
-  faPaperPlane,
-  faQuestion,
-  faImage,
-  faCopy,
+  faEyeDropper,
+  faSeedling,
+  faGlobe,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
@@ -19,33 +17,33 @@ const SideBar = ({ isOpen, toggle }) => (
       <span color="info" onClick={toggle} style={{ color: "#fff" }}>
         &times;
       </span>
-      <h3>Bootstrap Sidebar</h3>
+      <h3>Tanipedia</h3>
     </div>
-    <div className="side-menu">
-      <Nav vertical className="list-unstyled pb-3">
+    <div className="side-menu ">
+      <Nav vertical className="list-unstyled pb-3 ml-2 mt-3">
         {/* <SubMenu title="Home" icon={faHome} items={submenus[0]} /> */}
-        <NavItem>
-          <NavLink tag={Link} to={"/"}>
+        <NavItem className="rounded-pill mb-2">
+          <NavLink activeClassName="bg-white" tag={Link} to={"/"}>
             <FontAwesomeIcon icon={faHome} className="mr-2" />
             Home
           </NavLink>
         </NavItem>
         {/* <SubMenu title="Pages" icon={faCopy} items={submenus[1]} /> */}
-        <NavItem>
+        <NavItem className="rounded-pill mb-2">
           <NavLink tag={Link} to={"/Pupuk"}>
-            <FontAwesomeIcon icon={faImage} className="mr-2" />
+            <FontAwesomeIcon icon={faEyeDropper} className="mr-2" />
             Pupuk
           </NavLink>
         </NavItem>
-        <NavItem>
+        <NavItem className="rounded-pill mb-2">
           <NavLink tag={Link} to={"/Lahan"}>
-            <FontAwesomeIcon icon={faQuestion} className="mr-2" />
+            <FontAwesomeIcon icon={faGlobe} className="mr-2" />
             Lahan
           </NavLink>
         </NavItem>
-        <NavItem>
+        <NavItem className="rounded-pill mb-2">
           <NavLink tag={Link} to={"/Panen"}>
-            <FontAwesomeIcon icon={faPaperPlane} className="mr-2" />
+            <FontAwesomeIcon icon={faSeedling} className="mr-2" />
             Panen
           </NavLink>
         </NavItem>

@@ -34,18 +34,18 @@ import CreatePanen from "../pages/PrivatePages/Panen/CreatePanen";
 import EditPanen from "../pages/PrivatePages/Panen/EditPanen";
 
 const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
-  // render() {
   const token = getToken();
 
   return (
     <Container
       fluid
-      className={classNames("routes", { "is-open": sidebarIsOpen })}
+      className={classNames("content overflow-auto", {
+        "is-open": sidebarIsOpen,
+      })}
     >
-      {/* <div className={token ? "visible" : "invisible"}>
-          <SideBar />
-        </div> */}
-      <Topbar toggleSidebar={toggleSidebar} />
+      <div className={token ? "sticky-top" : "d-none"}>
+        <Topbar toggleSidebar={toggleSidebar} />
+      </div>
       <Switch>
         <PublicRoute exact path="/login" component={Login} />
         <PrivateRoute exact path="/" component={Home} />
@@ -85,7 +85,6 @@ const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
       </Switch>
     </Container>
   );
-  // },
 };
 
 export default Routes;

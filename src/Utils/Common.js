@@ -5,9 +5,13 @@ export const getUser = () => {
   else return null;
 };
 
+export const getName = () => {
+  return localStorage.getItem("user") || null;
+};
+
 // return the token from the session storage
 export const getToken = () => {
-  return  localStorage.getItem("token")  || null ;
+  return localStorage.getItem("token") || null;
 };
 
 // remove the token and user from the session storage
@@ -22,6 +26,7 @@ export const removeUserSession = () => {
 // set the token and user from the session storage
 export const setUserSession = (token, user) => {
   localStorage.setItem("token", token);
+  localStorage.setItem("user", user);
   // sessionStorage.setItem("token", token);
   // sessionStorage.setItem("user", JSON.stringify(user));
 };

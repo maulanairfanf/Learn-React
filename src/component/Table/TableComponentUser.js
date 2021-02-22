@@ -111,6 +111,7 @@ const TableComponentUser = (props) => {
                 <SearchBar {...props.searchProps} placeholder="Search..." />
               </div>
               <BootstrapTable
+                className="table-responsive"
                 {...props.baseProps}
                 pagination={paginationFactory()}
               />
