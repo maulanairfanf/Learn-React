@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { removeUserSession } from "../../Utils/Common";
 import { getToken } from "../../Utils/Common";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { LogOut } from "react-feather";
 import { Button } from "reactstrap";
 export const Logout = () => {
   const [error, setError] = useState("");
@@ -33,8 +32,8 @@ export const Logout = () => {
           <p>{error}</p>
         </div>
       )}
-      <Button color="info" onClick={handleLogout}>
-        <FontAwesomeIcon icon={faSignOutAlt} />
+      <Button color="info" className="p-1" onClick={handleLogout}>
+        <LogOut />
       </Button>
     </>
   );

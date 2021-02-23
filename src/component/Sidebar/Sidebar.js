@@ -1,11 +1,19 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faHome,
-  faEyeDropper,
-  faSeedling,
-  faGlobe,
-} from "@fortawesome/free-solid-svg-icons";
+  MoreVertical,
+  Home,
+  Trash,
+  ShoppingBag,
+  Globe,
+  Activity,
+} from "react-feather";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   faHome,
+//   faEyeDropper,
+//   faSeedling,
+//   faGlobe,
+// } from "@fortawesome/free-solid-svg-icons";
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
@@ -23,28 +31,42 @@ const SideBar = ({ isOpen, toggle }) => (
       <Nav vertical className="list-unstyled pb-3 ml-2 mt-3">
         {/* <SubMenu title="Home" icon={faHome} items={submenus[0]} /> */}
         <NavItem className="rounded-pill mb-2">
-          <NavLink activeClassName="bg-white" tag={Link} to={"/"}>
-            <FontAwesomeIcon icon={faHome} className="mr-2" />
-            Home
+          <NavLink className="d-flex align-items-center" tag={Link} to={"/"}>
+            <Home className="mr-3" size={24} />
+            <span>Home</span>
           </NavLink>
         </NavItem>
         {/* <SubMenu title="Pages" icon={faCopy} items={submenus[1]} /> */}
         <NavItem className="rounded-pill mb-2">
-          <NavLink tag={Link} to={"/Pupuk"}>
-            <FontAwesomeIcon icon={faEyeDropper} className="mr-2" />
-            Pupuk
+          <NavLink
+            className="d-flex align-items-center"
+            tag={Link}
+            to={"/Pupuk"}
+          >
+            <ShoppingBag className="mr-3" size={24} />
+            <span> Pupuk</span>
           </NavLink>
         </NavItem>
         <NavItem className="rounded-pill mb-2">
-          <NavLink tag={Link} to={"/Lahan"}>
-            <FontAwesomeIcon icon={faGlobe} className="mr-2" />
-            Lahan
+          <NavLink
+            className="d-flex align-items-center"
+            tag={Link}
+            to={"/Lahan"}
+          >
+            {" "}
+            <Globe className="mr-3" size={24} />
+            <span> Lahan</span>
           </NavLink>
         </NavItem>
         <NavItem className="rounded-pill mb-2">
-          <NavLink tag={Link} to={"/Panen"}>
-            <FontAwesomeIcon icon={faSeedling} className="mr-2" />
-            Panen
+          <NavLink
+            className="d-flex align-items-center"
+            tag={Link}
+            to={"/Panen"}
+          >
+            {" "}
+            <Activity className="mr-3" size={24} />
+            <span>Panen</span>
           </NavLink>
         </NavItem>
       </Nav>

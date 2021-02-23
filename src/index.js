@@ -8,7 +8,6 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
 import thunk from "redux-thunk";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const store = createStore(
   reducer,

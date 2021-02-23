@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAlignLeft } from "@fortawesome/free-solid-svg-icons";
+
 import {
   Navbar,
   Button,
@@ -13,12 +12,13 @@ import {
 import { getName } from "../../Utils/Common";
 import { Link } from "react-router-dom";
 import Logout from "./Logout";
+import { AlignLeft } from "react-feather";
 const Topbar = ({ toggleSidebar }) => {
   const [topbarIsOpen, setTopbarOpen] = useState(true);
   const toggleTopbar = () => setTopbarOpen(!topbarIsOpen);
   const name = getName();
   console.log(name);
-  // console.log(getUser());
+
   return (
     <Navbar
       color="light"
@@ -26,8 +26,13 @@ const Topbar = ({ toggleSidebar }) => {
       className="navbar shadow-lg p-3 mb-5 bg-white rounded  "
       expand="md"
     >
-      <Button color="info" onClick={toggleSidebar}>
-        <FontAwesomeIcon icon={faAlignLeft} />
+      <Button
+        color="info"
+        onClick={toggleSidebar}
+        className="p-1"
+        // style={{ border: "2px solid black" }}
+      >
+        <AlignLeft size={24}  />
       </Button>
       {/* <NavbarToggler onClick={toggleTopbar} /> */}
       {/* <Collapse isOpen={topbarIsOpen} navbar> */}
