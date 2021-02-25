@@ -12,7 +12,6 @@ class Panen extends Component {
   render() {
     return (
       <div>
-        <h1>haii from Panen</h1>
         <TableComponentPanen />
       </div>
     );

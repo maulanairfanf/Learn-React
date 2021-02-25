@@ -145,6 +145,7 @@ li a.dropdown-toggle::after {
   }
 
   .sidebar.is-open {
+    height: 100vh;
     min-width: 100%;
     max-width: 100%;
     margin-left: 0;
@@ -160,4 +161,49 @@ li a.dropdown-toggle::after {
     position: relative;
     left: 68%;
   }
+}
+
+/* //pagination */
+.pagination {
+  float: right;
+}
+
+.react-bootstrap-table-pagination-list .pagination .page-link {
+  color: black;
+}
+
+.pagination .page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+/* //table */
+
+.react-bootstrap-table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+ 
+}
+
+.table td,
+.table th {
+  vertical-align: baseline !important;
+  border-top: 1px solid #dee2e6;
+  width: 200px;
+
 }

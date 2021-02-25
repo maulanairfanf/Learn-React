@@ -11,7 +11,6 @@ class Lahan extends Component {
   render() {
     return (
       <>
-        <div>haii from lahan</div>
         <TableComponentLahan />
       </>
     );

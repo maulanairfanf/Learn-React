@@ -20,15 +20,35 @@ const UserValidation = (values) => {
   if (!values.kk || values.kk === "") {
     errors.kk = "KK harus diisi";
   }
+
   if (!values.alamat || values.alamat === "") {
     errors.alamat = "Alamat harus diisi";
   }
+
   if (!values.rt || values.rt === "") {
     errors.rt = "RT harus diisi";
   }
+
   if (!values.rw || values.rw === "") {
     errors.rw = "RW harus diisi";
   }
+
+  if (!values.desa || values.desa === "") {
+    errors.desa = "Desa harus diisi";
+  }
+
+  if (!values.kecamatan || values.kecamatan === "") {
+    errors.kecamatan = "Kecamatan harus diisi";
+  }
+
+  if (!values.kabupaten || values.kabupaten === "") {
+    errors.kabupaten = "Kabupaten harus diisi";
+  }
+
+  if (!values.provinsi || values.provinsi === "") {
+    errors.provinsi = "Provinsi harus diisi";
+  }
+
   if (!values.kodpeos || values.kodpeos === "") {
     errors.kodpeos = "Kodepos harus diisi";
   }

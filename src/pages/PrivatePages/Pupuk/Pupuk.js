@@ -12,7 +12,6 @@ class Pupuk extends Component {
   render() {
     return (
       <div>
-        <h1>haii from pupuk</h1>
         <TableComponentPupuk />
       </div>
     );
