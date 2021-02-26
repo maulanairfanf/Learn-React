@@ -1,6 +1,16 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-import { Container, Button, Spinner } from "reactstrap";
+import {
+  Button,
+  Spinner,
+  Table,
+  Badge,
+  UncontrolledDropdown,
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle,
+} from "reactstrap";
+import { MoreVertical, Edit, Trash, Eye, UserPlus } from "react-feather";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import { connect } from "react-redux";
@@ -8,9 +18,9 @@ import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import { deleteLahan } from "../../actions/lahanAction";
 
-const handleClick = (dispatch, id) => {
+const handleClick = (dispatch, id, kategori) => {
   swal({
-    title: "Apakah Anda yakin akan lahan dengan nama  : ",
+    title: "Apakah Anda yakin akan lahan dengan nama  : " + kategori,
     icon: "warning",
     buttons: true,
     dangerMode: true,
@@ -38,7 +48,6 @@ const defaultSorted = [
 const { SearchBar } = Search;
 
 const mapStateToProps = (state) => {
-  console.log(state.lahan.getLahanList);
   return {
     getLahanList: state.lahan.getLahanList,
     errorLahanList: state.lahan.errorLahanList,
@@ -46,56 +55,159 @@ const mapStateToProps = (state) => {
 };
 
 const TableComponentLahan = (props) => {
+  const customTotal = (from, to, size) => (
+    <span className="react-bootstrap-table-pagination-total">
+      Showing {from} to {to} of {size} Results
+    </span>
+  );
+  const options = {
+    paginationSize: 5,
+    pageStartIndex: 1,
+    alwaysShowAllBtns: true,
+    withFirstAndLast: false,
+    hideSizePerPage: true,
+    hidePageListOnlyOnePage: true,
+    firstPageText: "First",
+    prePageText: "Back",
+    nextPageText: "Next",
+    lastPageText: "Last",
+    nextPageTitle: "First page",
+    prePageTitle: "Pre page",
+    firstPageTitle: "Next page",
+    lastPageTitle: "Last page",
+    showTotal: true,
+    paginationTotalRenderer: customTotal,
+    disablePageTitle: true,
+    sizePerPageList: [
+      {
+        text: "10",
+        value: 10,
+      },
+      {
+        text: "All",
+        value: props.getLahanList.length,
+      },
+    ],
+  };
   const columns = [
     {
-      dataField: "id",
-      text: "ID",
-      headerStyle: () => {
-        return { width: "5%" };
+      dataField: "kategori",
+      text: "Tanaman",
+      sort: true,
+      headerStyle: {
+        backgroundColor: "#f3f2f7",
+        border: "none",
       },
-      sort: true,
+      formatter: (rowContent, row) => {
+        return (
+          <>
+            <small className="block">{row.kategori} / </small>
+            <small className="block">{row.luas} / </small>
+            <small className="block">{row.usia_tanaman} </small>
+          </>
+        );
+      },
     },
     {
-      dataField: "alamat",
-      text: "Lokasi",
-      sort: true,
+      dataField: "petani",
+      text: "Petani",
+      headerStyle: {
+        backgroundColor: "#f3f2f7",
+        border: "none",
+      },
     },
     {
-      dataField: "Action",
+      dataField: "desa",
+      text: "Desa",
+      headerStyle: {
+        backgroundColor: "#f3f2f7",
+        border: "none",
+      },
+      formatter: (rowContent, row) => {
+        return (
+          <>
+            <small>desa : {row.desa} </small>
+            <small>kecamatan : {row.kecamatan} </small>
+            <small>kabupaten : {row.kabupaten} </small>
+            <small>provinsi : {row.provinsi} </small>
+          </>
+        );
+      },
+    },
+    {
+      dataField: "keterangan",
+      text: "Keterangan",
+      headerStyle: {
+        backgroundColor: "#f3f2f7",
+        border: "none",
+      },
+    },
+    {
+      headerStyle: {
+        backgroundColor: "#f3f2f7",
+        border: "none",
+      },
       text: "Action",
       formatter: (rowContent, row) => {
         return (
-          <div>
-            <Link className="text-white" to={"EditLahan/" + row.id}>
-              <Button className="ml-3" color="primary">
-                Update
-              </Button>
-            </Link>
-
-            <Link className="text-white" to={"DetailLahanContainer/" + row.id}>
-              <Button className="ml-3" color="primary">
-                Detail
-              </Button>
-            </Link>
-            <Button
-              className="ml-3"
-              color="primary"
-              onClick={() => handleClick(props.dispatch, row.id, row.nama)}
-            >
-              Delete
-            </Button>
-          </div>
+          <>
+            <UncontrolledDropdown>
+              <Link
+                to={"DetailLahanContainer/" + row.id}
+                className="text-decoration-none "
+              >
+                <Eye className=" text-black-50" size={15} />
+              </Link>
+              <DropdownToggle
+                className="ml-1"
+                color="transparent"
+                size="sm"
+                outline
+              >
+                <MoreVertical size={15} />
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem onClick={(e) => e.preventDefault()}>
+                  <Link
+                    to={"EditLahan/" + row.id}
+                    className="text-decoration-none "
+                  >
+                    <h6>
+                      <span>
+                        <Edit className=" text-black-50 mr-1" size={15} />
+                      </span>
+                      <span className="align-middle text-black-50 mb-2">
+                        Edit
+                      </span>
+                    </h6>
+                  </Link>
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() =>
+                    handleClick(props.dispatch, row.id, row.kategori)
+                  }
+                >
+                  <h6>
+                    <span>
+                      <Trash className="mr-1 text-black-50" size={15} />
+                    </span>
+                    <span className="align-middle text-black-50 mb-2">
+                      Delete
+                    </span>
+                  </h6>
+                </DropdownItem>
+              </DropdownMenu>{" "}
+            </UncontrolledDropdown>
+          </>
         );
       },
     },
   ];
-
   return (
-    <Container>
+    <>
       {props.getLahanList ? (
         <ToolkitProvider
           bootstrap4
-          className="bg-blue-500"
           keyField="id"
           data={props.getLahanList}
           columns={columns}
@@ -105,16 +217,21 @@ const TableComponentLahan = (props) => {
           {(props) => (
             <div>
               <Link to="/CreateLahan">
-                <Button color="primary">Addlahan </Button>
+                <button type="button" className="btn btn-light rounded">
+                  <UserPlus size={20} />
+                </button>
               </Link>
 
               <div className="float-right">
                 <SearchBar {...props.searchProps} placeholder="Search..." />
               </div>
-              <BootstrapTable
-                {...props.baseProps}
-                pagination={paginationFactory()}
-              />
+              <div className="table-responsive-lg">
+                <BootstrapTable
+                  bordered={false}
+                  {...props.baseProps}
+                  pagination={paginationFactory(options)}
+                />
+              </div>
             </div>
           )}
         </ToolkitProvider>
@@ -127,7 +244,7 @@ const TableComponentLahan = (props) => {
           )}
         </div>
       )}
-    </Container>
+    </>
   );
 };
 

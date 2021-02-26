@@ -1,7 +1,6 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import {
-  Container,
   Button,
   Spinner,
   Table,
@@ -16,8 +15,10 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
-import { deleteUser } from "../../actions/userAction";
-import { MoreVertical, Edit, Trash, Eye, UserPlus } from "react-feather";
+import { deleteUser, getUsersList } from "../../actions/userAction";
+import { MoreVertical, Edit, Trash, Eye, UserPlus, User } from "react-feather";
+import Photo from "../../assets/user.png";
+import Kirito from "../../assets/tester.jpg";
 
 const handleClick = (dispatch, id, nama) => {
   swal({
@@ -28,6 +29,7 @@ const handleClick = (dispatch, id, nama) => {
   }).then((willDelete) => {
     if (willDelete) {
       dispatch(deleteUser(id));
+      dispatch(getUsersList());
       swal({
         title: "Berhasil Delete User!",
         icon: "success",
@@ -37,15 +39,12 @@ const handleClick = (dispatch, id, nama) => {
   });
 };
 
-//buat sorted
 const defaultSorted = [
   {
     dataField: "id",
     order: "desc",
   },
 ];
-
-//buat search
 const { SearchBar } = Search;
 
 const mapStateToProps = (state) => {
@@ -56,139 +55,224 @@ const mapStateToProps = (state) => {
 };
 
 const TableComponentUser = (props) => {
-  // const columns = [
-  //   {
-  //     dataField: "id",
-  //     text: "ID",
-  //     headerStyle: () => {
-  //       return { width: "5%" };
-  //     },
-  //     sort: true,
-  //   },
-  //   {
-  //     dataField: "nama",
-  //     text: "Nama",
-  //     sort: true,
-  //   },
-  //   {
-  //     dataField: "Action",
-  //     text: "Action",
-  //     formatter: (rowContent, row) => {
-  //       return (
-  //         <div>
-  //           <Link className="text-white" to={"EditUser/" + row.id}>
-  //             <Button className="ml-3" color="primary">
-  //               Update
-  //             </Button>
-  //           </Link>
+    const customTotal = (from, to, size) => (
+    <span className="react-bootstrap-table-pagination-total">
+      Showing {from} to {to} of {size} Results
+    </span>
+  );
+  const options = {
+    paginationSize: 5,
+    pageStartIndex: 1,
+    alwaysShowAllBtns: true,
+    withFirstAndLast: false,
+    hideSizePerPage: true,
+    hidePageListOnlyOnePage: true,
+    firstPageText: "First",
+    prePageText: "Back",
+    nextPageText: "Next",
+    lastPageText: "Last",
+    nextPageTitle: "First page",
+    prePageTitle: "Pre page",
+    firstPageTitle: "Next page",
+    lastPageTitle: "Last page",
+    showTotal: true,
+    paginationTotalRenderer: customTotal,
+    disablePageTitle: true,
+    sizePerPageList: [
+      {
+        text: "10",
+        value: 10,
+      },
+      {
+        text: "All",
+        value: props.getUsersList.length,
+      },
+    ],
+  };
 
-  //           <Link className="text-white" to={"DetailUserContainer/" + row.id}>
-  //             <Button className="ml-3" color="primary">
-  //               Detail
-  //             </Button>
-  //           </Link>
-  //           <Button
-  //             className="ml-3"
-  //             color="primary"
-  //             onClick={() => handleClick(props.dispatch, row.id, row.nama)}
-  //           >
-  //             Delete
-  //           </Button>
-  //         </div>
-  //       );
-  //     },
-  //   },
-  // ];
-  console.log(props.getUsersList);
-  const data = props.getUsersList;
-  console.log(data);
+  const columns = [
+    {
+      dataField: "nama",
+      text: "Identitas",
+      sort: true,
+      headerStyle: {
+        backgroundColor: "#f3f2f7",
+        border: "none",
+      },
+      formatter: (rowContent, row) => {
+        return (
+          <>
+            <div className="d-flex align-items-center ">
+              <div className="">
+                {row.foto_profil ? (
+                  <div style={{ width: "30px" }}>
+                    <img
+                      src={Kirito}
+                      className="rounded-circle img-fluid border border-primary "
+                    ></img>
+                  </div>
+                ) : (
+                  <img
+                    src={Photo}
+                    style={{ width: "30px" }}
+                    className="rounded-circle border border-primary"
+                  ></img>
+                )}
+              </div>
+              <div className="ml-2">
+                <small>{row.nama}</small>
+                <br />
+                <small>{row.telp}</small>
+              </div>
+            </div>
+          </>
+        );
+      },
+    },
+    {
+      dataField: "pekerjaan",
+      text: "Pekerjaan",
+
+      headerStyle: {
+        backgroundColor: "#f3f2f7",
+        border: "none",
+      },
+      formatter: (rowContent, row) => {
+        return (
+          <>
+            <h6>{row.pekerjaan}</h6>
+          </>
+        );
+      },
+    },
+    {
+      dataField: "gender",
+      text: "Riwayat",
+
+      headerStyle: {
+        backgroundColor: "#f3f2f7",
+        border: "none",
+      },
+      formatter: (rowContent, row) => {
+        return (
+          <>
+            <small>{row.gender} - </small>
+
+            <small>{row.pendidikan}</small>
+          </>
+        );
+      },
+    },
+    {
+      dataField: "provinsi",
+      text: "Provinsi",
+      headerStyle: {
+        backgroundColor: "#f3f2f7",
+        border: "none",
+      },
+      formatter: (rowContent, row) => {
+        return (
+          <>
+            <small>Desa : {row.desa} , </small>
+            <small>Kecamatan : {row.kecamatan} , </small>
+            <small>Kabupaten : {row.kabupaten} , </small>
+            <small>Provinsi : {row.provinsi} </small>
+          </>
+        );
+      },
+    },
+    {
+      headerStyle: {
+        backgroundColor: "#f3f2f7",
+        border: "none",
+      },
+      text: "Action",
+      formatter: (rowContent, row) => {
+        return (
+          <>
+            <UncontrolledDropdown>
+              <Link
+                to={"DetailUserContainer/" + row.id}
+                className="text-decoration-none "
+              >
+                <Eye className=" text-black-50" size={15} />
+              </Link>
+              <DropdownToggle
+                className="ml-1"
+                color="transparent"
+                size="sm"
+                outline
+              >
+                <MoreVertical size={15} />
+              </DropdownToggle>
+              <DropdownMenu right>
+                <DropdownItem onClick={(e) => e.preventDefault()}>
+                  <Link
+                    to={"EditUser/" + row.id}
+                    className="text-decoration-none "
+                  >
+                    <h6>
+                      <span>
+                        <Edit className=" text-black-50 mr-1" size={15} />
+                      </span>
+                      <span className="align-middle text-black-50 mb-2">
+                        Edit
+                      </span>
+                    </h6>
+                  </Link>
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() => handleClick(props.dispatch, row.id, row.nama)}
+                >
+                  <h6>
+                    <span>
+                      <Trash className="mr-1 text-black-50" size={15} />
+                    </span>
+                    <span className="align-middle text-black-50 mb-2">
+                      Delete
+                    </span>
+                  </h6>
+                </DropdownItem>
+              </DropdownMenu>{" "}
+            </UncontrolledDropdown>
+          </>
+        );
+      },
+    },
+  ];
+
   return (
     <>
       {props.getUsersList ? (
-        <div>
-          <Link to="/CreateUser" className=" text-decoration-none">
-            <Button color="dark">
-              <UserPlus className=" text-white" />
-              <span className="ml-3">Add User</span>
-            </Button>
-          </Link>
-          <div className="float-right">
-            <SearchBar {...props.searchProps} placeholder="Search..." />
-          </div>
+        <ToolkitProvider
+          bootstrap4
+          keyField="id"
+          data={props.getUsersList}
+          columns={columns}
+          defaultSorted={defaultSorted}
+          search
+        >
+          {(props) => (
+            <div>
+              <Link to="/CreateUser">
+                <button type="button" className="btn btn-light rounded">
+                  <UserPlus size={20} />
+                </button>
+              </Link>
 
-          <Table responsive>
-            <thead className="bg-secondary">
-              <tr className="text-white">
-                <th>ID</th>
-                <th>Nama</th>
-                {/* <th>Users</th> */}
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((user) => (
-                <tr>
-                  <td>
-                    <span className="align-middle font-weight-bold">
-                      {user.id}
-                    </span>
-                  </td>
-                  <td>{user.nama}</td>
-
-                  <td>
-                    {/* <Badge pill color="light-primary" className="mr-1"> */}
-                    {user.kategori}
-                    {/* </Badge> */}
-                  </td>
-                  <td>
-                    <UncontrolledDropdown>
-                      <DropdownToggle
-                        className="icon-btn hide-arrow"
-                        color="transparent"
-                        size="sm"
-                      >
-                        <MoreVertical size={15} />
-                      </DropdownToggle>
-                      <DropdownMenu right>
-                        <DropdownItem onClick={(e) => e.preventDefault()}>
-                          <Link
-                            to={"EditUser/" + user.id}
-                            className="text-decoration-none"
-                          >
-                            <Edit className=" text-black-50" size={15} />{" "}
-                            <span className="align-middle text-dark">Edit</span>
-                          </Link>
-                        </DropdownItem>
-                        <DropdownItem
-                          onClick={() =>
-                            handleClick(props.dispatch, user.id, user.nama)
-                          }
-                        >
-                          <Trash className=" text-black-50" size={15} />{" "}
-                          <span className="align-middle text-dark ">
-                            Delete
-                          </span>
-                        </DropdownItem>
-                        <DropdownItem>
-                          <Link
-                            to={"DetailUserContainer/" + user.id}
-                            className="text-decoration-none"
-                          >
-                            <Eye className=" text-black-50" size={15} />{" "}
-                            <span className="align-middle text-dark">
-                              Detail
-                            </span>
-                          </Link>
-                        </DropdownItem>
-                      </DropdownMenu>
-                    </UncontrolledDropdown>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
+              <div className="float-right">
+                <SearchBar {...props.searchProps} placeholder="Search..." />
+              </div>
+              <div className="table-responsive-lg">
+                <BootstrapTable
+                  bordered={false}
+                  {...props.baseProps}
+                  pagination={paginationFactory(options)}
+                />
+              </div>
+            </div>
+          )}
+        </ToolkitProvider>
       ) : (
         <div className="text-center">
           {props.errorUsersList ? (
