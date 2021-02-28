@@ -1,26 +1,23 @@
 import React from "react";
-import {
-  MoreVertical,
-  Home,
-  Trash,
-  ShoppingBag,
-  Globe,
-  Activity,
-} from "react-feather";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//   faHome,
-//   faEyeDropper,
-//   faSeedling,
-//   faGlobe,
-// } from "@fortawesome/free-solid-svg-icons";
+import { User, ShoppingBag, Globe, Activity, Home } from "react-feather";
+
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 import SubMenu from "./SubMenu";
+import Dashboard from "../../pages/PrivatePages/Dashboard/Dashboard";
+import { getToken } from "../../Utils/Common";
+
+const token = getToken();
 
 const SideBar = ({ isOpen, toggle }) => (
-  <div className={classNames("sidebar", { "is-open": isOpen })}>
+  <div
+    className={classNames(
+      "sidebar",
+      { "is-open": isOpen },
+      token ? "" : "d-none"
+    )}
+  >
     <div className="sidebar-header">
       <span color="info" onClick={toggle} style={{ color: "#fff" }}>
         &times;
@@ -31,9 +28,19 @@ const SideBar = ({ isOpen, toggle }) => (
       <Nav vertical className="list-unstyled pb-3 ml-2 mt-3">
         {/* <SubMenu title="Home" icon={faHome} items={submenus[0]} /> */}
         <NavItem className="rounded-pill mb-2">
-          <NavLink className="d-flex align-items-center" tag={Link} to={"/"}>
+          <NavLink
+            className="d-flex align-items-center"
+            tag={Link}
+            to={"/"}
+          >
             <Home className="mr-3" size={24} />
-            <span>Home</span>
+            <span>Dashboard</span>
+          </NavLink>
+        </NavItem>
+        <NavItem className="rounded-pill mb-2">
+          <NavLink className="d-flex align-items-center" tag={Link} to={"/Home"}>
+            <User className="mr-3" size={24} />
+            <span>Petani</span>
           </NavLink>
         </NavItem>
         {/* <SubMenu title="Pages" icon={faCopy} items={submenus[1]} /> */}

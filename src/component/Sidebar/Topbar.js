@@ -17,7 +17,6 @@ const Topbar = ({ toggleSidebar }) => {
   const [topbarIsOpen, setTopbarOpen] = useState(true);
   const toggleTopbar = () => setTopbarOpen(!topbarIsOpen);
   const name = getName();
-  console.log(name);
 
   return (
     <Navbar
@@ -32,7 +31,7 @@ const Topbar = ({ toggleSidebar }) => {
         className="p-1"
         // style={{ border: "2px solid black" }}
       >
-        <AlignLeft size={24}  />
+        <AlignLeft size={24} />
       </Button>
       {/* <NavbarToggler onClick={toggleTopbar} /> */}
       {/* <Collapse isOpen={topbarIsOpen} navbar> */}

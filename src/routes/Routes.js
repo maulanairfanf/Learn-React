@@ -32,6 +32,7 @@ import Panen from "../pages/PrivatePages/Panen/Panen";
 import DetailPanenContainer from "../pages/PrivatePages/Panen/DetailPanenContainer";
 import CreatePanen from "../pages/PrivatePages/Panen/CreatePanen";
 import EditPanen from "../pages/PrivatePages/Panen/EditPanen";
+import Dashboard from "../pages/PrivatePages/Dashboard/Dashboard";
 
 const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
   const token = getToken();
@@ -48,29 +49,26 @@ const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
       </div>
       <Switch>
         <PublicRoute exact path="/login" component={Login} />
-        <PrivateRoute exact path="/" component={Home} />
+        <PrivateRoute exact path="/" component={Dashboard} />
+        <PrivateRoute path="/Home" component={Home} />
         <PrivateRoute path="/Pupuk" component={Pupuk} />
         <PrivateRoute path="/Lahan" component={Lahan} />
         <PrivateRoute path="/Panen" component={Panen} />
 
         <PrivateRoute
           path="/DetailUserContainer/:id"
-          exact
           component={DetailUserContainer}
         />
         <PrivateRoute
           path="/DetailPupukContainer/:id"
-          exact
           component={DetailPupukContainer}
         />
         <PrivateRoute
           path="/DetailLahanContainer/:id"
-          exact
           component={DetailLahanContainer}
         />
         <PrivateRoute
           path="/DetailPanenContainer/:id"
-          exact
           component={DetailPanenContainer}
         />
         <PrivateRoute path="/CreateUser" component={CreateUser} />

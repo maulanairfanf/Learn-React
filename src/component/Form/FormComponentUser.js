@@ -1,164 +1,24 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Form, FormGroup, Col, Label, Input, Row, Button } from "reactstrap";
 import { connect } from "react-redux";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm, Field, arrayInsert } from "redux-form";
 import UserValidation from "../../Validations/UserValidation";
-
-const renderField = ({
-  input,
-  type,
-  placeholder,
-  label,
-  disabled,
-  readOnly,
-  value,
-  meta: { touched, error, warning },
-}) => (
-  <Row>
-    <Col md="12">
-      <Label htmlFor="{label}" className="col-form-label">
-        {label}
-      </Label>
-    </Col>
-    <Col md="12">
-      {label === "gender" ? (
-        <>
-          <Input
-            {...input}
-            type={type}
-            placeholder={placeholder}
-            disabled={disabled}
-            readOnly={readOnly}
-          >
-            <option value={1000101}>Laki-laki</option>
-            <option value={1000102}>Perempuan</option>
-          </Input>
-        </>
-      ) : label === "agama" ? (
-        <>
-          <Input
-            {...input}
-            type={type}
-            placeholder={placeholder}
-            disabled={disabled}
-            readOnly={readOnly}
-          >
-            <option value={1000201}>Islam</option>
-            <option value={1000202}>Kristen</option>
-            <option value={1000203}>Katolik</option>
-            <option value={1000204}>Hindu</option>
-            <option value={1000205}>Budha</option>
-          </Input>
-        </>
-      ) : label === "pendidikan" ? (
-        <>
-          <Input
-            {...input}
-            type={type}
-            placeholder={placeholder}
-            disabled={disabled}
-            readOnly={readOnly}
-          >
-            <option value={1000301}>Tidak Sekolah</option>
-            <option value={1000302}>SD</option>
-            <option value={1000303}>SMP</option>
-            <option value={1000304}>S1</option>
-            <option value={1000306}>S2</option>
-            <option value={1000307}>S3</option>
-          </Input>
-        </>
-      ) : label === "suku" ? (
-        <>
-          <Input
-            {...input}
-            type={type}
-            placeholder={placeholder}
-            disabled={disabled}
-            readOnly={readOnly}
-          >
-            <option value={1000501}>Jawa</option>
-            <option value={1000502}>Sunda</option>
-            <option value={1000503}>Lampung</option>
-            <option value={1000504}>Bugis</option>
-            <option value={1000505}>Palembang</option>
-            <option value={1000501}>Padang</option>
-          </Input>
-        </>
-      ) : label === "pekerjaan" ? (
-        <>
-          <Input
-            {...input}
-            type={type}
-            placeholder={placeholder}
-            disabled={disabled}
-            readOnly={readOnly}
-          >
-            <option value={1000601}>Petani</option>
-            <option value={1000602}>Buruh</option>
-            <option value={1000603}>ASN</option>
-            <option value={1000604}>Pedagang</option>
-            <option value={1000605}>Penyuluh</option>
-            <option value={1000606}>Dosen</option>
-            <option value={1000607}>Pegawai Swasta</option>
-            <option value={1000608}>Honorer</option>
-          </Input>
-        </>
-      ) : label === "foto_profil_convert" ? (
-        <>
-          <Input
-            {...input}
-            type={type}
-            placeholder={placeholder}
-            disabled={disabled}
-            readOnly={readOnly}
-            value={value}
-          ></Input>
-        </>
-      ) : label === "foto_profil" ? (
-        <>
-          <input
-            {...input}
-            type={type}
-            placeholder={placeholder}
-            disabled={disabled}
-            readOnly={readOnly}
-            value={value}
-          ></input>
-        </>
-      ) : (
-        <>
-          <Input
-            {...input}
-            type={type}
-            placeholder={placeholder}
-            disabled={disabled}
-            readOnly={readOnly}
-          ></Input>
-        </>
-      )}
-
-      {/* 
-        <option value={1000401}>A</option>
-        <option value={1000402}>B</option>
-        <option value={1000403}>AB</option>
-         */}
-
-      {touched &&
-        ((error && <p style={{ color: "red" }}>{error}</p>) ||
-          (warning && <p style={{ color: "brown" }}>{warning}</p>))}
-    </Col>
-  </Row>
-);
+import Photo from "../../assets/user.png";
+import {
+  getProvinsiList,
+  getKabupatenList,
+  getKecamatanList,
+  getKelurahanList,
+} from "../../actions/masterAction";
 
 const mapStateToProps = (state) => {
   return {
     initialValues: {
-      nama: state.users.getUsersDetail.nama,
-      email: state.users.getUsersDetail.email,
-      telp: state.users.getUsersDetail.telp,
       id: state.users.getUsersDetail.id,
+      nama: state.users.getUsersDetail.nama,
       nik: state.users.getUsersDetail.nik,
       kk: state.users.getUsersDetail.kk,
+      kategori: state.users.getUsersDetail.kategori,
       pekerjaan: state.users.getUsersDetail.pekerjaan,
       gender: state.users.getUsersDetail.gender,
       agama: state.users.getUsersDetail.agama,
@@ -168,332 +28,486 @@ const mapStateToProps = (state) => {
       alamat: state.users.getUsersDetail.alamat,
       rt: state.users.getUsersDetail.rt,
       rw: state.users.getUsersDetail.rw,
-      id_desa: state.users.getUsersDetail.id_desa,
-      id_kecamatan: state.users.getUsersDetail.id_kecamatan,
-      id_kabupaten: state.users.getUsersDetail.id_kabupaten,
-      id_provinsi: state.users.getUsersDetail.id_provinsi,
+      desa: state.users.getUsersDetail.desa,
+      kecamatan: state.users.getUsersDetail.kecamatan,
+      kabupaten: state.users.getUsersDetail.kabupaten,
+      provinsi: state.users.getUsersDetail.provinsi,
       kodepos: state.users.getUsersDetail.kodepos,
       foto_profil: state.users.getUsersDetail.foto_profil,
       foto_kk: state.users.getUsersDetail.foto_kk,
       foto_ktp: state.users.getUsersDetail.foto_ktp,
+      gol_darah: state.users.getUsersDetail.gol_darah,
+      telp: state.users.getUsersDetail.telp,
+      email: state.users.getUsersDetail.email,
+      facebook: state.users.getUsersDetail.facebook,
+      id_user: state.users.getUsersDetail.id_user,
+    },
+    wilayah: {
+      provinsi: state.master.getProvinsiList,
+      kabupaten: state.master.getKabupatenList,
+      kecamatan: state.master.getKecamatanList,
+      kelurahan: state.master.getKelurahanList,
     },
   };
 };
 
 class FormComponentUser extends Component {
-  state = {
-    file: null,
-    base64URL: "",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      id_provinsi: 0,
+      id_kabupaten: 0,
+      id_kecamatan: 0,
+      id_kelurahan: 0,
+    };
+  }
+  componentDidMount() {
+    this.props.dispatch(getProvinsiList());
+  }
 
-  getBase64 = (file) => {
-    return new Promise((resolve) => {
-      let fileInfo;
-      let baseURL = "";
-      // Make new FileReader
-      let reader = new FileReader();
+  renderField = ({
+    input,
+    type,
+    placeholder,
+    label,
+    value,
+    meta: { touched, error, warning },
+  }) => (
+    <Row>
+      <Col md="12">
+        <Label htmlFor="{label}" className="col-form-label text-secondary">
+          {label}
+        </Label>
+      </Col>
+      <Col md="12">
+        {label === "Gender" ? (
+          <>
+            <Input {...input} type={type} placeholder={placeholder}>
+              <option value={1000101}>Laki-laki</option>
+              <option value={1000102}>Perempuan</option>
+            </Input>
+          </>
+        ) : label === "Agama" ? (
+          <Input {...input} type={type} placeholder={placeholder}>
+            <option value={1000201}>Islam</option>
+            <option value={1000202}>Kristen</option>
+            <option value={1000203}>Katolik</option>
+            <option value={1000204}>Hindu</option>
+            <option value={1000205}>Budha</option>
+          </Input>
+        ) : label === "Pendidikan" ? (
+          <Input {...input} type={type} placeholder={placeholder}>
+            <option value={1000301}>Tidak Sekolah</option>
+            <option value={1000302}>SD</option>
+            <option value={1000303}>SMP</option>
+            <option value={1000304}>S1</option>
+            <option value={1000306}>S2</option>
+            <option value={1000307}>S3</option>
+          </Input>
+        ) : label === "Suku" ? (
+          <>
+            <Input {...input} type={type} placeholder={placeholder}>
+              <option value={1000501}>Jawa</option>
+              <option value={1000502}>Sunda</option>
+              <option value={1000503}>Lampung</option>
+              <option value={1000504}>Bugis</option>
+              <option value={1000505}>Palembang</option>
+              <option value={1000501}>Padang</option>
+            </Input>
+          </>
+        ) : label === "Pekerjaan" ? (
+          <>
+            <Input {...input} type={type} placeholder={placeholder}>
+              <option value={1000601}>Petani</option>
+              <option value={1000602}>Buruh</option>
+              <option value={1000603}>ASN</option>
+              <option value={1000604}>Pedagang</option>
+              <option value={1000605}>Penyuluh</option>
+              <option value={1000606}>Dosen</option>
+              <option value={1000607}>Pegawai Swasta</option>
+              <option value={1000608}>Honorer</option>
+            </Input>
+          </>
+        ) : label === "Golongan Darah" ? (
+          <>
+            <Input {...input} type={type} placeholder={placeholder}>
+              <option value={1000401}>A</option>
+              <option value={1000402}>B</option>
+              <option value={1000403}>AB</option>
+              <option value={1000404}>O</option>
+            </Input>
+          </>
+        ) : label === "Kategori" ? (
+          <Input>
+            <Input {...input} type={type} placeholder={placeholder}>
+              <option value={1000001}>Personal</option>
+              <option value={1000002}>Institution</option>
+            </Input>
+          </Input>
+        ) : label === "Provinsi" ? (
+          <>
+            <Input
+              {...input}
+              type={type}
+              placeholder={placeholder}
+              value={value}
+              onChange={(e) => {
+                e.preventDefault();
+                this.setState({
+                  id_provinsi: e.target.value,
+                  id_kabupaten: 0,
+                  id_kecamatan: 0,
+                  id_kelurahan: 0,
+                });
+                this.props.dispatch(getKabupatenList(e.target.value));
+              }}
+            >
+              <option value={0}>Provinsi</option>
+              {this.props.wilayah.provinsi &&
+                this.props.wilayah.provinsi.map((item) => {
+                  return <option value={item.provinsi}>{item.nama}</option>;
+                })}
+            </Input>
+          </>
+        ) : label === "Kabupaten" ? (
+          <>
+            <Input
+              {...input}
+              type={type}
+              placeholder={placeholder}
+              value={value}
+              onChange={(e) => {
+                e.preventDefault();
+                this.setState({
+                  id_kabupaten: e.target.value,
+                  id_kecamatan: 0,
+                  id_kelurahan: 0,
+                });
+                this.props.dispatch(
+                  getKecamatanList(this.state.id_provinsi, e.target.value)
+                );
+              }}
+            >
+              <option value={0}>Kabupaten / Kota</option>
+              {this.props.wilayah.kabupaten &&
+                this.props.wilayah.kabupaten.map((item) => {
+                  return (
+                    <option value={item.kabupatenkota}>{item.nama}</option>
+                  );
+                })}
+            </Input>
+          </>
+        ) : label === "Kecamatan" ? (
+          <>
+            <Input
+              {...input}
+              type={type}
+              placeholder={placeholder}
+              value={value}
+              onChange={(e) => {
+                e.preventDefault();
+                this.setState({
+                  id_kecamatan: e.target.value,
+                  id_kelurahan: 0,
+                });
+                this.props.dispatch(
+                  getKelurahanList(
+                    this.state.id_provinsi,
+                    this.state.id_kabupaten,
+                    e.target.value
+                  )
+                );
+              }}
+            >
+              <option value={0}>Kecamatan</option>
+              {this.props.wilayah.kecamatan &&
+                this.props.wilayah.kecamatan.map((item) => {
+                  return <option value={item.kecamatan}>{item.nama}</option>;
+                })}
+            </Input>
+          </>
+        ) : label === "Kelurahan" ? (
+          <>
+            <Input
+              {...input}
+              type={type}
+              placeholder={placeholder}
+              value={value}
+              onChange={(e) => {
+                e.preventDefault();
+                this.setState({
+                  id_kelurahan: e.target.value,
+                });
+              }}
+            >
+              <option value={0}>Kelurahan</option>
+              {this.props.wilayah.kelurahan &&
+                this.props.wilayah.kelurahan.map((item) => {
+                  return <option value={item.kelurahan}>{item.nama}</option>;
+                })}
+            </Input>
+          </>
+        ) : (
+          <>
+            <Input
+              {...input}
+              type={type}
+              placeholder={placeholder}
+              autocomplete="off"
+            ></Input>
+          </>
+        )}
 
-      // Convert the file to base64 text
-      reader.readAsDataURL(file);
-
-      // on reader load somthing...
-      reader.onload = () => {
-        // Make a fileInfo Object
-        // console.log("Called", reader);
-        baseURL = reader.result;
-        // console.log(baseURL);
-        resolve(baseURL);
-      };
-      console.log(fileInfo);
-    });
-  };
-
-  handleFileInputChange = (e) => {
-    console.log(e.target.files[0]);
-    let { file } = this.state;
-
-    file = e.target.files[0];
-
-    this.getBase64(file)
-      .then((result) => {
-        file["base64"] = result;
-        // console.log("File Is", file);
-        this.setState({
-          base64URL: result,
-          file,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    this.setState({
-      file: e.target.files[0],
-    });
-  };
+        {touched &&
+          ((error && <small style={{ color: "red" }}>{error}</small>) ||
+            (warning && <span style={{ color: "brown" }}>{warning}</span>))}
+      </Col>
+    </Row>
+  );
 
   render() {
-    console.log("base pict : ", this.state.base64URL);
-    const value = this.state.base64URL;
     return (
       <>
         <Form onSubmit={this.props.handleSubmit}>
-          {/* <Col md={6}>
-            <FormGroup>
-              <input
-                type="file"
-                name="foto_profil_convert"
-                accept=".jpg, .png, .jpeg"
-                // component={renderField}
-                // label="foto_profil"
-                onChange={this.handleFileInputChange}
-                // value={this.state.base64URL}
-              />
-            </FormGroup>
-          </Col>
-
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
-                name="foto_profil"
-                component={renderField}
-                label="foto_profil"
-                value="alsla"
-                // placeholder={this.state.base64URL}
-                // onChange={this.handleFileInputChange}
-                // value=
-              />
-              <p>{value}</p>
-            </FormGroup>
-          </Col> */}
-
           <FormGroup row>
-            <Col md={6}>
+            <Col md={2}>
+              <div>
+                <img
+                  src={Photo}
+                  class="img-thumbnail"
+                  style={{ width: "120px" }}
+                  alt="..."
+                ></img>
+              </div>
+              <div className="mt-2 ">
+                <button type="button" className="btn btn-outline-secondary">
+                  Pilih Foto
+                </button>
+              </div>
+            </Col>
+          </FormGroup>
+          <h4 className="text-black-50 mt-4">Identitas</h4>
+          <FormGroup row>
+            <Col md={4}>
               <FormGroup>
                 <Field
                   type="text"
                   name="nama"
-                  component={renderField}
+                  component={this.renderField}
                   label="Nama"
                 />
               </FormGroup>
             </Col>
-
-            <Col md={6}>
+            <Col md={4}>
               <FormGroup>
                 <Field
                   type="text"
                   name="email"
-                  component={renderField}
+                  component={this.renderField}
                   label="Email"
                 />
               </FormGroup>
             </Col>
-
-            <Col md={6}>
+            <Col md={4}>
               <FormGroup>
                 <Field
-                  type="text"
+                  type="number"
                   name="telp"
-                  component={renderField}
-                  label="telp"
+                  component={this.renderField}
+                  label="Nomor Telepon"
                 />
               </FormGroup>
             </Col>
-
-            <Col md={6}>
+            <Col md={4}>
               <FormGroup>
                 <Field
-                  type="text"
+                  type="number"
                   name="nik"
-                  component={renderField}
-                  label="Nik"
+                  component={this.renderField}
+                  label="NIK"
                 />
               </FormGroup>
             </Col>
-
-            <Col md={6}>
+            <Col md={4}>
               <FormGroup>
                 <Field
-                  type="text"
+                  type="number"
                   name="kk"
-                  component={renderField}
-                  label="kk"
+                  component={this.renderField}
+                  label="Kartu Keluarga"
                 />
               </FormGroup>
             </Col>
-
-            <Col md={6}>
+            <Col md={4}>
               <FormGroup>
                 <Field
-                  type="text"
+                  type="select"
                   name="kategori"
-                  component={renderField}
-                  label="kategori"
+                  component={this.renderField}
+                  label="Kategori"
                 />
               </FormGroup>
             </Col>
-
-            <Col md={6}>
+            <Col md={4}>
               <FormGroup>
                 <Field
                   type="select"
                   name="pekerjaan"
-                  component={renderField}
-                  label="pekerjaan"
+                  component={this.renderField}
+                  label="Pekerjaan"
                 />
               </FormGroup>
             </Col>
-
-            <Col md={6}>
+            <Col md={4}>
               <FormGroup>
                 <Field
-                  label="gender"
-                  type="select"
+                  label="Gender"
                   name="gender"
-                  component={renderField}
+                  type="select"
+                  component={this.renderField}
                 />
               </FormGroup>
             </Col>
-
-            <Col md={6}>
+            <Col md={4}>
               <FormGroup>
                 <Field
-                  type="select"
                   name="agama"
-                  component={renderField}
-                  label="agama"
+                  type="select"
+                  component={this.renderField}
+                  label="Agama"
                 />
               </FormGroup>
             </Col>
-
-            <Col md={6}>
+            <Col md={4}>
               <FormGroup>
                 <Field
                   type="select"
                   name="suku"
-                  component={renderField}
-                  label="suku"
+                  component={this.renderField}
+                  label="Suku"
                 />
               </FormGroup>
             </Col>
-
-            <Col md={6}>
+            <Col md={4}>
               <FormGroup>
                 <Field
                   type="date"
                   name="tgl_lahir"
-                  component={renderField}
-                  label="tgl_lahir"
+                  component={this.renderField}
+                  label="Tanggal Lahir"
                 />
               </FormGroup>
-            </Col>
-
-            <Col md={6}>
+            </Col>{" "}
+            <Col md={4}>
               <FormGroup>
                 <Field
                   type="select"
                   name="pendidikan"
-                  component={renderField}
-                  label="pendidikan"
+                  component={this.renderField}
+                  label="Pendidikan"
                 />
               </FormGroup>
             </Col>
-
-            <Col md={6}>
+            <Col md={4}>
               <FormGroup>
                 <Field
-                  type="text"
-                  name="alamat"
-                  component={renderField}
-                  label="alamat"
+                  type="select"
+                  name="gol_darah"
+                  component={this.renderField}
+                  label="Golongan Darah"
                 />
               </FormGroup>
             </Col>
-
-            <Col md={6}>
-              <FormGroup>
-                <Field
-                  type="text"
-                  name="rt"
-                  component={renderField}
-                  label="rt"
-                />
-              </FormGroup>
-            </Col>
-
-            <Col md={6}>
-              <FormGroup>
-                <Field
-                  type="text"
-                  name="rw"
-                  component={renderField}
-                  label="rw"
-                />
-              </FormGroup>
-            </Col>
-
-            <Col md={6}>
-              <FormGroup>
-                <Field
-                  type="text"
-                  name="id_desa"
-                  component={renderField}
-                  label="id_desa"
-                />
-              </FormGroup>
-            </Col>
-            <Col md={6}>
-              <FormGroup>
-                <Field
-                  type="text"
-                  name="id_kecamatan"
-                  component={renderField}
-                  label="id_kecamatan"
-                />
-              </FormGroup>
-            </Col>
-            <Col md={6}>
-              <FormGroup>
-                <Field
-                  type="text"
-                  name="id_kabupaten"
-                  component={renderField}
-                  label="id_kabupaten"
-                />
-              </FormGroup>
-            </Col>
-
-            <Col md={6}>
-              <FormGroup>
-                <Field
-                  type="text"
-                  name="id_provinsi"
-                  component={renderField}
-                  label="id_provinsi"
-                />
-              </FormGroup>
-            </Col>
-
-            <Col md={6}>
-              <FormGroup>
-                <Field
-                  type="text"
-                  name="kodepos"
-                  component={renderField}
-                  label="kodepos"
-                />
-              </FormGroup>
-            </Col>
-
-            <Col md={6}>
+            <Col md={4}>
               <FormGroup>
                 <Field
                   type="text"
                   name="facebook"
-                  component={renderField}
-                  label="facebook"
+                  component={this.renderField}
+                  label="Facebook"
+                />
+              </FormGroup>
+            </Col>
+          </FormGroup>
+          <h4 className="text-black-50 mt-4">Lokasi</h4>
+          <FormGroup row>
+            <Col md={4}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="alamat"
+                  component={this.renderField}
+                  label="Alamat"
+                />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="rt"
+                  component={this.renderField}
+                  label="RT"
+                />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="rw"
+                  component={this.renderField}
+                  label="RW"
+                />
+              </FormGroup>
+            </Col>{" "}
+            <Col md={4}>
+              <FormGroup>
+                <Field
+                  type="select"
+                  name="provinsi"
+                  component={this.renderField}
+                  label="Provinsi"
+                />
+              </FormGroup>
+            </Col>{" "}
+            <Col md={4}>
+              <FormGroup>
+                <Field
+                  type="select"
+                  name="kabupaten"
+                  component={this.renderField}
+                  label="Kabupaten"
+                />
+              </FormGroup>
+            </Col>{" "}
+            <Col md={4}>
+              <FormGroup>
+                <Field
+                  type="select"
+                  name="kecamatan"
+                  component={this.renderField}
+                  label="Kecamatan"
+                />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Field
+                  type="select"
+                  name="desa"
+                  component={this.renderField}
+                  label="Kelurahan"
+                />
+              </FormGroup>
+            </Col>
+            <Col md={4}>
+              <FormGroup>
+                <Field
+                  type="number"
+                  name="kodepos"
+                  component={this.renderField}
+                  label="KodePos"
                 />
               </FormGroup>
             </Col>
@@ -503,11 +517,11 @@ class FormComponentUser extends Component {
             <Col md="12">
               <FormGroup>
                 <Button
-                  color="dark"
+                  color="info"
                   type="submit"
                   disabled={this.props.submitting}
                 >
-                  Submit
+                  Simpan
                 </Button>
               </FormGroup>
             </Col>
