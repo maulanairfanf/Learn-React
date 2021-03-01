@@ -1,15 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import {
-  // Card,
-  Button,
-  Form,
-  Label,
-  FormGroup,
-  // Input,
-  // FormText,
-  Container,
-} from "reactstrap";
+import { Button, Form, Label, FormGroup, Container } from "reactstrap";
 
 import { setUserSession } from "../../Utils/Common";
 
@@ -18,10 +9,12 @@ function Login(props) {
   const passwordRef = useRef();
   const [error, setError] = useState("");
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
   const axios = require("axios");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const data = JSON.stringify({
       username: usernameRef.current.value,
       password: passwordRef.current.value,
@@ -43,6 +36,7 @@ function Login(props) {
       .then(function (response) {
         if (response.data.status === "ERROR") {
           setError("username atau password yang dimasukkan salah");
+          setLoading(false);
         } else {
           setUserSession(
             response.data.data.api_token,
@@ -64,6 +58,7 @@ function Login(props) {
         action=""
         onSubmit={handleSubmit}
         className="p-5 rounded shadow"
+        align="center"
         style={{ width: "400px" }}
       >
         {error && (
@@ -72,18 +67,19 @@ function Login(props) {
           </div>
         )}
         <h1 className=" text-center ">TaniPedia</h1>
-        <FormGroup>
-          <Label>Email</Label>
+        <FormGroup align="left">
+          <Label className="text-left">Email</Label>
           <input
             className="form-control"
             id="username"
             type="username"
-            placeholder="username"
+            placeholder="Username"
             ref={usernameRef}
             autoComplete="off"
+            required
           />
         </FormGroup>
-        <FormGroup className="">
+        <FormGroup align="left">
           <Label>Password</Label>
           <input
             className="form-control"
@@ -92,10 +88,23 @@ function Login(props) {
             placeholder="Password"
             ref={passwordRef}
             autoComplete="off"
+            required
           />
         </FormGroup>
-        <Button type="submit" color="primary">
+        <Button type="submit" color="primary ">
           Submit
+          {
+            (console.log(loading),
+            loading ? (
+              <span
+                className="spinner-border spinner-border-sm ml-2"
+                role="status"
+                aria-hidden="true"
+              ></span>
+            ) : (
+              ""
+            ))
+          }
         </Button>
       </Form>
     </Container>

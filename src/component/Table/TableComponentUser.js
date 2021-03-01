@@ -29,7 +29,7 @@ const handleClick = (dispatch, id, nama) => {
   }).then((willDelete) => {
     if (willDelete) {
       dispatch(deleteUser(id));
-      dispatch(getUsersList());
+
       swal({
         title: "Berhasil Delete User!",
         icon: "success",
@@ -55,7 +55,7 @@ const mapStateToProps = (state) => {
 };
 
 const TableComponentUser = (props) => {
-    const customTotal = (from, to, size) => (
+  const customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
       Showing {from} to {to} of {size} Results
     </span>

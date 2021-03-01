@@ -112,17 +112,20 @@ li a.dropdown-toggle::after {
   overflow-y: scroll;
 }
 
-.side-menu::-webkit-scrollbar {
+.side-menu::-webkit-scrollbar,
+.content::-webkit-scrollbar {
   width: 10px;
 }
 
-.side-menu::-webkit-scrollbar-thumb {
-  background: #5466b3;
+.side-menu::-webkit-scrollbar-thumb,
+.content::-webkit-scrollbar-thumb {
+  background: #117a8b;
   border-radius: 3px;
 }
 
-.side-menu::-webkit-scrollbar-thumb:hover {
-  background: #3a4c99;
+.side-menu::-webkit-scrollbar-thumb:hover,
+.content::-webkit-scrollbar-thumb:hover {
+  background: #117a8b;
 }
 
 /* ---------------------------------------------------
@@ -197,7 +200,6 @@ tr {
   display: table-row;
   vertical-align: inherit;
   border-color: inherit;
- 
 }
 
 .table td,
@@ -205,5 +207,4 @@ tr {
   vertical-align: baseline !important;
   border-top: 1px solid #dee2e6;
   width: 200px;
-
 }

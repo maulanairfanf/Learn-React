@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Login from "../pages/AuthPages/Login";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 //component
 import SideBar from "../component/Sidebar//Sidebar";
@@ -33,6 +33,8 @@ import DetailPanenContainer from "../pages/PrivatePages/Panen/DetailPanenContain
 import CreatePanen from "../pages/PrivatePages/Panen/CreatePanen";
 import EditPanen from "../pages/PrivatePages/Panen/EditPanen";
 import Dashboard from "../pages/PrivatePages/Dashboard/Dashboard";
+//not found
+import NotFound from "../pages/NotFound";
 
 const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
   const token = getToken();
@@ -47,6 +49,7 @@ const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
       <div className={token ? "sticky-top" : "d-none"}>
         <Topbar toggleSidebar={toggleSidebar} />
       </div>
+
       <Switch>
         <PublicRoute exact path="/login" component={Login} />
         <PrivateRoute exact path="/" component={Dashboard} />
@@ -54,7 +57,6 @@ const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
         <PrivateRoute path="/Pupuk" component={Pupuk} />
         <PrivateRoute path="/Lahan" component={Lahan} />
         <PrivateRoute path="/Panen" component={Panen} />
-
         <PrivateRoute
           path="/DetailUserContainer/:id"
           component={DetailUserContainer}
@@ -75,11 +77,11 @@ const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
         <PrivateRoute path="/CreatePupuk" component={CreatePupuk} />
         <PrivateRoute path="/CreateLahan" component={CreateLahan} />
         <PrivateRoute path="/CreatePanen" component={CreatePanen} />
-
         <PrivateRoute path="/EditUser/:id" component={EditUser} />
         <PrivateRoute path="/EditPupuk/:id" component={EditPupuk} />
         <PrivateRoute path="/EditLahan/:id" component={EditLahan} />
-        <PrivateRoute path="/EditPanen/:id" component={EditPanen} />
+        <PrivateRoute path="/EditPanen/:id" component={EditPanen} />{" "}
+        <Route component={NotFound} />
       </Switch>
     </Container>
   );
