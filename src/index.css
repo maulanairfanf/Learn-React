@@ -113,18 +113,24 @@ li a.dropdown-toggle::after {
 }
 
 .side-menu::-webkit-scrollbar,
-.content::-webkit-scrollbar {
-  width: 10px;
+.content::-webkit-scrollbar,
+.scroll_calender::-webkit-scrollbar,
+.fc .fc-scroller-liquid-absolute::-webkit-scrollbar {
+  width: 5px;
 }
 
 .side-menu::-webkit-scrollbar-thumb,
-.content::-webkit-scrollbar-thumb {
+.content::-webkit-scrollbar-thumb,
+.scroll_calender::-webkit-scrollbar-thumb,
+.fc .fc-scroller-liquid-absolute::-webkit-scrollbar-thumb {
   background: #117a8b;
   border-radius: 3px;
 }
 
 .side-menu::-webkit-scrollbar-thumb:hover,
-.content::-webkit-scrollbar-thumb:hover {
+.content::-webkit-scrollbar-thumb:hover,
+.scroll_calender::-webkit-scrollbar-thumb:hover,
+.fc .fc-scroller-liquid-absolute::-webkit-scrollbar-thumb:hover {
   background: #117a8b;
 }
 
@@ -207,4 +213,39 @@ tr {
   vertical-align: baseline !important;
   border-top: 1px solid #dee2e6;
   width: 200px;
+}
+
+/* Calender */
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+  color: black;
+  overflow-y: auto;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: #32c2d8;
+}
+
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+  display: flex;
+}
+.fc-daygrid-block-event .fc-event-time,
+.fc-daygrid-block-event .fc-event-title {
+  /* padding: 1px; */
+  width: 1px;
+  height: 1px;
+}
+
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+}
+.fc-h-event {
+  display: block;
+  border: 1px solid #0cc23f;
+  background-color: #0cc23f;
+}
+.fc .fc-scroller-liquid-absolute {
+  overflow: auto;
 }

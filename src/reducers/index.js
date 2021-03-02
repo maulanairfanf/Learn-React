@@ -3,6 +3,7 @@ import users from "./users";
 import pupuk from "./pupuk";
 import lahan from "./lahan";
 import panen from "./panen";
+import master from "./master";
 import { reducer as formReducer } from "redux-form";
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
   pupuk,
   lahan,
   panen,
+  master,
   form: formReducer,
 });
