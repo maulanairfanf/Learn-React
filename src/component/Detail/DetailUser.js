@@ -1,5 +1,4 @@
 import React from "react";
-import { PhoneForwarded } from "react-feather";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Container, Spinner } from "reactstrap";
@@ -16,8 +15,11 @@ const DetailUser = (props) => {
     <>
       {props.getUsersDetail ? (
         <div className="container-fluid overflow-hidden">
+          {" "}
+          <h4 className="text-secondary ml-3 mt-4 mb-4">Detail User</h4>
           <div className="row">
             <div className="shadow-sm rounded col-md-6 d-flex justify-content-center align-items-center">
+              {" "}
               <div className="p-5 ">
                 <img
                   src={Photo}
@@ -104,11 +106,10 @@ const DetailUser = (props) => {
                   <h6 className="text-black-50">Pendidikan</h6>
                   <br />
                   <h6 className="text-black">
-                    {" "}
                     {props.getUsersDetail.pendidikan}
                   </h6>
                 </div>
-              </div>{" "}
+              </div>
               <div className="row mt-5 d-flex justify-content-around">
                 <div className=" border-bottom col-5">
                   <h6 className="text-black-50">Facebook</h6>
@@ -116,7 +117,7 @@ const DetailUser = (props) => {
                   <h6 className="text-black">
                     {props.getUsersDetail.facebook}
                   </h6>
-                </div>{" "}
+                </div>
                 <div className=" border-bottom col-5">
                   <h6 className="text-black-50">Suku</h6>
                   <br />
