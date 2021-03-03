@@ -1,6 +1,9 @@
 import React from "react";
+import { PhoneForwarded } from "react-feather";
 import { connect } from "react-redux";
-import { Table } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Container, Spinner } from "reactstrap";
+import Photo from "../../assets/user.png";
 
 const mapStateToProps = (state) => {
   return {
@@ -9,173 +12,183 @@ const mapStateToProps = (state) => {
   };
 };
 const DetailUser = (props) => {
-  console.log(props.getUsersDetail);
   return (
-    <div>
-      {/* {props.getUsersDetail ? ( */}
-      <Table striped>
-        <tbody>
-          <tr>
-            <td width="200">Nama</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.nama}</td>
-          </tr>
-          <tr>
-            <td width="200">email</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.email}</td>
-          </tr>{" "}
-          <tr>
-            <td width="200">telp</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.telp}</td>
-          </tr>
-          <tr>
-            <td width="200">nik</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.nik}</td>
-          </tr>
-          <tr>
-            <td width="200">kk</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.kk}</td>
-          </tr>
-          <tr>
-            <td width="200">kategori</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.kategori}</td>
-          </tr>
-          <tr>
-            <td width="200">pekerjaan</td>
-            <td width="10">:</td>
-            <td>
-              {props.getUsersDetail.pekerjaan === 1000601
-                ? "Petani"
-                : props.getUsersDetail.pekerjaan === 1000602
-                ? "Buruh"
-                : props.getUsersDetail.pekerjaan === 1000603
-                ? "ASN"
-                : props.getUsersDetail.pekerjaan === 1000604
-                ? "Pedagang"
-                : props.getUsersDetail.pekerjaan === 1000605
-                ? "Penyuluh"
-                : props.getUsersDetail.pekerjaan === 1000606
-                ? "Dosen"
-                : props.getUsersDetail.pekerjaan === 1000607
-                ? "Pegawai Swasta"
-                : props.getUsersDetail.pekerjaan === 1000608
-                ? "Honorer"
-                : ""}
-            </td>
-          </tr>
-          <tr>
-            <td width="200">gender</td>
-            <td width="10">:</td>
-            <td>
-              {props.getUsersDetail.gender === 1000101
-                ? "laki-laki"
-                : props.getUsersDetail.gender === 1000102
-                ? "perempuan"
-                : ""}
-            </td>
-          </tr>
-          <tr>
-            <td width="200">agama</td>
-            <td width="10">:</td>
-            <td>
-              {props.getUsersDetail.agama === 1000201
-                ? "Islam"
-                : props.getUsersDetail.agama === 1000202
-                ? "Kristen"
-                : props.getUsersDetail.agama === 1000203
-                ? "Katolik"
-                : props.getUsersDetail.agama === 1000204
-                ? "Hindu"
-                : props.getUsersDetail.agama === 1000205
-                ? "Budha"
-                : ""}
-            </td>
-          </tr>
-          <tr>
-            <td width="200">suku</td>
-            <td width="10">:</td>
-            <td>
-              {props.getUsersDetail.suku === 1000501
-                ? "Jawa"
-                : props.getUsersDetail.suku === 1000502
-                ? "Sunda"
-                : props.getUsersDetail.suku === 1000503
-                ? "Lampung"
-                : props.getUsersDetail.suku === 1000504
-                ? "Bugis"
-                : props.getUsersDetail.suku === 1000505
-                ? "Palembang"
-                : props.getUsersDetail.suku === 1000506
-                ? "Padang"
-                : ""}
-            </td>
-          </tr>
-          <tr>
-            <td width="200">tanggal lahir</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.tgl_lahir}</td>
-          </tr>
-          <tr>
-            <td width="200">pendidikan</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.pendidikan}</td>
-          </tr>
-          <tr>
-            <td width="200">alamat</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.alamat}</td>
-          </tr>
-          <tr>
-            <td width="200">rt</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.rt}</td>
-          </tr>
-          <tr>
-            <td width="200">rw</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.rw}</td>
-          </tr>{" "}
-          <tr>
-            <td width="200">id_desa</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.id_desa}</td>
-          </tr>{" "}
-          <tr>
-            <td width="200">id_kecamatan</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.id_kecamatan}</td>
-          </tr>{" "}
-          <tr>
-            <td width="200">id_kabupaten</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.id_kabupaten}</td>
-          </tr>{" "}
-          <tr>
-            <td width="200">id_provinsi</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.id_provinsi}</td>
-          </tr>
-          <tr>
-            <td width="200">kodepos</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.kodepos}</td>
-          </tr>{" "}
-          <tr>
-            <td width="200">facebook</td>
-            <td width="10">:</td>
-            <td>{props.getUsersDetail.facebook}</td>
-          </tr>
-        </tbody>
-      </Table>
-      {/* ) : (
-        <Spinner colors="dark" />
-      )} */}
-    </div>
+    <>
+      {props.getUsersDetail ? (
+        <div className="container-fluid overflow-hidden">
+          <div className="row">
+            <div className="shadow-sm rounded col-md-6 d-flex justify-content-center align-items-center">
+              <div className="p-5 ">
+                <img
+                  src={Photo}
+                  className="rounded-circle border border-secondary "
+                  style={{ width: "120px" }}
+                  alt="..."
+                ></img>
+                <h3 className="text-black mt-3 text-center">
+                  {props.getUsersDetail.nama}
+                </h3>
+                <h6 className="text-black-50">{props.getUsersDetail.email}</h6>
+                <div className="d-flex justify-content-center mt-3">
+                  <Link
+                    className=" btn btn-info"
+                    to={"/EditUser/" + props.getUsersDetail.id}
+                  >
+                    Edit Profil
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="shadow-sm rounded col-md-6 p-3 p-md-5 ">
+              <div className="row d-flex justify-content-around">
+                <div className=" border-bottom col-5">
+                  <h6 className="text-black-50">Jenis Kelamin</h6>
+                  <br />
+                  <h6 className="text-black"> {props.getUsersDetail.gender}</h6>
+                </div>
+                <div className=" border-bottom col-5">
+                  <h6 className="text-black-50">Tanggal Lahir</h6>
+                  <br />
+                  <h6 className="text-black">
+                    {props.getUsersDetail.tgl_lahir}
+                  </h6>
+                </div>
+              </div>
+              <div className="row mt-5 d-flex justify-content-around">
+                <div className=" border-bottom col-5">
+                  <h6 className="text-black-50">Nomor Telepon</h6>
+                  <br />
+                  <h6 className="text-black"> {props.getUsersDetail.telp}</h6>
+                </div>
+                <div className=" border-bottom col-5 overflow-auto">
+                  <h6 className="text-black-50">Alamat</h6>
+                  <br />
+                  <h6 className="text-black"> {props.getUsersDetail.alamat}</h6>
+                </div>
+              </div>
+              <div className="row mt-5 d-flex justify-content-around">
+                <div className=" border-bottom col-5">
+                  <h6 className="text-black-50">Agama</h6>
+                  <br />
+                  <h6 className="text-black"> {props.getUsersDetail.Agama}</h6>
+                </div>
+                <div className=" border-bottom col-5">
+                  <h6 className="text-black-50">Pekerjaan</h6>
+                  <br />
+                  <h6 className="text-black">
+                    {props.getUsersDetail.pekerjaan}
+                  </h6>
+                </div>
+              </div>
+              <div className="row mt-5 d-flex justify-content-around">
+                <div className=" border-bottom col-5">
+                  <h6 className="text-black-50">Nomor Induk Keluarga</h6>
+                  <br />
+                  <h6 className="text-black"> {props.getUsersDetail.nik}</h6>
+                </div>
+                <div className=" border-bottom col-5">
+                  <h6 className="text-black-50">Kartu Keluarga</h6>
+                  <br />
+                  <h6 className="text-black"> {props.getUsersDetail.kk}</h6>
+                </div>
+              </div>
+              <div className="row mt-5 d-flex justify-content-around">
+                <div className=" border-bottom col-5">
+                  <h6 className="text-black-50">Kategori</h6>
+                  <br />
+                  <h6 className="text-black">
+                    {props.getUsersDetail.kategori}
+                  </h6>
+                </div>
+                <div className=" border-bottom col-5">
+                  <h6 className="text-black-50">Pendidikan</h6>
+                  <br />
+                  <h6 className="text-black">
+                    {" "}
+                    {props.getUsersDetail.pendidikan}
+                  </h6>
+                </div>
+              </div>{" "}
+              <div className="row mt-5 d-flex justify-content-around">
+                <div className=" border-bottom col-5">
+                  <h6 className="text-black-50">Facebook</h6>
+                  <br />
+                  <h6 className="text-black">
+                    {props.getUsersDetail.facebook}
+                  </h6>
+                </div>{" "}
+                <div className=" border-bottom col-5">
+                  <h6 className="text-black-50">Suku</h6>
+                  <br />
+                  <h6 className="text-black"> {props.getUsersDetail.suku}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="shadow-sm rounded col-12 pb-3">
+              <div className="p-3">
+                <h4 className="text-secondary mt-4 mb-4">Detail Alamat</h4>
+                <div className="row  justify-content-around">
+                  <div className=" border-bottom col-md-3 col-5">
+                    <h6 className="text-black-50">Provinsi</h6>
+                    <br />
+                    <h6 className="text-black">
+                      {props.getUsersDetail.provinsi}
+                    </h6>
+                  </div>
+                  <div className=" border-bottom col-md-3 col-5">
+                    <h6 className="text-black-50">Kabupaten</h6>
+                    <br />
+                    <h6 className="text-black">
+                      {props.getUsersDetail.kabupaten}
+                    </h6>
+                  </div>
+                  <div className=" border-bottom mt-3 mt-md-0 col-md-3 col-5">
+                    <h6 className="text-black-50">Kecamatan</h6>
+                    <br />
+                    <h6 className="text-black">
+                      {props.getUsersDetail.kecamatan}
+                    </h6>
+                  </div>
+                </div>
+                <div className="row mt-5  justify-content-around">
+                  <div className=" border-bottom col-md-3 col-5">
+                    <h6 className="text-black-50">Kelurahan</h6>
+                    <br />
+                    <h6 className="text-black">{props.getUsersDetail.desa}</h6>
+                  </div>
+
+                  <div className=" border-bottom col-md-1 col-5">
+                    <h6 className="text-black-50 ">RT</h6>
+                    <br />
+                    <h6 className="text-black"> {props.getUsersDetail.rt}</h6>
+                  </div>
+                  <div className=" border-bottom col-md-1 col-5">
+                    <h6 className="text-black-50 mt-3 mt-md-0 ">RW</h6>
+                    <br />
+                    <h6 className="text-black"> {props.getUsersDetail.rw}</h6>
+                  </div>
+                  <div className=" border-bottom col-md-1 col-5 mt-3 mt-md-0">
+                    <h6 className="text-black-50  ">Kodepos</h6>
+                    <br />
+                    <h6 className="text-black">
+                      {props.getUsersDetail.kodepos}
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Container className="h-75 d-flex justify-content-center align-items-center">
+          <div className="spinner-grow text-info" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </Container>
+      )}
+    </>
   );
 };
 

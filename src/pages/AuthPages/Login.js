@@ -91,13 +91,13 @@ function Login(props) {
             required
           />
         </FormGroup>
-        <Button type="submit" color="primary ">
-          Submit
+        <Button type="submit" color="primary" className="px-4">
+          Login
           {
             (console.log(loading),
             loading ? (
               <span
-                className="spinner-border spinner-border-sm ml-2"
+                className="spinner-border spinner-border-sm ml-2 "
                 role="status"
                 aria-hidden="true"
               ></span>

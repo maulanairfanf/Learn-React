@@ -3,6 +3,7 @@ import {
   GET_KABUPATEN_LIST,
   GET_KECAMATAN_LIST,
   GET_KELURAHAN_LIST,
+  GET_TOTAL_LIST,
 } from "../actions/masterAction";
 
 let initialState = {
@@ -14,11 +15,19 @@ let initialState = {
   errorKecamatanList: false,
   getKelurahanList: false,
   errorKelurahanList: false,
+  getTotalList: false,
+  errorTotalList: false,
   title: "master",
 };
 
 const master = (state = initialState, action) => {
   switch (action.type) {
+    case GET_TOTAL_LIST:
+      return {
+        ...state,
+        getTotalList: action.payload.data,
+        errorTotalList: action.payload.errorMessage,
+      };
     case GET_PROVINSI_LIST:
       return {
         ...state,
