@@ -10,6 +10,7 @@ import {
   getKecamatanList,
   getKelurahanList,
 } from "../../actions/masterAction";
+import { Link } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   return {
@@ -28,10 +29,10 @@ const mapStateToProps = (state) => {
       alamat: state.users.getUsersDetail.alamat,
       rt: state.users.getUsersDetail.rt,
       rw: state.users.getUsersDetail.rw,
-      desa: state.users.getUsersDetail.desa,
-      kecamatan: state.users.getUsersDetail.kecamatan,
-      kabupaten: state.users.getUsersDetail.kabupaten,
-      provinsi: state.users.getUsersDetail.provinsi,
+      id_desa: state.users.getUsersDetail.id_desa,
+      id_kecamatan: state.users.getUsersDetail.id_kecamatan,
+      id_kabupaten: state.users.getUsersDetail.id_kabupaten,
+      id_provinsi: state.users.getUsersDetail.id_provinsi,
       kodepos: state.users.getUsersDetail.kodepos,
       foto_profil: state.users.getUsersDetail.foto_profil,
       foto_kk: state.users.getUsersDetail.foto_kk,
@@ -61,10 +62,12 @@ class FormComponentUser extends Component {
       id_kelurahan: 0,
     };
   }
-  componentDidMount() {
-    this.props.dispatch(getProvinsiList());
-  }
 
+  getProvinsi(provinsi) {
+    const x = provinsi;
+
+    return x;
+  }
   renderField = ({
     input,
     type,
@@ -83,12 +86,16 @@ class FormComponentUser extends Component {
         {label === "Gender" ? (
           <>
             <Input {...input} type={type} placeholder={placeholder}>
+              <option value={0}></option>
+              <option value={1000601}>Petani</option>
               <option value={1000101}>Laki-laki</option>
               <option value={1000102}>Perempuan</option>
             </Input>
           </>
         ) : label === "Agama" ? (
           <Input {...input} type={type} placeholder={placeholder}>
+            <option value={0}></option>
+            <option value={1000601}>Petani</option>
             <option value={1000201}>Islam</option>
             <option value={1000202}>Kristen</option>
             <option value={1000203}>Katolik</option>
@@ -97,6 +104,8 @@ class FormComponentUser extends Component {
           </Input>
         ) : label === "Pendidikan" ? (
           <Input {...input} type={type} placeholder={placeholder}>
+            <option value={0}></option>
+            <option value={1000601}>Petani</option>
             <option value={1000301}>Tidak Sekolah</option>
             <option value={1000302}>SD</option>
             <option value={1000303}>SMP</option>
@@ -107,6 +116,8 @@ class FormComponentUser extends Component {
         ) : label === "Suku" ? (
           <>
             <Input {...input} type={type} placeholder={placeholder}>
+              <option value={0}></option>
+              <option value={1000601}>Petani</option>
               <option value={1000501}>Jawa</option>
               <option value={1000502}>Sunda</option>
               <option value={1000503}>Lampung</option>
@@ -118,6 +129,7 @@ class FormComponentUser extends Component {
         ) : label === "Pekerjaan" ? (
           <>
             <Input {...input} type={type} placeholder={placeholder}>
+              <option value={0}></option>
               <option value={1000601}>Petani</option>
               <option value={1000602}>Buruh</option>
               <option value={1000603}>ASN</option>
@@ -131,6 +143,8 @@ class FormComponentUser extends Component {
         ) : label === "Golongan Darah" ? (
           <>
             <Input {...input} type={type} placeholder={placeholder}>
+              <option value={0}></option>
+              <option value={1000601}>Petani</option>
               <option value={1000401}>A</option>
               <option value={1000402}>B</option>
               <option value={1000403}>AB</option>
@@ -138,12 +152,14 @@ class FormComponentUser extends Component {
             </Input>
           </>
         ) : label === "Kategori" ? (
-          <Input>
+          <>
             <Input {...input} type={type} placeholder={placeholder}>
+              <option value={0}></option>
+              <option value={1000601}>Petani</option>
               <option value={1000001}>Personal</option>
               <option value={1000002}>Institution</option>
             </Input>
-          </Input>
+          </>
         ) : label === "Provinsi" ? (
           <>
             <Input
@@ -154,18 +170,33 @@ class FormComponentUser extends Component {
               onChange={(e) => {
                 e.preventDefault();
                 this.setState({
-                  id_provinsi: e.target.value,
+                  id_provinsi: e.target.selectedOptions[0].id,
                   id_kabupaten: 0,
                   id_kecamatan: 0,
                   id_kelurahan: 0,
                 });
-                this.props.dispatch(getKabupatenList(e.target.value));
+
+                this.props.dispatch(
+                  getKabupatenList(e.target.selectedOptions[0].id)
+                );
+                {
+                  console.log("id provinsi : ", e.target.selectedOptions[0].id);
+                  console.log(e);
+                }
               }}
             >
               <option value={0}>Provinsi</option>
               {this.props.wilayah.provinsi &&
-                this.props.wilayah.provinsi.map((item) => {
-                  return <option value={item.provinsi}>{item.nama}</option>;
+                this.props.wilayah.provinsi.map((item, i) => {
+                  return (
+                    <option
+                      key={item.provinsi}
+                      value={item.id}
+                      id={item.provinsi}
+                    >
+                      {item.nama}
+                    </option>
+                  );
                 })}
             </Input>
           </>
@@ -179,20 +210,29 @@ class FormComponentUser extends Component {
               onChange={(e) => {
                 e.preventDefault();
                 this.setState({
-                  id_kabupaten: e.target.value,
+                  id_kabupaten: e.target.selectedOptions[0].id,
                   id_kecamatan: 0,
                   id_kelurahan: 0,
                 });
                 this.props.dispatch(
-                  getKecamatanList(this.state.id_provinsi, e.target.value)
+                  getKecamatanList(
+                    this.state.id_provinsi,
+                    e.target.selectedOptions[0].id
+                  )
                 );
+                console.log("id kabupaten : ", e.target.selectedOptions[0].id);
+                console.log(e);
               }}
             >
               <option value={0}>Kabupaten / Kota</option>
               {this.props.wilayah.kabupaten &&
                 this.props.wilayah.kabupaten.map((item) => {
                   return (
-                    <option value={item.kabupatenkota}>{item.nama}</option>
+                    <>
+                      <option value={item.id} id={item.kabupatenkota}>
+                        {item.nama}
+                      </option>
+                    </>
                   );
                 })}
             </Input>
@@ -207,22 +247,28 @@ class FormComponentUser extends Component {
               onChange={(e) => {
                 e.preventDefault();
                 this.setState({
-                  id_kecamatan: e.target.value,
+                  id_kecamatan: e.target.selectedOptions[0].id,
                   id_kelurahan: 0,
                 });
                 this.props.dispatch(
                   getKelurahanList(
                     this.state.id_provinsi,
                     this.state.id_kabupaten,
-                    e.target.value
+                    e.target.selectedOptions[0].id
                   )
                 );
+                console.log(e);
+                console.log("id kecamatan : ", e.target.selectedOptions[0].id);
               }}
             >
               <option value={0}>Kecamatan</option>
               {this.props.wilayah.kecamatan &&
                 this.props.wilayah.kecamatan.map((item) => {
-                  return <option value={item.kecamatan}>{item.nama}</option>;
+                  return (
+                    <option value={item.id} id={item.kecamatan}>
+                      {item.nama}
+                    </option>
+                  );
                 })}
             </Input>
           </>
@@ -236,14 +282,19 @@ class FormComponentUser extends Component {
               onChange={(e) => {
                 e.preventDefault();
                 this.setState({
-                  id_kelurahan: e.target.value,
+                  id_kelurahan: e.target.selectedOptions[0].id,
                 });
+                console.log("Id kelurahan : ", e.target.selectedOptions[0].id);
               }}
             >
               <option value={0}>Kelurahan</option>
               {this.props.wilayah.kelurahan &&
                 this.props.wilayah.kelurahan.map((item) => {
-                  return <option value={item.kelurahan}>{item.nama}</option>;
+                  return (
+                    <option value={item.id} id={item.kelurahan}>
+                      {item.nama}
+                    </option>
+                  );
                 })}
             </Input>
           </>
@@ -253,7 +304,7 @@ class FormComponentUser extends Component {
               {...input}
               type={type}
               placeholder={placeholder}
-              autocomplete="off"
+              autoComplete="off"
             ></Input>
           </>
         )}
@@ -274,7 +325,7 @@ class FormComponentUser extends Component {
               <div>
                 <img
                   src={Photo}
-                  class="img-thumbnail"
+                  className="img-thumbnail"
                   style={{ width: "120px" }}
                   alt="..."
                 ></img>
@@ -397,7 +448,7 @@ class FormComponentUser extends Component {
                   label="Tanggal Lahir"
                 />
               </FormGroup>
-            </Col>{" "}
+            </Col>
             <Col md={4}>
               <FormGroup>
                 <Field
@@ -460,32 +511,32 @@ class FormComponentUser extends Component {
                   label="RW"
                 />
               </FormGroup>
-            </Col>{" "}
+            </Col>
             <Col md={4}>
               <FormGroup>
                 <Field
                   type="select"
-                  name="provinsi"
+                  name="id_provinsi"
                   component={this.renderField}
                   label="Provinsi"
                 />
               </FormGroup>
-            </Col>{" "}
+            </Col>
             <Col md={4}>
               <FormGroup>
                 <Field
                   type="select"
-                  name="kabupaten"
+                  name="id_kabupaten"
                   component={this.renderField}
                   label="Kabupaten"
                 />
               </FormGroup>
-            </Col>{" "}
+            </Col>
             <Col md={4}>
               <FormGroup>
                 <Field
                   type="select"
-                  name="kecamatan"
+                  name="id_kecamatan"
                   component={this.renderField}
                   label="Kecamatan"
                 />
@@ -495,7 +546,7 @@ class FormComponentUser extends Component {
               <FormGroup>
                 <Field
                   type="select"
-                  name="desa"
+                  name="id_desa"
                   component={this.renderField}
                   label="Kelurahan"
                 />
@@ -534,7 +585,7 @@ class FormComponentUser extends Component {
 
 FormComponentUser = reduxForm({
   form: "CreateUser",
-  validate: UserValidation,
+  // validate: UserValidation,
   enableReinitialize: true,
 })(FormComponentUser);
 export default connect(mapStateToProps, null)(FormComponentUser);
