@@ -11,7 +11,7 @@ class DetailPanenContainer extends Component {
   render() {
     return (
       <div>
-        <h1>Detail</h1>
+        
         <DetailPanen />
       </div>
     );
