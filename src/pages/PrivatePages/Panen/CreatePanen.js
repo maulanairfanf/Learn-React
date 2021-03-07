@@ -25,10 +25,10 @@ class CreatePanen extends Component {
       }
     }
     return (
-      <Container>
-        <h1>haii from create pupuk</h1>
+      <>
+        <h4 className="text-secondary">Tambah Panen</h4>
         <FormComponentPanen onSubmit={(data) => this.handleSubmit(data)} />
-      </Container>
+      </>
     );
   }
 }

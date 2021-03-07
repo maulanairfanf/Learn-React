@@ -39,7 +39,6 @@ class EventCalender extends Component {
   render() {
     const data = this.getData();
 
-
     console.log(data);
     return (
       <>
@@ -53,7 +52,7 @@ class EventCalender extends Component {
               />
               <div
                 className="scroll_calender border-top  border-secondary overflow-auto   mt-3 py-3"
-                style={{ height: "250px" }}
+                style={{ height: "325px" }}
               >
                 <ul>
                   {this.props.getPupukList.map((items) => {
@@ -65,7 +64,7 @@ class EventCalender extends Component {
                             <small>{items.tgl_distribusi}</small>
                           </span>
                           <h6>
-                            {items.jenis_pupuk} distribution to {items.petani}
+                            {items.jenis_pupuk} dikirimkan ke {items.petani}
                           </h6>
                         </li>
                       </>

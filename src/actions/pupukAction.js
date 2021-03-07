@@ -81,7 +81,6 @@ export const postPupukCreate = (data) => {
 };
 
 export const putPupukUpdate = (data) => {
-
   return (dispatch) => {
     axios({
       method: "put",

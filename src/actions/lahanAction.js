@@ -4,6 +4,7 @@ export const GET_LAHAN_LIST = "GET_LAHAN_LIST";
 export const GET_LAHAN_DETAIL = "GET_LAHAN_DETAIL";
 export const POST_LAHAN_CREATE = "POST_LAHAN_CREATE";
 export const PUT_LAHAN_UPDATE = "PUT_LAHAN_UPDATE";
+export const GET_FILTER_LAHAN = "GET_FILTER_LAHAN"
 
 const token = getToken();
 
@@ -44,6 +45,30 @@ export const getLahanDetail = (id) => {
         console.log(response.data.data);
         dispatch({
           type: GET_LAHAN_DETAIL,
+          payload: { data: response.data.data, errorMessage: false },
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+};
+
+
+export const getFilterLahan = (id) => {
+  return (dispatch) => {
+    axios({
+      method: "get",
+      url: "http://localhost:8000/lahan?id_petani=" + id,
+      headers: {
+        Authorization: "Gradien " + token,
+        "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
+      },
+    })
+      .then(function (response) {
+        console.log(response.data.data);
+        dispatch({
+          type: GET_FILTER_LAHAN,
           payload: { data: response.data.data, errorMessage: false },
         });
       })

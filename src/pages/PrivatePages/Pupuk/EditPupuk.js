@@ -15,7 +15,6 @@ class EditPupuk extends Component {
   componentDidMount() {
     this.props.dispatch(getPupukDetail(this.props.match.params.id));
   }
-
   handleSubmit(data) {
     console.log(data);
     this.props.dispatch(putPupukUpdate(data, this.props.match.params.id));
@@ -36,7 +35,7 @@ class EditPupuk extends Component {
     }
     return (
       <>
-        <h1>Edit User</h1>
+        <h4 className="text-secondary">Edit Pupuk</h4>
         <FormComponentPupuk onSubmit={(data) => this.handleSubmit(data)} />
       </>
     );

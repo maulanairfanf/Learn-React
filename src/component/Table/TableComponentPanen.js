@@ -102,7 +102,7 @@ const TableComponentPanen = (props) => {
     },
     {
       dataField: "alamat",
-      text: "Keterangan",
+      text: "Lokasi",
       headerStyle: {
         backgroundColor: "#f3f2f7",
         border: "none",
@@ -142,14 +142,14 @@ const TableComponentPanen = (props) => {
       formatter: (rowContent, row) => {
         return (
           <>
-            <small>{row.totalpanen}</small>
+            <small>{row.total_panen}</small>
           </>
         );
       },
     },
     {
       dataField: "tgl_tanam",
-      text: "Tanggal",
+      text: "Tanam / Panen",
       headerStyle: {
         backgroundColor: "#f3f2f7",
         border: "none",
@@ -174,7 +174,7 @@ const TableComponentPanen = (props) => {
           <>
             <UncontrolledDropdown>
               <Link
-                to={"DetailPanenContainer/" + row.id}
+                to={"detail-panen/" + row.id}
                 className="text-decoration-none "
               >
                 <Eye className=" text-black-50" size={15} />
@@ -190,7 +190,7 @@ const TableComponentPanen = (props) => {
               <DropdownMenu right>
                 <DropdownItem onClick={(e) => e.preventDefault()}>
                   <Link
-                    to={"EditPanen/" + row.id}
+                    to={"edit-panen/" + row.id}
                     className="text-decoration-none "
                   >
                     <h6>
@@ -238,9 +238,11 @@ const TableComponentPanen = (props) => {
         >
           {(props) => (
             <div>
-              <Link to="/CreatePanen">
+              <Link to="/create-panen">
                 <button type="button" className="btn btn-light rounded">
-                  <UserPlus size={20} />
+                  <span >
+                    Tambah Panen <UserPlus className="ml-2 mb-1" size={20} />
+                  </span>
                 </button>
               </Link>
 

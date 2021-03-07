@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import FormComponentUser from "../../../component/Form/FormComponentUser";
-import { Container } from "reactstrap";
 import { connect } from "react-redux";
 import { postUserCreate } from "../../../actions/userAction";
 import swal from "sweetalert";
@@ -32,10 +31,10 @@ class CreateUser extends Component {
       }
     }
     return (
-      <Container>
-        <h1>haii from create user</h1>
+      <div className="shadow px-4 py-3 rounded">
+        <h3 className="text-black-50 mb-4">Add Userr</h3>
         <FormComponentUser onSubmit={(data) => this.handleSubmit(data)} />
-      </Container>
+      </div>
     );
   }
 }

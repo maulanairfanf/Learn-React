@@ -53,34 +53,34 @@ const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
       <Switch>
         <PublicRoute exact path="/login" component={Login} />
         <PrivateRoute exact path="/" component={Dashboard} />
-        <PrivateRoute path="/Home" component={Home} />
-        <PrivateRoute path="/Pupuk" component={Pupuk} />
-        <PrivateRoute path="/Lahan" component={Lahan} />
-        <PrivateRoute path="/Panen" component={Panen} />
+        <PrivateRoute path="/home" component={Home} />
+        <PrivateRoute path="/pupuk" component={Pupuk} />
+        <PrivateRoute path="/lahan" component={Lahan} />
+        <PrivateRoute path="/panen" component={Panen} />
         <PrivateRoute
-          path="/DetailUserContainer/:id"
+          path="/detail-user/:id"
           component={DetailUserContainer}
         />
         <PrivateRoute
-          path="/DetailPupukContainer/:id"
+          path="/detail-pupuk/:id"
           component={DetailPupukContainer}
         />
         <PrivateRoute
-          path="/DetailLahanContainer/:id"
+          path="/detail-lahan/:id"
           component={DetailLahanContainer}
         />
         <PrivateRoute
-          path="/DetailPanenContainer/:id"
+          path="/detailpanen/:id"
           component={DetailPanenContainer}
         />
-        <PrivateRoute path="/CreateUser" component={CreateUser} />
-        <PrivateRoute path="/CreatePupuk" component={CreatePupuk} />
-        <PrivateRoute path="/CreateLahan" component={CreateLahan} />
-        <PrivateRoute path="/CreatePanen" component={CreatePanen} />
-        <PrivateRoute path="/EditUser/:id" component={EditUser} />
-        <PrivateRoute path="/EditPupuk/:id" component={EditPupuk} />
-        <PrivateRoute path="/EditLahan/:id" component={EditLahan} />
-        <PrivateRoute path="/EditPanen/:id" component={EditPanen} />{" "}
+        <PrivateRoute path="/create-user" component={CreateUser} />
+        <PrivateRoute path="/create-pupuk" component={CreatePupuk} />
+        <PrivateRoute path="/create-lahan" component={CreateLahan} />
+        <PrivateRoute path="/create-panen" component={CreatePanen} />
+        <PrivateRoute path="/edit-user/:id" component={EditUser} />
+        <PrivateRoute path="/edit-pupuk/:id" component={EditPupuk} />
+        <PrivateRoute path="/edit-lahan/:id" component={EditLahan} />
+        <PrivateRoute path="/edit-panen/:id" component={EditPanen} />{" "}
         <Route component={NotFound} />
       </Switch>
     </Container>

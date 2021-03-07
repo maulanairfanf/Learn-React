@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 };
 class CreatePupuk extends Component {
   handleSubmit(data) {
-    console.log(data);
+  
     this.props.dispatch(postPupukCreate(data));
   }
   render() {
@@ -25,10 +25,10 @@ class CreatePupuk extends Component {
       }
     }
     return (
-      <Container>
-        <h1>haii from create pupuk</h1>
+      <>
+        <h4 className="text-secondary">Tambah Pupuk</h4>
         <FormComponentPupuk onSubmit={(data) => this.handleSubmit(data)} />
-      </Container>
+      </>
     );
   }
 }

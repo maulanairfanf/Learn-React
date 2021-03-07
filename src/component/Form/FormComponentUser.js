@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import { Form, FormGroup, Col, Label, Input, Row, Button } from "reactstrap";
 import { connect } from "react-redux";
-import { reduxForm, Field, arrayInsert } from "redux-form";
+import { reduxForm, Field } from "redux-form";
 import UserValidation from "../../Validations/UserValidation";
 import Photo from "../../assets/user.png";
 import {
@@ -9,8 +9,15 @@ import {
   getKabupatenList,
   getKecamatanList,
   getKelurahanList,
+  getGenderList,
+  getAgamaList,
+  getPendidikanList,
+  getGolonganDarahList,
+  getSukuList,
+  getPekerjaanList,
+  getTipeUserList,
+  getSatuanList,
 } from "../../actions/masterAction";
-import { Link } from "react-router-dom";
 
 const mapStateToProps = (state) => {
   return {
@@ -43,16 +50,37 @@ const mapStateToProps = (state) => {
       facebook: state.users.getUsersDetail.facebook,
       id_user: state.users.getUsersDetail.id_user,
     },
-    wilayah: {
+    master: {
       provinsi: state.master.getProvinsiList,
       kabupaten: state.master.getKabupatenList,
       kecamatan: state.master.getKecamatanList,
       kelurahan: state.master.getKelurahanList,
+      gender: state.master.getGenderList,
+      agama: state.master.getAgamaList,
+      pendidikan: state.master.getPendidikanList,
+      golonganDarah: state.master.getGolonganDarahList,
+      suku: state.master.getSukuList,
+      pekerjaan: state.master.getPekerjaanList,
+      tipeUser: state.master.getTipeUserList,
+
+      satuan: state.master.getSatuanList,
     },
   };
 };
 
 class FormComponentUser extends Component {
+  componentDidMount() {
+    this.props.dispatch(getProvinsiList());
+    this.props.dispatch(getGenderList());
+    this.props.dispatch(getAgamaList());
+    this.props.dispatch(getPendidikanList());
+    this.props.dispatch(getGolonganDarahList());
+    this.props.dispatch(getSukuList());
+    this.props.dispatch(getPekerjaanList());
+    this.props.dispatch(getTipeUserList());
+
+    this.props.dispatch(getSatuanList());
+  }
   constructor(props) {
     super(props);
     this.state = {
@@ -63,11 +91,6 @@ class FormComponentUser extends Component {
     };
   }
 
-  getProvinsi(provinsi) {
-    const x = provinsi;
-
-    return x;
-  }
   renderField = ({
     input,
     type,
@@ -87,77 +110,111 @@ class FormComponentUser extends Component {
           <>
             <Input {...input} type={type} placeholder={placeholder}>
               <option value={0}></option>
-              <option value={1000601}>Petani</option>
-              <option value={1000101}>Laki-laki</option>
-              <option value={1000102}>Perempuan</option>
+              {(console.log(this.props), console.log(this.props.master))}
+              {this.props.master.gender &&
+                this.props.master.gender.map((item, i) => {
+                  return (
+                    <>
+                      <option key={i.id} value={item.id}>
+                        {item.nama}
+                      </option>
+                    </>
+                  );
+                })}
             </Input>
           </>
         ) : label === "Agama" ? (
           <Input {...input} type={type} placeholder={placeholder}>
             <option value={0}></option>
-            <option value={1000601}>Petani</option>
-            <option value={1000201}>Islam</option>
-            <option value={1000202}>Kristen</option>
-            <option value={1000203}>Katolik</option>
-            <option value={1000204}>Hindu</option>
-            <option value={1000205}>Budha</option>
+            {this.props.master.agama &&
+              this.props.master.agama.map((item, i) => {
+                return (
+                  <>
+                    <option key={i.id} value={item.id}>
+                      {item.nama}
+                    </option>
+                  </>
+                );
+              })}
           </Input>
         ) : label === "Pendidikan" ? (
           <Input {...input} type={type} placeholder={placeholder}>
             <option value={0}></option>
-            <option value={1000601}>Petani</option>
-            <option value={1000301}>Tidak Sekolah</option>
-            <option value={1000302}>SD</option>
-            <option value={1000303}>SMP</option>
-            <option value={1000304}>S1</option>
-            <option value={1000306}>S2</option>
-            <option value={1000307}>S3</option>
+
+            {this.props.master.pendidikan &&
+              this.props.master.pendidikan.map((item, i) => {
+                return (
+                  <>
+                    <option key={i.id} value={item.id}>
+                      {item.nama}
+                    </option>
+                  </>
+                );
+              })}
           </Input>
         ) : label === "Suku" ? (
           <>
             <Input {...input} type={type} placeholder={placeholder}>
               <option value={0}></option>
-              <option value={1000601}>Petani</option>
-              <option value={1000501}>Jawa</option>
-              <option value={1000502}>Sunda</option>
-              <option value={1000503}>Lampung</option>
-              <option value={1000504}>Bugis</option>
-              <option value={1000505}>Palembang</option>
-              <option value={1000501}>Padang</option>
+
+              {this.props.master.suku &&
+                this.props.master.suku.map((item, i) => {
+                  return (
+                    <>
+                      <option key={i.id} value={item.id}>
+                        {item.nama}
+                      </option>
+                    </>
+                  );
+                })}
             </Input>
           </>
         ) : label === "Pekerjaan" ? (
           <>
             <Input {...input} type={type} placeholder={placeholder}>
               <option value={0}></option>
-              <option value={1000601}>Petani</option>
-              <option value={1000602}>Buruh</option>
-              <option value={1000603}>ASN</option>
-              <option value={1000604}>Pedagang</option>
-              <option value={1000605}>Penyuluh</option>
-              <option value={1000606}>Dosen</option>
-              <option value={1000607}>Pegawai Swasta</option>
-              <option value={1000608}>Honorer</option>
+              {this.props.master.pekerjaan &&
+                this.props.master.pekerjaan.map((item, i) => {
+                  return (
+                    <>
+                      <option key={i.id} value={item.id}>
+                        {item.nama}
+                      </option>
+                    </>
+                  );
+                })}
             </Input>
           </>
         ) : label === "Golongan Darah" ? (
           <>
             <Input {...input} type={type} placeholder={placeholder}>
               <option value={0}></option>
-              <option value={1000601}>Petani</option>
-              <option value={1000401}>A</option>
-              <option value={1000402}>B</option>
-              <option value={1000403}>AB</option>
-              <option value={1000404}>O</option>
+              {this.props.master.golonganDarah &&
+                this.props.master.golonganDarah.map((item, i) => {
+                  return (
+                    <>
+                      <option key={i.id} value={item.id}>
+                        {item.nama}
+                      </option>
+                    </>
+                  );
+                })}
             </Input>
           </>
-        ) : label === "Kategori" ? (
+        ) : label === "Tipe User" ? (
           <>
             <Input {...input} type={type} placeholder={placeholder}>
               <option value={0}></option>
-              <option value={1000601}>Petani</option>
-              <option value={1000001}>Personal</option>
-              <option value={1000002}>Institution</option>
+              {this.props.master.tipeUser &&
+                this.props.master.tipeUser.map((item, i) => {
+                  return (
+                    <>
+                      <option key={i.id} value={item.id}>
+                        {item.nama}
+                      </option>
+                    </>
+                  );
+                })}
             </Input>
           </>
         ) : label === "Provinsi" ? (
@@ -186,14 +243,10 @@ class FormComponentUser extends Component {
               }}
             >
               <option value={0}>Provinsi</option>
-              {this.props.wilayah.provinsi &&
-                this.props.wilayah.provinsi.map((item, i) => {
+              {this.props.master.provinsi &&
+                this.props.master.provinsi.map((item, i) => {
                   return (
-                    <option
-                      key={item.provinsi}
-                      value={item.id}
-                      id={item.provinsi}
-                    >
+                    <option key={i.id} value={item.id} id={item.provinsi}>
                       {item.nama}
                     </option>
                   );
@@ -225,11 +278,15 @@ class FormComponentUser extends Component {
               }}
             >
               <option value={0}>Kabupaten / Kota</option>
-              {this.props.wilayah.kabupaten &&
-                this.props.wilayah.kabupaten.map((item) => {
+              {this.props.master.kabupaten &&
+                this.props.master.kabupaten.map((item, i) => {
                   return (
                     <>
-                      <option value={item.id} id={item.kabupatenkota}>
+                      <option
+                        key={i.id}
+                        value={item.id}
+                        id={item.kabupatenkota}
+                      >
                         {item.nama}
                       </option>
                     </>
@@ -262,10 +319,10 @@ class FormComponentUser extends Component {
               }}
             >
               <option value={0}>Kecamatan</option>
-              {this.props.wilayah.kecamatan &&
-                this.props.wilayah.kecamatan.map((item) => {
+              {this.props.master.kecamatan &&
+                this.props.master.kecamatan.map((item, i) => {
                   return (
-                    <option value={item.id} id={item.kecamatan}>
+                    <option key={i.id} value={item.id} id={item.kecamatan}>
                       {item.nama}
                     </option>
                   );
@@ -288,10 +345,10 @@ class FormComponentUser extends Component {
               }}
             >
               <option value={0}>Kelurahan</option>
-              {this.props.wilayah.kelurahan &&
-                this.props.wilayah.kelurahan.map((item) => {
+              {this.props.master.kelurahan &&
+                this.props.master.kelurahan.map((item, i) => {
                   return (
-                    <option value={item.id} id={item.kelurahan}>
+                    <option key={i.id} value={item.id} id={item.kelurahan}>
                       {item.nama}
                     </option>
                   );
@@ -395,7 +452,7 @@ class FormComponentUser extends Component {
                   type="select"
                   name="kategori"
                   component={this.renderField}
-                  label="Kategori"
+                  label="Tipe User"
                 />
               </FormGroup>
             </Col>

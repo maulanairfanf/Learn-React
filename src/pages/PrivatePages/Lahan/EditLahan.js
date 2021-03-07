@@ -36,7 +36,7 @@ class EditLahan extends Component {
     }
     return (
       <>
-        <h1>Edit Lahan</h1>
+        <h4 className="text-secondary">Edit Lahan</h4>{" "}
         <FormComponentLahan onSubmit={(data) => this.handleSubmit(data)} />
       </>
     );

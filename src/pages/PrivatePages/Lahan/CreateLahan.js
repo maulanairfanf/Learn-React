@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
 };
 class CreateLahan extends Component {
   handleSubmit(data) {
-    console.log(data);
+    
     this.props.dispatch(postLahanCreate(data));
   }
   render() {
@@ -25,10 +25,10 @@ class CreateLahan extends Component {
       }
     }
     return (
-      <Container>
-        <h1>haii from create pupuk</h1>
+      <>
+        <h4 className="text-secondary">Tambah Lahan</h4>
         <FormComponentLahan onSubmit={(data) => this.handleSubmit(data)} />
-      </Container>
+      </>
     );
   }
 }

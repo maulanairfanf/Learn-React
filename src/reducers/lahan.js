@@ -3,6 +3,7 @@ import {
   GET_LAHAN_DETAIL,
   POST_LAHAN_CREATE,
   PUT_LAHAN_UPDATE,
+  GET_FILTER_LAHAN
 } from "../actions/lahanAction";
 
 let initialState = {
@@ -12,6 +13,8 @@ let initialState = {
   errorPupukDetail: false,
   getResponseDataLahan: false,
   errorResponseDataLahan: false,
+  getFilterLahan: false,
+  errorFilterLahan : false,
   title: "lahan",
 };
 
@@ -40,6 +43,12 @@ const lahan = (state = initialState, action) => {
         ...state,
         getResponseDataLahan: action.payload.data,
         errorResponseDataLahan: action.payload.errorMessage,
+      };
+    case GET_FILTER_LAHAN:
+      return {
+        ...state,
+        getFilterLahan: action.payload.data,
+        errorFilterLahan: action.payload.errorMessage,
       };
     default:
       return state;

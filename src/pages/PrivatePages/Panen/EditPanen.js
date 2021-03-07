@@ -36,7 +36,7 @@ class EditPanen extends Component {
     }
     return (
       <>
-        <h1>Edit Lahan</h1>
+        <h4 className="text-secondary">Edit Panen</h4>{" "}
         <FormComponentPanen onSubmit={(data) => this.handleSubmit(data)} />
       </>
     );

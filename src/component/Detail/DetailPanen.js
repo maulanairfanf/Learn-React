@@ -105,10 +105,10 @@ const DetailPanen = (props) => {
               </div>{" "}
               <div className="d-flex justify-content-center align-items-center mt-5">
                 <Link
-                  to={"/EditLahan/" + props.getPanenDetail.id}
+                  to={"/EditPanen/" + props.getPanenDetail.id}
                   className="btn btn-info"
                 >
-                  Update Pupuk
+                  Update Panen
                 </Link>
               </div>
             </div>

@@ -3,37 +3,8 @@ import { FormGroup, Col, Label, Input, Row, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import UserValidation from "../../Validations/UserValidation";
-
-const renderField = ({
-  input,
-  type,
-  placeholder,
-  label,
-  disabled,
-  readOnly,
-  value,
-  meta: { touched, error, warning },
-}) => (
-  <Row>
-    <Col md="12">
-      <Label htmlFor="{input}" className="col-form-label">
-        {label}
-      </Label>
-    </Col>
-    <Col md="12">
-      <Input
-        {...input}
-        type={type}
-        placeholder={placeholder}
-        disabled={disabled}
-        readOnly={readOnly}
-      ></Input>
-      {touched &&
-        ((error && <p style={{ color: "red" }}>{error}</p>) ||
-          (warning && <p style={{ color: "brown" }}>{warning}</p>))}
-    </Col>
-  </Row>
-);
+import { getUsersList } from "../../actions/userAction";
+import { getTipeUserList } from "../../actions/masterAction";
 
 const mapStateToProps = (state) => {
   return {
@@ -43,91 +14,147 @@ const mapStateToProps = (state) => {
       kapasitas: state.pupuk.getPupukDetail.kapasitas,
       satuan: state.pupuk.getPupukDetail.satuan,
       id_poktan: state.pupuk.getPupukDetail.id_poktan,
+      poktan: state.pupuk.getPupukDetail.poktann,
       id_petani: state.pupuk.getPupukDetail.id_petani,
+      petani: state.pupuk.getPupukDetail.petani,
       tgl_distribusi: state.pupuk.getPupukDetail.tgl_distribusi,
-      id_instansi: state.pupuk.getPupukDetail.id_instansi,
+      instansi: state.pupuk.getPupukDetail.instansi,
+      keterangan: state.pupuk.getPupukDetail.keterangan,
+    },
+    user: {
+      petani: state.users.getUsersList,
+    },
+    master: {
+      tipeUser: state.master.getTipeUserList,
     },
   };
 };
 
 class FormComponentPupuk extends Component {
+  componentDidMount() {
+    this.props.dispatch(getTipeUserList());
+    this.props.dispatch(getUsersList());
+  }
+  renderField = ({
+    input,
+    type,
+    placeholder,
+    label,
+    disabled,
+    meta: { touched, error, warning },
+  }) => (
+    <Row>
+      <Col md="12">
+        <Label htmlFor="{input}" className="col-form-label">
+          {label}
+        </Label>
+      </Col>
+      <Col md="12">
+        {label === "Satuan" ? (
+          <>
+            <Input {...input} type={type} placeholder={placeholder}>
+              <option value={101}>Kg</option>
+            </Input>
+          </>
+        ) : label === "Petani" ? (
+          <Input {...input} type={type} placeholder={placeholder}>
+            <option value={0}></option>
+            {this.props.user.petani &&
+              this.props.user.petani.map((item) => {
+                return <option value={item.id}>{item.nama}</option>;
+              })}
+          </Input>
+        ) : (
+          <Input
+            {...input}
+            type={type}
+            placeholder={placeholder}
+            autoComplete="off"
+          />
+        )}
+        {touched &&
+          ((error && <small style={{ color: "red" }}>{error}</small>) ||
+            (warning && <small style={{ color: "brown" }}>{warning}</small>))}
+      </Col>
+    </Row>
+  );
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
         <FormGroup row>
-          <Col md={6}>
+          <Col md={4}>
             <FormGroup>
               <Field
                 type="text"
                 name="jenis_pupuk"
-                component={renderField}
-                label="Jenis :"
+                component={this.renderField}
+                label="Jenis"
               />
             </FormGroup>
           </Col>
 
-          <Col md={6}>
+          <Col md={4}>
             <FormGroup>
               <Field
-                type="text"
+                type="number"
                 name="kapasitas"
-                component={renderField}
-                label="Kapasitas :"
+                component={this.renderField}
+                label="Kapasitas"
               />
             </FormGroup>
           </Col>
 
-          <Col md={6}>
+          <Col md={4}>
             <FormGroup>
               <Field
-                type="text"
+                type="select"
                 name="satuan"
-                component={renderField}
-                label="Satuan :"
+                component={this.renderField}
+                label="Satuan"
               />
             </FormGroup>
           </Col>
-
-          <Col md={6}>
+          {/* 
+            <Col md={4}>
+              <FormGroup>
+                <Field
+                  type="text"
+                  name="poktan"
+                  component={this.renderField}
+                  label="Poktan"
+                  disabled
+                />
+              </FormGroup>
+            </Col> */}
+          <Col md={4}>
             <FormGroup>
               <Field
-                type="text"
-                name="id_poktan"
-                component={renderField}
-                label="ID Poktan :"
-              />
-            </FormGroup>
-          </Col>
-
-          <Col md={6}>
-            <FormGroup>
-              <Field
-                type="text"
+                type="select"
                 name="id_petani"
-                component={renderField}
-                label="ID Petani :"
+                component={this.renderField}
+                label="Petani"
               />
             </FormGroup>
           </Col>
 
-          <Col md={6}>
+          <Col md={4}>
             <FormGroup>
               <Field
                 type="date"
                 name="tgl_distribusi"
-                component={renderField}
-                label="Tanggal Terdistribusi :"
+                component={this.renderField}
+                label="Tanggal Terdistribusi"
               />
             </FormGroup>
           </Col>
 
-          <Col md={6}>
+          <Col md={4}>
             <FormGroup>
               <Field
                 type="text"
-                name="id_instansi"
-                component={renderField}
-                label="ID Instansi :"
+                name="keterangan"
+                component={this.renderField}
+                label="Keterangan"
               />
             </FormGroup>
           </Col>
@@ -137,11 +164,11 @@ class FormComponentPupuk extends Component {
           <Col md="12">
             <FormGroup>
               <Button
-                color="dark"
+                color="info"
                 type="submit"
                 disabled={this.props.submitting}
               >
-                Submit
+                Simpan
               </Button>
             </FormGroup>
           </Col>

@@ -192,23 +192,18 @@ const TableComponentUser = (props) => {
           <>
             <UncontrolledDropdown>
               <Link
-                to={"DetailUserContainer/" + row.id}
+                to={"detail-user/" + row.id}
                 className="text-decoration-none "
               >
                 <Eye className=" text-black-50" size={15} />
               </Link>
-              <DropdownToggle
-                className="ml-1"
-                color="transparent"
-                size="sm"
-                outline
-              >
+              <DropdownToggle className="ml-1" color="transparent" size="sm">
                 <MoreVertical size={15} />
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem onClick={(e) => e.preventDefault()}>
                   <Link
-                    to={"EditUser/" + row.id}
+                    to={"edit-user/" + row.id}
                     className="text-decoration-none "
                   >
                     <h6>
@@ -254,9 +249,11 @@ const TableComponentUser = (props) => {
         >
           {(props) => (
             <div>
-              <Link to="/CreateUser">
-                <button type="button" className="btn btn-light rounded">
-                  <UserPlus size={20} />
+              <Link to="/create-user">
+                <button type="button" className="btn btn-light rounded ">
+                  <span>
+                    Tambah Petani <UserPlus className="ml-2 mb-1" size={20} />
+                  </span>
                 </button>
               </Link>
 

@@ -91,7 +91,7 @@ const TableComponentPupuk = (props) => {
   };
   const columns = [
     {
-      dataField: "id",
+      dataField: "petani",
       text: "Identitas",
       sort: true,
       headerStyle: {
@@ -126,7 +126,7 @@ const TableComponentPupuk = (props) => {
     },
     {
       dataField: "tgl_distribusi",
-      text: "Jenis",
+      text: "Tanggal Distribusi",
       sort: true,
       headerStyle: {
         backgroundColor: "#f3f2f7",
@@ -145,7 +145,7 @@ const TableComponentPupuk = (props) => {
           <>
             <UncontrolledDropdown>
               <Link
-                to={"DetailPupukContainer/" + row.id}
+                to={"detail-pupuk/" + row.id}
                 className="text-decoration-none "
               >
                 <Eye className=" text-black-50" size={15} />
@@ -161,7 +161,7 @@ const TableComponentPupuk = (props) => {
               <DropdownMenu right>
                 <DropdownItem onClick={(e) => e.preventDefault()}>
                   <Link
-                    to={"EditPupuk/" + row.id}
+                    to={"edit-pupuk/" + row.id}
                     className="text-decoration-none "
                   >
                     <h6>
@@ -210,9 +210,11 @@ const TableComponentPupuk = (props) => {
         >
           {(props) => (
             <div>
-              <Link to="/CreatePupuk">
+              <Link to="/create-pupuk">
                 <button type="button" className="btn btn-light rounded">
-                  <UserPlus size={20} />
+                  <span >
+                    Tambah Pupuk <UserPlus className="ml-2 mb-1" size={20} />
+                  </span>
                 </button>
               </Link>
 

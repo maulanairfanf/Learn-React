@@ -9,7 +9,7 @@ export const PUT_USERS_UPDATE_IMAGE = "PUT_USERS_UPDATE_IMAGE";
 const token = getToken();
 
 export const getUsersList = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     axios({
       method: "get",
       url: "http://localhost:8000/profil",
@@ -32,7 +32,7 @@ export const getUsersList = () => {
 };
 
 export const getUsersDetail = (id) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     axios({
       method: "get",
       url: "http://localhost:8000/profil/" + id,
@@ -42,6 +42,7 @@ export const getUsersDetail = (id) => {
       },
     })
       .then(function (response) {
+        console.log(response.data.data);
         dispatch({
           type: GET_USERS_DETAIL,
           payload: { data: response.data.data, errorMessage: false },
@@ -54,7 +55,7 @@ export const getUsersDetail = (id) => {
 };
 
 export const postUserCreate = (data) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     axios({
       method: "post",
       url: "http://localhost:8000/profil/",
@@ -70,6 +71,7 @@ export const postUserCreate = (data) => {
           type: POST_USERS_CREATE,
           payload: { data: response.data.data, errorMessage: false },
         });
+        dispatch(getUsersList());
       })
       .catch((err) => {
         dispatch({
@@ -81,7 +83,7 @@ export const postUserCreate = (data) => {
 };
 
 export const putUsersUpdate = (data) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     axios({
       method: "put",
       url: "http://localhost:8000/profil/",
@@ -116,7 +118,7 @@ export const putUsersUpdate = (data) => {
 };
 
 export const putUsersUpdateImage = (data) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     axios({
       method: "put",
       url: "http://localhost:8000/profil/image",
@@ -151,7 +153,7 @@ export const putUsersUpdateImage = (data) => {
 };
 
 export const deleteUser = (id) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     axios({
       method: "delete",
       url: "http://localhost:8000/profil/" + id,
@@ -171,7 +173,7 @@ export const deleteUser = (id) => {
 };
 
 export const deleteDataUser = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({
       type: GET_USERS_DETAIL,
       payload: {

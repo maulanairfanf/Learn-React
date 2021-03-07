@@ -35,7 +35,7 @@ const SideBar = ({ isOpen, toggle }) => (
           <NavLink
             className="d-flex align-items-center"
             tag={Link}
-            to={"/Home"}
+            to={"/home"}
           >
             <User className="mr-3" size={24} />
             <span>Petani</span>
@@ -46,7 +46,7 @@ const SideBar = ({ isOpen, toggle }) => (
           <NavLink
             className="d-flex align-items-center"
             tag={Link}
-            to={"/Pupuk"}
+            to={"/pupuk"}
           >
             <ShoppingBag className="mr-3" size={24} />
             <span> Pupuk</span>
@@ -56,7 +56,7 @@ const SideBar = ({ isOpen, toggle }) => (
           <NavLink
             className="d-flex align-items-center"
             tag={Link}
-            to={"/Lahan"}
+            to={"/lahan"}
           >
             <Globe className="mr-3" size={24} />
             <span> Lahan</span>
@@ -66,7 +66,7 @@ const SideBar = ({ isOpen, toggle }) => (
           <NavLink
             className="d-flex align-items-center"
             tag={Link}
-            to={"/Panen"}
+            to={"/panen"}
           >
             <Activity className="mr-3" size={24} />
             <span>Panen</span>

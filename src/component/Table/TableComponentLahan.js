@@ -1,10 +1,7 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import {
-  Button,
   Spinner,
-  Table,
-  Badge,
   UncontrolledDropdown,
   DropdownMenu,
   DropdownItem,
@@ -101,9 +98,13 @@ const TableComponentLahan = (props) => {
       formatter: (rowContent, row) => {
         return (
           <>
-            <small className="block">{row.kategori} / </small>
-            <small className="block">{row.luas} / </small>
-            <small className="block">{row.usia_tanaman} </small>
+            <div className="">
+              <span>{row.kategori} </span>
+              <br />
+              <small className="text-secondary">
+                Luas : {row.luas} / Usia Tanaman : {row.usia_tanaman}
+              </small>
+            </div>
           </>
         );
       },
@@ -153,7 +154,7 @@ const TableComponentLahan = (props) => {
           <>
             <UncontrolledDropdown>
               <Link
-                to={"DetailLahanContainer/" + row.id}
+                to={"detail-lahan/" + row.id}
                 className="text-decoration-none "
               >
                 <Eye className=" text-black-50" size={15} />
@@ -169,7 +170,7 @@ const TableComponentLahan = (props) => {
               <DropdownMenu right>
                 <DropdownItem onClick={(e) => e.preventDefault()}>
                   <Link
-                    to={"EditLahan/" + row.id}
+                    to={"edit-lahan/" + row.id}
                     className="text-decoration-none "
                   >
                     <h6>
@@ -196,7 +197,7 @@ const TableComponentLahan = (props) => {
                     </span>
                   </h6>
                 </DropdownItem>
-              </DropdownMenu>{" "}
+              </DropdownMenu>
             </UncontrolledDropdown>
           </>
         );
@@ -216,9 +217,11 @@ const TableComponentLahan = (props) => {
         >
           {(props) => (
             <div>
-              <Link to="/CreateLahan">
+              <Link to="/create-lahan">
                 <button type="button" className="btn btn-light rounded">
-                  <UserPlus size={20} />
+                  <span>
+                    Tambah Lahan <UserPlus className="ml-2 mb-1" size={20} />
+                  </span>
                 </button>
               </Link>
 

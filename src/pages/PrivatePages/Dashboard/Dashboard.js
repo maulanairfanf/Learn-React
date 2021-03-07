@@ -24,8 +24,8 @@ class Dashboard extends Component {
     console.log(this.props.getTotalList);
     return (
       <div className="position-relative">
-        <div className="row">
-          <div className="col-md-8 mx-auto">
+        <div className="row ">
+          <div className="col-xl-8 mx-auto">
             <div className="row ">
               <div className="col-md-6 mb-3 ">
                 <div
@@ -123,7 +123,7 @@ class Dashboard extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6 mb-3">
+              <div className="col-md-6 mb-3 ">
                 <div
                   className="w-100 p-3"
                   style={{ border: "1px solid #0CC23F", borderRadius: "10px" }}
@@ -144,9 +144,9 @@ class Dashboard extends Component {
               </div>
             </div>{" "}
           </div>
-          <div className="col-md-4  ">
+          <div className="col-xl-4 ">
             <div
-              className="w-100 p-3"
+              className=" p-3"
               style={{ border: "1px solid #0CC23F", borderRadius: "10px" }}
             >
               <EventCalender />

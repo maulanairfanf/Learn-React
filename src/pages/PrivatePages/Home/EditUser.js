@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import FormComponentUser from "../../../component/Form/FormComponentUser";
-import {
-  getUsersDetail,
-  putUsersUpdate,
-  putUsersUpdateImage,
-} from "../../../actions/userAction";
+import { getUsersDetail, putUsersUpdate } from "../../../actions/userAction";
 import swal from "sweetalert";
 import { connect } from "react-redux";
 
@@ -22,7 +18,6 @@ class EditUser extends Component {
 
   handleSubmit(data) {
     this.props.dispatch(putUsersUpdate(data, this.props.match.params.id));
-    this.props.dispatch(putUsersUpdateImage(data, this.props.match.params.id));
   }
 
   render() {
@@ -32,7 +27,6 @@ class EditUser extends Component {
       } else {
         swal({
           title: "User Updated !",
-
           icon: "success",
           button: "Oke",
         });
@@ -40,8 +34,10 @@ class EditUser extends Component {
     }
     return (
       <>
-        <h1>Edit User</h1>
-        <FormComponentUser onSubmit={(data) => this.handleSubmit(data)} />
+        <div>
+          <h4 className="text-secondary">Edit User</h4>
+          <FormComponentUser onSubmit={(data) => this.handleSubmit(data)} />
+        </div>
       </>
     );
   }
