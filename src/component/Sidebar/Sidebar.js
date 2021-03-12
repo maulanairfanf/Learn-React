@@ -26,7 +26,12 @@ const SideBar = ({ isOpen, toggle }) => (
     <div className="side-menu ">
       <Nav vertical className="list-unstyled pb-3 ml-2 mt-3">
         <NavItem className="rounded-pill mb-2">
-          <NavLink className="d-flex align-items-center" tag={Link} to={"/"}>
+          <NavLink
+            className="d-flex align-items-center"
+            tag={Link}
+            to={"/"}
+            activeClassName="active"
+          >
             <Home className="mr-3" size={24} />
             <span>Dashboard</span>
           </NavLink>

@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import FormComponentUser from "../../../component/Form/FormComponentUser";
-import { getUsersDetail, putUsersUpdate } from "../../../actions/userAction";
+import {
+  getUsersDetail,
+  putUsersUpdate,
+  deleteDataUser,
+} from "../../../actions/userAction";
 import swal from "sweetalert";
 import { connect } from "react-redux";
+import FormPict from "../../../component/Form/FormPict";
 
 const mapStateToProps = (state) => {
   return {
@@ -22,6 +27,7 @@ class EditUser extends Component {
 
   render() {
     if (this.props.getResponseDataUser || this.props.errorResponseDataUser) {
+      console.log(this.props);
       if (this.props.errorResponseDataUser) {
         swal("Failed!", this.props.errorResponseDataUser, "error");
       } else {
@@ -36,6 +42,7 @@ class EditUser extends Component {
       <>
         <div>
           <h4 className="text-secondary">Edit User</h4>
+          <FormPict />
           <FormComponentUser onSubmit={(data) => this.handleSubmit(data)} />
         </div>
       </>

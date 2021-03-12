@@ -13,6 +13,8 @@ let initialState = {
   errorUsersDetail: false,
   getResponseDataUser: false,
   errorResponseDataUser: false,
+  getResponseDataPict: false,
+  errorResponseDataPict: false,
   title: "users",
 };
 
@@ -45,8 +47,8 @@ const users = (state = initialState, action) => {
     case PUT_USERS_UPDATE_IMAGE:
       return {
         ...state,
-        getResponseDataUser: action.payload.data,
-        errorResponseDataUser: action.payload.errorMessage,
+        getResponseDataPict: action.payload.data,
+        errorResponseDataPict: action.payload.errorMessage,
       };
 
     default:

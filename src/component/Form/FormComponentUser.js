@@ -18,6 +18,7 @@ import {
   getTipeUserList,
   getSatuanList,
 } from "../../actions/masterAction";
+import { putUsersUpdateImage } from "../../actions/userAction";
 
 const mapStateToProps = (state) => {
   return {
@@ -88,8 +89,31 @@ class FormComponentUser extends Component {
       id_kabupaten: 0,
       id_kecamatan: 0,
       id_kelurahan: 0,
+      file: null,
+      base64URL: "",
     };
   }
+  getBase64 = (file) => {
+    return new Promise((resolve) => {
+      let fileInfo;
+      let baseURL = "";
+      // Make new FileReader
+      let reader = new FileReader();
+
+      // Convert the file to base64 text
+      reader.readAsDataURL(file);
+
+      // on reader load somthing...
+      reader.onload = () => {
+        // Make a fileInfo Object
+        // console.log("Called", reader);
+        baseURL = reader.result;
+        // console.log(baseURL);
+        resolve(baseURL);
+      };
+      // console.log(fileInfo);
+    });
+  };
 
   renderField = ({
     input,
@@ -110,7 +134,7 @@ class FormComponentUser extends Component {
           <>
             <Input {...input} type={type} placeholder={placeholder}>
               <option value={0}></option>
-              {(console.log(this.props), console.log(this.props.master))}
+
               {this.props.master.gender &&
                 this.props.master.gender.map((item, i) => {
                   return (
@@ -238,7 +262,6 @@ class FormComponentUser extends Component {
                 );
                 {
                   console.log("id provinsi : ", e.target.selectedOptions[0].id);
-                  console.log(e);
                 }
               }}
             >
@@ -274,7 +297,6 @@ class FormComponentUser extends Component {
                   )
                 );
                 console.log("id kabupaten : ", e.target.selectedOptions[0].id);
-                console.log(e);
               }}
             >
               <option value={0}>Kabupaten / Kota</option>
@@ -314,7 +336,7 @@ class FormComponentUser extends Component {
                     e.target.selectedOptions[0].id
                   )
                 );
-                console.log(e);
+
                 console.log("id kecamatan : ", e.target.selectedOptions[0].id);
               }}
             >
@@ -356,6 +378,44 @@ class FormComponentUser extends Component {
             </Input>
           </>
         ) : (
+          // ) : label === "Foto KTP" ? (
+          //   <>
+          //     <Input
+          //       {...input}
+          //       type={type}
+          //       value={value}
+          //       placeholder={placeholder}
+          //       onChange={(e) => {
+          //         e.preventDefault();
+
+          //         let { file } = this.state;
+
+          //         file = e.target.files[0];
+
+          //         this.getBase64(file)
+          //           .then((result) => {
+          //             file["base64"] = result;
+          //             console.log("File Is", file.base64);
+          //             this.value = file.base64;
+          //             console.log(this.props.initialValues.id);
+          //             this.props.dispatch(
+          //               putUsersUpdateImage({
+          //                 id: this.props.initialValues.id,
+          //                 foto_ktp: this.value,
+          //               })
+          //             );
+          //             console.log(this.value);
+          //             this.setState({
+          //               base64URL: result,
+          //               file,
+          //             });
+          //           })
+          //           .catch((err) => {
+          //             console.log(err);
+          //           });
+          //       }}
+          //     ></Input>
+          //   </>
           <>
             <Input
               {...input}
@@ -377,23 +437,6 @@ class FormComponentUser extends Component {
     return (
       <>
         <Form onSubmit={this.props.handleSubmit}>
-          <FormGroup row>
-            <Col md={2}>
-              <div>
-                <img
-                  src={Photo}
-                  className="img-thumbnail"
-                  style={{ width: "120px" }}
-                  alt="..."
-                ></img>
-              </div>
-              <div className="mt-2 ">
-                <button type="button" className="btn btn-outline-secondary">
-                  Pilih Foto
-                </button>
-              </div>
-            </Col>
-          </FormGroup>
           <h4 className="text-black-50 mt-4">Identitas</h4>
           <FormGroup row>
             <Col md={4}>

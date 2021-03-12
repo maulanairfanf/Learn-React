@@ -12,7 +12,7 @@ export const getUsersList = () => {
   return async (dispatch) => {
     axios({
       method: "get",
-      url: "http://localhost:8000/profil",
+      url: "http://localhost:8000/profil?page=1&limit_page=5",
       headers: {
         Authorization: "Gradien " + token,
         "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
@@ -83,6 +83,7 @@ export const postUserCreate = (data) => {
 };
 
 export const putUsersUpdate = (data) => {
+  console.log(data);
   return async (dispatch) => {
     axios({
       method: "put",
@@ -95,7 +96,6 @@ export const putUsersUpdate = (data) => {
       data: data,
     })
       .then(function (response) {
-        console.log(response);
         dispatch({
           type: PUT_USERS_UPDATE,
           payload: {
@@ -184,6 +184,18 @@ export const deleteDataUser = () => {
 
     dispatch({
       type: POST_USERS_CREATE,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+  };
+};
+
+export const delleteDataPict = () => {
+  return (dispatch) => {
+    dispatch({
+      type: PUT_USERS_UPDATE_IMAGE,
       payload: {
         data: false,
         errorMessage: false,

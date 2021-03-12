@@ -34,7 +34,7 @@ const DetailUser = (props) => {
                 <div className="d-flex justify-content-center mt-3">
                   <Link
                     className=" btn btn-info"
-                    to={"/EditUser/" + props.getUsersDetail.id}
+                    to={"/edit-user/" + props.getUsersDetail.id}
                   >
                     Edit Profil
                   </Link>

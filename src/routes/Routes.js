@@ -57,10 +57,7 @@ const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
         <PrivateRoute path="/pupuk" component={Pupuk} />
         <PrivateRoute path="/lahan" component={Lahan} />
         <PrivateRoute path="/panen" component={Panen} />
-        <PrivateRoute
-          path="/detail-user/:id"
-          component={DetailUserContainer}
-        />
+        <PrivateRoute path="/detail-user/:id" component={DetailUserContainer} />
         <PrivateRoute
           path="/detail-pupuk/:id"
           component={DetailPupukContainer}
@@ -80,6 +77,7 @@ const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
         <PrivateRoute path="/edit-user/:id" component={EditUser} />
         <PrivateRoute path="/edit-pupuk/:id" component={EditPupuk} />
         <PrivateRoute path="/edit-lahan/:id" component={EditLahan} />
+        <PrivateRoute path="/edit-panen/:id" component={EditPanen} />{" "}
         <PrivateRoute path="/edit-panen/:id" component={EditPanen} />{" "}
         <Route component={NotFound} />
       </Switch>

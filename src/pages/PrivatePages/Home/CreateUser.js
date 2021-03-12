@@ -19,13 +19,13 @@ class CreateUser extends Component {
       if (this.props.getResponseDataUser) {
         swal({
           title: "User Created",
-          // text: "You clicked the button!",
+
           icon: "success",
         });
       } else {
         swal({
           title: "Good job!",
-          // text: "You clicked the button!",
+
           icon: "error",
         });
       }

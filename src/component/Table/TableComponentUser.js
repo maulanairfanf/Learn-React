@@ -105,16 +105,16 @@ const TableComponentUser = (props) => {
             <div className="d-flex align-items-center ">
               <div className="">
                 {row.foto_profil ? (
-                  <div style={{ width: "30px" }}>
+                  <div style={{ width: "50px" }}>
                     <img
-                      src={Kirito}
+                      src={row.foto_profil}
                       className="rounded-circle img-fluid border border-primary "
                     ></img>
                   </div>
                 ) : (
                   <img
                     src={Photo}
-                    style={{ width: "30px" }}
+                    style={{ width: "50px" }}
                     className="rounded-circle border border-primary"
                   ></img>
                 )}
@@ -173,9 +173,12 @@ const TableComponentUser = (props) => {
       formatter: (rowContent, row) => {
         return (
           <>
-            <small>Desa : {row.desa} , </small>
-            <small>Kecamatan : {row.kecamatan} , </small>
-            <small>Kabupaten : {row.kabupaten} , </small>
+            <small>Desa : {row.desa} </small>
+            <br />
+            <small>Kecamatan : {row.kecamatan} </small>
+            <br />
+            <small>Kabupaten : {row.kabupaten} </small>
+            <br />
             <small>Provinsi : {row.provinsi} </small>
           </>
         );
