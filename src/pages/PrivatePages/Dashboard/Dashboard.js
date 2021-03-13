@@ -8,7 +8,7 @@ import TotalPupukTerdistribusiPict from "../../../assets/TotalPupukTerdistribusi
 import TotalVarietasPict from "../../../assets/TotalVarietasPict.svg";
 import EventCalender from "../../../component/Calender/EventCalender";
 import { getTotalList } from "../../../actions/masterAction";
-
+import { getData } from "../../../Utils/Common";
 const mapStateToProps = (state) => {
   return {
     getTotalList: state.master.getTotalList,
@@ -21,7 +21,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.props.getTotalList);
+  
     return (
       <div className="position-relative">
         <div className="row ">

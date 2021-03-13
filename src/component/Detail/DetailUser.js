@@ -21,12 +21,15 @@ const DetailUser = (props) => {
             <div className="shadow-sm rounded col-md-6 d-flex justify-content-center align-items-center">
               {" "}
               <div className="p-5 ">
-                <img
-                  src={Photo}
-                  className="rounded-circle border border-secondary "
-                  style={{ width: "120px" }}
-                  alt="..."
-                ></img>
+                <div className="d-flex justify-content-center mt-3">
+                  <img
+                    src={props.getUsersDetail.foto_ktp}
+                    className="rounded-circle border border-secondary "
+                    style={{ width: "120px" }}
+                    alt="Foto Profi"
+                  />{" "}
+                  {console.log(`props.getUsersDetail.foto_ktp`)}
+                </div>
                 <h3 className="text-black mt-3 text-center">
                   {props.getUsersDetail.nama}
                 </h3>
@@ -72,7 +75,7 @@ const DetailUser = (props) => {
                 <div className=" border-bottom col-5">
                   <h6 className="text-black-50">Agama</h6>
                   <br />
-                  <h6 className="text-black"> {props.getUsersDetail.Agama}</h6>
+                  <h6 className="text-black"> {props.getUsersDetail.agama}</h6>
                 </div>
                 <div className=" border-bottom col-5">
                   <h6 className="text-black-50">Pekerjaan</h6>

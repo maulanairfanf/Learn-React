@@ -33,6 +33,8 @@ import DetailPanenContainer from "../pages/PrivatePages/Panen/DetailPanenContain
 import CreatePanen from "../pages/PrivatePages/Panen/CreatePanen";
 import EditPanen from "../pages/PrivatePages/Panen/EditPanen";
 import Dashboard from "../pages/PrivatePages/Dashboard/Dashboard";
+//Admin
+import Admin from "../pages/PrivatePages/Admin/Admin";
 //not found
 import NotFound from "../pages/NotFound";
 
@@ -56,7 +58,8 @@ const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
         <PrivateRoute path="/home" component={Home} />
         <PrivateRoute path="/pupuk" component={Pupuk} />
         <PrivateRoute path="/lahan" component={Lahan} />
-        <PrivateRoute path="/panen" component={Panen} />
+        <PrivateRoute path="/panen" component={Panen} />{" "}
+        <PrivateRoute path="/admin" component={Admin} />
         <PrivateRoute path="/detail-user/:id" component={DetailUserContainer} />
         <PrivateRoute
           path="/detail-pupuk/:id"

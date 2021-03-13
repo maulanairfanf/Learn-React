@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Form, Label, FormGroup, Container } from "reactstrap";
 
-import { setUserSession } from "../../Utils/Common";
+import { setUserSession, getData } from "../../Utils/Common";
 
 function Login(props) {
   const usernameRef = useRef();
@@ -40,8 +40,13 @@ function Login(props) {
         } else {
           setUserSession(
             response.data.data.api_token,
-            response.data.data.username
+            response.data.data.username,
+            response.data.data.nik,
+            response.data.data.telp,
+            response.data.data.email,
+            response.data.data.id_profil
           );
+
           props.history.push("/");
           window.location.reload();
         }
