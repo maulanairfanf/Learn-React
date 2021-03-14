@@ -90,6 +90,8 @@ const TableComponentUser = (props) => {
     ],
   };
 
+  const url = "http://localhost:8000";
+
   const columns = [
     {
       dataField: "nama",
@@ -103,19 +105,16 @@ const TableComponentUser = (props) => {
         return (
           <>
             <div className="d-flex align-items-center ">
-              <div className="">
+              <div style={{ width: "50px", height: "50px" }}>
                 {row.foto_profil ? (
-                  <div style={{ width: "50px" }}>
-                    <img
-                      src={row.foto_profil}
-                      className="rounded-circle img-fluid border border-primary "
-                    ></img>
-                  </div>
+                  <img
+                    src={url + row.foto_profil}
+                    className="rounded-circle h-100 w-100 border border-primary "
+                  ></img>
                 ) : (
                   <img
                     src={Photo}
-                    style={{ width: "50px" }}
-                    className="rounded-circle border border-primary"
+                    className="rounded-circle h-100 w-100  border border-primary"
                   ></img>
                 )}
               </div>
@@ -140,7 +139,7 @@ const TableComponentUser = (props) => {
       formatter: (rowContent, row) => {
         return (
           <>
-            <h6>{row.pekerjaan}</h6>
+            <small>{row.pekerjaan}</small>
           </>
         );
       },
@@ -156,9 +155,9 @@ const TableComponentUser = (props) => {
       formatter: (rowContent, row) => {
         return (
           <>
-            <small>{row.gender} - </small>
-
-            <small>{row.pendidikan}</small>
+            <small>Jensi Kelamin : {row.gender} </small>
+            <br />
+            <small>Pendidikan : {row.pendidikan}</small>
           </>
         );
       },

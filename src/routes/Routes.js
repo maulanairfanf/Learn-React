@@ -70,7 +70,7 @@ const Routes = ({ sidebarIsOpen, toggleSidebar }) => {
           component={DetailLahanContainer}
         />
         <PrivateRoute
-          path="/detailpanen/:id"
+          path="/detail-panen/:id"
           component={DetailPanenContainer}
         />
         <PrivateRoute path="/create-user" component={CreateUser} />

@@ -1,5 +1,5 @@
 import React from "react";
-import { User, ShoppingBag, Globe, Activity, Home,Plus } from "react-feather";
+import { User, ShoppingBag, Globe, Activity, Home, Plus } from "react-feather";
 
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
@@ -30,7 +30,7 @@ const SideBar = ({ isOpen, toggle }) => (
             className="d-flex align-items-center"
             tag={Link}
             to={"/"}
-            activeClassName="active"
+           
           >
             <Home className="mr-3" size={24} />
             <span>Dashboard</span>
@@ -41,6 +41,7 @@ const SideBar = ({ isOpen, toggle }) => (
             className="d-flex align-items-center"
             tag={Link}
             to={"/home"}
+           
           >
             <User className="mr-3" size={24} />
             <span>Petani</span>
@@ -51,6 +52,7 @@ const SideBar = ({ isOpen, toggle }) => (
             className="d-flex align-items-center"
             tag={Link}
             to={"/pupuk"}
+           
           >
             <ShoppingBag className="mr-3" size={24} />
             <span> Pupuk</span>
@@ -61,6 +63,7 @@ const SideBar = ({ isOpen, toggle }) => (
             className="d-flex align-items-center"
             tag={Link}
             to={"/lahan"}
+           
           >
             <Globe className="mr-3" size={24} />
             <span> Lahan</span>
@@ -76,7 +79,7 @@ const SideBar = ({ isOpen, toggle }) => (
             <span>Panen</span>
           </NavLink>
         </NavItem>{" "}
-        <NavItem className="rounded-pill mb-2">
+        {/* <NavItem className="rounded-pill mb-2">
           <NavLink
             className="d-flex align-items-center"
             tag={Link}
@@ -85,7 +88,7 @@ const SideBar = ({ isOpen, toggle }) => (
             <Plus className="mr-3" size={24} />
             <span>Tambah User</span>
           </NavLink>
-        </NavItem>
+        </NavItem> */}
       </Nav>
     </div>
   </div>

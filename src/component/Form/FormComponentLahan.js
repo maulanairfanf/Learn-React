@@ -37,7 +37,7 @@ const mapStateToProps = (state) => {
       kelurahan: state.master.getKelurahanList,
       tipeUser: state.master.getTipeUserList,
     },
- 
+
     user: {
       petani: state.users.getUsersList,
     },
@@ -71,9 +71,7 @@ class FormComponentLahan extends Component {
   }) => (
     <Row>
       <Col md="12">
-        <Label htmlFor="{input}" className="col-form-label">
-          {label}
-        </Label>
+        <Label className="col-form-label">{label}</Label>
       </Col>
       <Col md="12">
         {label === "Provinsi" ? (
@@ -97,7 +95,6 @@ class FormComponentLahan extends Component {
                 );
                 {
                   console.log("id provinsi : ", e.target.selectedOptions[0].id);
-                  console.log(e);
                 }
               }}
             >
@@ -105,11 +102,7 @@ class FormComponentLahan extends Component {
               {this.props.master.provinsi &&
                 this.props.master.provinsi.map((item, i) => {
                   return (
-                    <option
-                      key={item.id}
-                      value={item.id}
-                      
-                    >
+                    <option key={i.id} value={item.id} id={item.provinsi}>
                       {item.nama}
                     </option>
                   );
@@ -137,18 +130,17 @@ class FormComponentLahan extends Component {
                   )
                 );
                 console.log("id kabupaten : ", e.target.selectedOptions[0].id);
-                console.log(e);
               }}
             >
               <option value={0}>Kabupaten / Kota</option>
               {this.props.master.kabupaten &&
-                this.props.master.kabupaten.map((item,i) => {
+                this.props.master.kabupaten.map((item, i) => {
                   return (
                     <>
                       <option
-                        key={item.id}
+                        key={i.id}
                         value={item.id}
-                        
+                        id={item.kabupatenkota}
                       >
                         {item.nama}
                       </option>
@@ -177,15 +169,15 @@ class FormComponentLahan extends Component {
                     e.target.selectedOptions[0].id
                   )
                 );
-                console.log(e);
+
                 console.log("id kecamatan : ", e.target.selectedOptions[0].id);
               }}
             >
               <option value={0}>Kecamatan</option>
               {this.props.master.kecamatan &&
-                this.props.master.kecamatan.map((item,i) => {
+                this.props.master.kecamatan.map((item, i) => {
                   return (
-                    <option key={item.id} value={item.id} >
+                    <option key={i.id} value={item.id} id={item.kecamatan}>
                       {item.nama}
                     </option>
                   );
@@ -209,9 +201,9 @@ class FormComponentLahan extends Component {
             >
               <option value={0}>Kelurahan</option>
               {this.props.master.kelurahan &&
-                this.props.master.kelurahan.map((item,i) => {
+                this.props.master.kelurahan.map((item, i) => {
                   return (
-                    <option key={item.id} value={item.id}>
+                    <option key={i.id} value={item.id} id={item.kelurahan}>
                       {item.nama}
                     </option>
                   );
@@ -245,12 +237,11 @@ class FormComponentLahan extends Component {
                 this.setState({
                   id_petani: e.target.value,
                 });
-              
               }}
             >
               <option value={0}></option>
               {this.props.user.petani &&
-                this.props.user.petani.map((item,i) => {
+                this.props.user.petani.map((item, i) => {
                   return (
                     <option key={i.id} value={item.id}>
                       {item.nama}
@@ -259,7 +250,6 @@ class FormComponentLahan extends Component {
                 })}
             </Input>
           </>
-     
         ) : label === "Satuan" ? (
           <>
             <Input
@@ -268,6 +258,8 @@ class FormComponentLahan extends Component {
               placeholder={placeholder}
               value={value}
             >
+              {" "}
+              <option value={0}></option>
               <option value={101}>Kg</option>
             </Input>
           </>

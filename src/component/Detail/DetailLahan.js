@@ -148,7 +148,7 @@ const DetailLahan = (props) => {
               </div>
               <div className="d-flex justify-content-center align-items-center mt-5">
                 <Link
-                  to={"/EditLahan/" + props.getLahanDetail.id}
+                  to={"/edit-lahan/" + props.getLahanDetail.id}
                   className="btn btn-info"
                 >
                   Update Lahan

@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import FormComponentUser from "../../../component/Form/FormComponentUser";
-import {
-  getUsersDetail,
-  putUsersUpdate,
-  deleteDataUser,
-} from "../../../actions/userAction";
+import { getUsersDetail, putUsersUpdate } from "../../../actions/userAction";
 import swal from "sweetalert";
 import { connect } from "react-redux";
 import FormPict from "../../../component/Form/FormPict";
@@ -13,6 +9,8 @@ const mapStateToProps = (state) => {
   return {
     getResponseDataUser: state.users.getResponseDataUser,
     errorResponseDataUser: state.users.errorResponseDataUser,
+    getUsersDetail: state.users.getUsersDetail,
+    errorUserDetail: state.users.errorUserDetail,
   };
 };
 
@@ -40,11 +38,19 @@ class EditUser extends Component {
     }
     return (
       <>
-        <div>
-          <h4 className="text-secondary">Edit User</h4>
-          <FormPict />
-          <FormComponentUser onSubmit={(data) => this.handleSubmit(data)} />
-        </div>
+        {this.props.getUsersDetail ? (
+          <>
+            <h4 className="text-secondary">Edit User</h4>
+            <FormPict />
+            <FormComponentUser onSubmit={(data) => this.handleSubmit(data)} />
+          </>
+        ) : (
+          <div className="text-center">
+            <div class="spinner-grow text-info" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        )}
       </>
     );
   }

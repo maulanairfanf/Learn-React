@@ -126,8 +126,9 @@ const TableComponentPanen = (props) => {
       formatter: (rowContent, row) => {
         return (
           <>
-            <small>{row.kategori}</small>
-            <small>{row.varietas}</small>
+            <small> Kategori : {row.kategori}</small>
+            <br />
+            <small> Varietas : {row.varietas}</small>
           </>
         );
       },
@@ -240,7 +241,7 @@ const TableComponentPanen = (props) => {
             <div>
               <Link to="/create-panen">
                 <button type="button" className="btn btn-light rounded">
-                  <span >
+                  <span>
                     Tambah Panen <UserPlus className="ml-2 mb-1" size={20} />
                   </span>
                 </button>

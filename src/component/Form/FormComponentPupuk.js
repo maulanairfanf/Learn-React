@@ -41,23 +41,24 @@ class FormComponentPupuk extends Component {
     placeholder,
     label,
     disabled,
+    value,
     meta: { touched, error, warning },
   }) => (
     <Row>
       <Col md="12">
-        <Label htmlFor="{input}" className="col-form-label">
-          {label}
-        </Label>
+        <Label className="col-form-label">{label}</Label>
       </Col>
       <Col md="12">
         {label === "Satuan" ? (
           <>
             <Input {...input} type={type} placeholder={placeholder}>
+              {" "}
+              <option value={0}></option>
               <option value={101}>Kg</option>
             </Input>
           </>
         ) : label === "Petani" ? (
-          <Input {...input} type={type} placeholder={placeholder}>
+          <Input {...input} type={type} placeholder={placeholder} value={value}>
             <option value={0}></option>
             {this.props.user.petani &&
               this.props.user.petani.map((item) => {
@@ -114,18 +115,7 @@ class FormComponentPupuk extends Component {
               />
             </FormGroup>
           </Col>
-          {/* 
-            <Col md={4}>
-              <FormGroup>
-                <Field
-                  type="text"
-                  name="poktan"
-                  component={this.renderField}
-                  label="Poktan"
-                  disabled
-                />
-              </FormGroup>
-            </Col> */}
+
           <Col md={4}>
             <FormGroup>
               <Field

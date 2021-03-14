@@ -101,8 +101,10 @@ const TableComponentLahan = (props) => {
             <div className="">
               <span>{row.kategori} </span>
               <br />
+              <small className="text-secondary">Luas : {row.luas}</small>
+              <br />
               <small className="text-secondary">
-                Luas : {row.luas} / Usia Tanaman : {row.usia_tanaman}
+                Usia Tanaman : {row.usia_tanam}
               </small>
             </div>
           </>
@@ -128,8 +130,9 @@ const TableComponentLahan = (props) => {
         return (
           <>
             <small>desa : {row.desa} </small>
-            <small>kecamatan : {row.kecamatan} </small>
-            <small>kabupaten : {row.kabupaten} </small>
+            <br />
+            <small>kecamatan : {row.kecamatan} </small> <br />
+            <small>kabupaten : {row.kabupaten} </small> <br />
             <small>provinsi : {row.provinsi} </small>
           </>
         );

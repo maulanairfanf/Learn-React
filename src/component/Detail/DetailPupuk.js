@@ -96,7 +96,7 @@ const DetailPupuk = (props) => {
               </div>{" "}
               <div className="d-flex justify-content-center align-items-center mt-5">
                 <Link
-                  to={"/EditPupuk/" + props.getPupukDetail.id}
+                  to={"/edit-pupuk/" + props.getPupukDetail.id}
                   className="btn btn-info"
                 >
                   Update Pupuk

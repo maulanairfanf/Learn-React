@@ -8,6 +8,8 @@ const mapStateToProps = (state) => {
   return {
     getResponseDataPupuk: state.pupuk.getResponseDataPupuk,
     errorResponseDataPupuk: state.pupuk.errorResponseDataPupuk,
+    getPupukDetail: state.pupuk.getPupukDetail,
+    errorResponseDataPupuk: state.pupuk.errorResponseDataPupuk,
   };
 };
 
@@ -16,13 +18,11 @@ class EditPupuk extends Component {
     this.props.dispatch(getPupukDetail(this.props.match.params.id));
   }
   handleSubmit(data) {
-    console.log(data);
     this.props.dispatch(putPupukUpdate(data, this.props.match.params.id));
   }
 
   render() {
     if (this.props.getResponseDataPupuk || this.props.errorResponseDataPupuk) {
-      console.log("haii");
       if (this.props.errorResponseDataPupuk) {
         swal("Failed!", this.props.errorResponseDataPupuk, "error");
       } else {
@@ -35,8 +35,18 @@ class EditPupuk extends Component {
     }
     return (
       <>
-        <h4 className="text-secondary">Edit Pupuk</h4>
-        <FormComponentPupuk onSubmit={(data) => this.handleSubmit(data)} />
+        {this.props.getPupukDetail ? (
+          <>
+            <h4 className="text-secondary">Edit Pupuk</h4>
+            <FormComponentPupuk onSubmit={(data) => this.handleSubmit(data)} />
+          </>
+        ) : (
+          <div className="text-center">
+            <div class="spinner-grow text-info" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        )}
       </>
     );
   }

@@ -48,7 +48,6 @@ class FormComponentPanen extends Component {
     this.props.dispatch(getTipeUserList());
     this.props.dispatch(getKomoditasList());
     this.props.dispatch(getUsersList());
-   
   }
   renderField = ({
     input,
@@ -70,6 +69,7 @@ class FormComponentPanen extends Component {
             {...input}
             type={type}
             placeholder={placeholder}
+            value={value}
             onChange={(e) => {
               e.preventDefault();
               this.setState({

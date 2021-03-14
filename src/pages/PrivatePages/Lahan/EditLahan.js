@@ -8,6 +8,8 @@ const mapStateToProps = (state) => {
   return {
     getResponseDataLahan: state.lahan.getResponseDataLahan,
     errorResponseDataLahan: state.lahan.errorResponseDataLahan,
+    getLahanDetail: state.lahan.getLahanDetail,
+    errorLahanDetail: state.lahan.errorLahanDetail,
   };
 };
 
@@ -36,8 +38,18 @@ class EditLahan extends Component {
     }
     return (
       <>
-        <h4 className="text-secondary">Edit Lahan</h4>{" "}
-        <FormComponentLahan onSubmit={(data) => this.handleSubmit(data)} />
+        {this.props.getLahanDetail ? (
+          <>
+            <h4 className="text-secondary">Edit Lahan</h4>{" "}
+            <FormComponentLahan onSubmit={(data) => this.handleSubmit(data)} />
+          </>
+        ) : (
+          <div className="text-center">
+            <div class="spinner-grow text-info" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        )}
       </>
     );
   }

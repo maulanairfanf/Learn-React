@@ -102,6 +102,7 @@ const TableComponentPupuk = (props) => {
         return (
           <>
             <small>{row.petani}</small>
+            <br />
             <small>{row.poktan}</small>
           </>
         );
@@ -118,7 +119,8 @@ const TableComponentPupuk = (props) => {
       formatter: (rowContent, row) => {
         return (
           <>
-            <small>Jenis : {row.jenis_pupuk} | </small>
+            <small>Jenis : {row.jenis_pupuk}</small>
+            <br />
             <small>Kapasitas : {row.kapasitas}</small>
           </>
         );
@@ -212,7 +214,7 @@ const TableComponentPupuk = (props) => {
             <div>
               <Link to="/create-pupuk">
                 <button type="button" className="btn btn-light rounded">
-                  <span >
+                  <span>
                     Tambah Pupuk <UserPlus className="ml-2 mb-1" size={20} />
                   </span>
                 </button>

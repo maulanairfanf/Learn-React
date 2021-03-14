@@ -8,6 +8,8 @@ const mapStateToProps = (state) => {
   return {
     getResponseDataPanen: state.panen.getResponseDataPanen,
     errorResponseDataPanen: state.panen.errorResponseDataPanen,
+    getPanenDetail: state.panen.getPanenDetail,
+    errorPanenDetail: state.panen.errorPanenDetail,
   };
 };
 
@@ -36,8 +38,18 @@ class EditPanen extends Component {
     }
     return (
       <>
-        <h4 className="text-secondary">Edit Panen</h4>{" "}
-        <FormComponentPanen onSubmit={(data) => this.handleSubmit(data)} />
+        {this.props.getPanenDetail ? (
+          <>
+            <h4 className="text-secondary">Edit Panen</h4>{" "}
+            <FormComponentPanen onSubmit={(data) => this.handleSubmit(data)} />
+          </>
+        ) : (
+          <div className="text-center">
+            <div class="spinner-grow text-info" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        )}
       </>
     );
   }
