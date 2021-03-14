@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component } from "react";
 import { Form, FormGroup, Col, Label, Input, Row, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
@@ -18,7 +18,6 @@ import {
   getTipeUserList,
   getSatuanList,
 } from "../../actions/masterAction";
-import { putUsersUpdateImage } from "../../actions/userAction";
 
 const mapStateToProps = (state) => {
   return {
@@ -63,7 +62,6 @@ const mapStateToProps = (state) => {
       suku: state.master.getSukuList,
       pekerjaan: state.master.getPekerjaanList,
       tipeUser: state.master.getTipeUserList,
-
       satuan: state.master.getSatuanList,
     },
   };
@@ -79,7 +77,6 @@ class FormComponentUser extends Component {
     this.props.dispatch(getSukuList());
     this.props.dispatch(getPekerjaanList());
     this.props.dispatch(getTipeUserList());
-
     this.props.dispatch(getSatuanList());
   }
   constructor(props) {
@@ -97,21 +94,15 @@ class FormComponentUser extends Component {
     return new Promise((resolve) => {
       let fileInfo;
       let baseURL = "";
-      // Make new FileReader
+
       let reader = new FileReader();
 
-      // Convert the file to base64 text
       reader.readAsDataURL(file);
 
-      // on reader load somthing...
       reader.onload = () => {
-        // Make a fileInfo Object
-        // console.log("Called", reader);
         baseURL = reader.result;
-        // console.log(baseURL);
         resolve(baseURL);
       };
-      // console.log(fileInfo);
     });
   };
 
@@ -378,44 +369,6 @@ class FormComponentUser extends Component {
             </Input>
           </>
         ) : (
-          // ) : label === "Foto KTP" ? (
-          //   <>
-          //     <Input
-          //       {...input}
-          //       type={type}
-          //       value={value}
-          //       placeholder={placeholder}
-          //       onChange={(e) => {
-          //         e.preventDefault();
-
-          //         let { file } = this.state;
-
-          //         file = e.target.files[0];
-
-          //         this.getBase64(file)
-          //           .then((result) => {
-          //             file["base64"] = result;
-          //             console.log("File Is", file.base64);
-          //             this.value = file.base64;
-          //             console.log(this.props.initialValues.id);
-          //             this.props.dispatch(
-          //               putUsersUpdateImage({
-          //                 id: this.props.initialValues.id,
-          //                 foto_ktp: this.value,
-          //               })
-          //             );
-          //             console.log(this.value);
-          //             this.setState({
-          //               base64URL: result,
-          //               file,
-          //             });
-          //           })
-          //           .catch((err) => {
-          //             console.log(err);
-          //           });
-          //       }}
-          //     ></Input>
-          //   </>
           <>
             <Input
               {...input}
@@ -685,7 +638,7 @@ class FormComponentUser extends Component {
 
 FormComponentUser = reduxForm({
   form: "CreateUser",
-  // validate: UserValidation,
+  validate: UserValidation,
   enableReinitialize: true,
 })(FormComponentUser);
 export default connect(mapStateToProps, null)(FormComponentUser);

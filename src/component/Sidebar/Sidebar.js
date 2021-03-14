@@ -1,5 +1,5 @@
 import React from "react";
-import { User, ShoppingBag, Globe, Activity, Home } from "react-feather";
+import { User, ShoppingBag, Globe, Activity, Home,Plus } from "react-feather";
 
 import { NavItem, NavLink, Nav } from "reactstrap";
 import classNames from "classnames";
@@ -46,7 +46,6 @@ const SideBar = ({ isOpen, toggle }) => (
             <span>Petani</span>
           </NavLink>
         </NavItem>
-
         <NavItem className="rounded-pill mb-2">
           <NavLink
             className="d-flex align-items-center"
@@ -75,6 +74,16 @@ const SideBar = ({ isOpen, toggle }) => (
           >
             <Activity className="mr-3" size={24} />
             <span>Panen</span>
+          </NavLink>
+        </NavItem>{" "}
+        <NavItem className="rounded-pill mb-2">
+          <NavLink
+            className="d-flex align-items-center"
+            tag={Link}
+            to={"/admin"}
+          >
+            <Plus className="mr-3" size={24} />
+            <span>Tambah User</span>
           </NavLink>
         </NavItem>
       </Nav>

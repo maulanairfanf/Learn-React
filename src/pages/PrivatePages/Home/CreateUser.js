@@ -24,7 +24,7 @@ class CreateUser extends Component {
         });
       } else {
         swal({
-          title: "Good job!",
+          title: "Failed Created",
 
           icon: "error",
         });

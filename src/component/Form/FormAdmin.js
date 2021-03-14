@@ -1,25 +1,24 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component } from "react";
 import { Form, FormGroup, Col, Label, Input, Row, Button } from "reactstrap";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
-import UserValidation from "../../Validations/UserValidation";
-import Photo from "../../assets/user.png";
+import AdminValidation from "../../Validations/AdminValidation";
 
 const mapStateToProps = (state) => {
   return {
     initialValues: {
       id: state.admin.postRegister.id,
       username: state.admin.postRegister.username,
-      password: state.admin.postRegister.username,
+      password: state.admin.postRegister.password,
+      email: state.admin.postRegister.email,
+      telp: state.admin.postRegister.telp,
     },
   };
 };
 
 class FormAdmin extends Component {
-  componentDidMount() {}
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   renderField = ({
@@ -28,7 +27,6 @@ class FormAdmin extends Component {
     placeholder,
     label,
     value,
-    required,
     meta: { touched, error, warning },
   }) => (
     <Row>
@@ -81,7 +79,7 @@ class FormAdmin extends Component {
             <Col md={4}>
               <FormGroup>
                 <Field
-                  type="text"
+                  type="number"
                   name="telp"
                   component={this.renderField}
                   label="Nomor Telpon"
@@ -91,7 +89,7 @@ class FormAdmin extends Component {
             <Col md={4}>
               <FormGroup>
                 <Field
-                  type="text"
+                  type="email"
                   name="email"
                   component={this.renderField}
                   label="Email"
@@ -120,7 +118,7 @@ class FormAdmin extends Component {
 
 FormAdmin = reduxForm({
   form: "CreateAdmin",
-  // validate: UserValidation,
+  validate: AdminValidation,
   enableReinitialize: true,
 })(FormAdmin);
 export default connect(mapStateToProps, null)(FormAdmin);
