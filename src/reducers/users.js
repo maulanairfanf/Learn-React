@@ -4,6 +4,7 @@ import {
   POST_USERS_CREATE,
   PUT_USERS_UPDATE,
   PUT_USERS_UPDATE_IMAGE,
+  GET_USER_SORT,
 } from "../actions/userAction";
 
 let initialState = {
@@ -15,6 +16,8 @@ let initialState = {
   errorResponseDataUser: false,
   getResponseDataPict: false,
   errorResponseDataPict: false,
+  getUserSort: false,
+  errorUserSort: false,
   title: "users",
 };
 
@@ -49,6 +52,12 @@ const users = (state = initialState, action) => {
         ...state,
         getResponseDataPict: action.payload.data,
         errorResponseDataPict: action.payload.errorMessage,
+      };
+    case GET_USER_SORT:
+      return {
+        ...state,
+        getUserSort: action.payload.data,
+        errorUserSort: action.payload.errorMessage,
       };
 
     default:

@@ -5,6 +5,7 @@ export const GET_USERS_DETAIL = "GET_USERS_DETAIL";
 export const POST_USERS_CREATE = "POST_USERS_CREATE";
 export const PUT_USERS_UPDATE = "PUT_USERS_UPDATE";
 export const PUT_USERS_UPDATE_IMAGE = "PUT_USERS_UPDATE_IMAGE";
+export const GET_USER_SORT = "GET_USER_SORT";
 
 const token = getToken();
 
@@ -22,6 +23,34 @@ export const getUsersList = () => {
         console.log(response.data.data);
         dispatch({
           type: GET_USERS_LIST,
+          payload: { data: response.data.data, errorMessage: false },
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+};
+
+export const getUserSort = (
+  id_provinsi,
+  id_kabupaten,
+  id_kecamtan,
+  id_desa
+) => {
+  return async (dispatch) => {
+    axios({
+      method: "get",
+      url: `http://localhost:8000/profil?id_provinsi=${id_provinsi}&id_kabupaten=${id_kabupaten}&id_kecamatan=${id_kecamtan}&id_desa=${id_desa}`,
+      headers: {
+        Authorization: "Gradien " + token,
+        "APP-KEY": "okYC7opyhD4DTIauhPvMq2Wkvc6bz08t",
+      },
+    })
+      .then(function (response) {
+        console.log(response.data.data);
+        dispatch({
+          type: GET_USER_SORT,
           payload: { data: response.data.data, errorMessage: false },
         });
       })

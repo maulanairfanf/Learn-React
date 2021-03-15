@@ -116,7 +116,7 @@ li a.dropdown-toggle::after {
 .content::-webkit-scrollbar,
 .scroll_calender::-webkit-scrollbar,
 .fc .fc-scroller-liquid-absolute::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
 }
 
 .side-menu::-webkit-scrollbar-thumb,

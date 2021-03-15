@@ -10,7 +10,7 @@ import {
   getKelurahanList,
   getTipeUserList,
 } from "../../actions/masterAction";
-import { getUsersList } from "../../actions/userAction";
+import { getUsersList, getUserSort } from "../../actions/userAction";
 
 const mapStateToProps = (state) => {
   return {
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
     },
 
     user: {
-      petani: state.users.getUsersList,
+      petani: state.users.getUserSort,
     },
   };
 };
@@ -52,6 +52,11 @@ class FormComponentLahan extends Component {
       id_kabupaten: 0,
       id_kecamatan: 0,
       id_kelurahan: 0,
+      sort_id_provinsi: 0,
+      sort_id_kabupaten: 0,
+      sort_id_kecamatan: 0,
+      sort_id_kelurahan: 0,
+      disabled_kabupaten: true,
     };
   }
   componentDidMount() {
@@ -83,18 +88,26 @@ class FormComponentLahan extends Component {
               value={value}
               onChange={(e) => {
                 e.preventDefault();
+
                 this.setState({
                   id_provinsi: e.target.selectedOptions[0].id,
                   id_kabupaten: 0,
                   id_kecamatan: 0,
                   id_kelurahan: 0,
+                  sort_id_provinsi: e.target.value,
+                  sort_id_kabupaten: 0,
+                  sort_id_kecamatan: 0,
+                  sort_id_kelurahan: 0,
                 });
 
                 this.props.dispatch(
                   getKabupatenList(e.target.selectedOptions[0].id)
                 );
-                {
-                  console.log("id provinsi : ", e.target.selectedOptions[0].id);
+                if (this.id_provinsi === 0) {
+                  this.state.disabled_kabupaten = true;
+                } else {
+                  this.state.disabled_kabupaten = false;
+                  console.log(this.state.disabled_kabupaten);
                 }
               }}
             >
@@ -118,11 +131,19 @@ class FormComponentLahan extends Component {
               value={value}
               onChange={(e) => {
                 e.preventDefault();
+                {
+                  console.log(this.state.disabled_kabupaten);
+                }
+
                 this.setState({
                   id_kabupaten: e.target.selectedOptions[0].id,
                   id_kecamatan: 0,
                   id_kelurahan: 0,
+                  sort_id_kabupaten: e.target.value,
+                  sort_id_kecamatan: 0,
+                  sort_id_kelurahan: 0,
                 });
+
                 this.props.dispatch(
                   getKecamatanList(
                     this.state.id_provinsi,
@@ -161,6 +182,8 @@ class FormComponentLahan extends Component {
                 this.setState({
                   id_kecamatan: e.target.selectedOptions[0].id,
                   id_kelurahan: 0,
+                  sort_id_kecamatan: e.target.value,
+                  sort_id_kelurahan: 0,
                 });
                 this.props.dispatch(
                   getKelurahanList(
@@ -195,8 +218,23 @@ class FormComponentLahan extends Component {
                 e.preventDefault();
                 this.setState({
                   id_kelurahan: e.target.selectedOptions[0].id,
+                  sort_id_kelurahan: e.target.value,
                 });
-                console.log("Id kelurahan : ", e.target.selectedOptions[0].id);
+                console.log(
+                  this.state.sort_id_provinsi,
+                  this.state.sort_id_kabupaten,
+                  this.state.sort_id_kecamatan,
+                  this.state.sort_id_kelurahan
+                );
+                this.props.dispatch(
+                  getUserSort(
+                    this.state.sort_id_provinsi,
+                    this.state.sort_id_kabupaten,
+                    this.state.sort_id_kecamatan,
+                    this.state.sort_id_kelurahan
+                  )
+                );
+                // console.log("Id kelurahan : ", e.target.selectedOptions[0].id);
               }}
             >
               <option value={0}>Kelurahan</option>
@@ -338,16 +376,6 @@ class FormComponentLahan extends Component {
             <FormGroup>
               <Field
                 type="select"
-                name="id_petani"
-                component={this.renderField}
-                label="Petani"
-              />
-            </FormGroup>
-          </Col>{" "}
-          <Col md={4}>
-            <FormGroup>
-              <Field
-                type="select"
                 name="id_provinsi"
                 component={this.renderField}
                 label="Provinsi"
@@ -381,6 +409,16 @@ class FormComponentLahan extends Component {
                 name="id_desa"
                 component={this.renderField}
                 label="Kelurahan"
+              />
+            </FormGroup>
+          </Col>
+          <Col md={4}>
+            <FormGroup>
+              <Field
+                type="select"
+                name="id_petani"
+                component={this.renderField}
+                label="Petani"
               />
             </FormGroup>
           </Col>
