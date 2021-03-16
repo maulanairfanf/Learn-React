@@ -46,8 +46,8 @@ class EditUser extends Component {
           </>
         ) : (
           <div className="text-center">
-            <div class="spinner-grow text-info" role="status">
-              <span class="sr-only">Loading...</span>
+            <div className="spinner-grow text-info" role="status">
+              <span className="sr-only">Loading...</span>
             </div>
           </div>
         )}

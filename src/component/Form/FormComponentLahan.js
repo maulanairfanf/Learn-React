@@ -10,7 +10,7 @@ import {
   getKelurahanList,
   getTipeUserList,
 } from "../../actions/masterAction";
-import { getUsersList, getUserSort } from "../../actions/userAction";
+import { getUserSort } from "../../actions/userAction";
 
 const mapStateToProps = (state) => {
   return {
@@ -37,7 +37,6 @@ const mapStateToProps = (state) => {
       kelurahan: state.master.getKelurahanList,
       tipeUser: state.master.getTipeUserList,
     },
-
     user: {
       petani: state.users.getUserSort,
     },
@@ -56,13 +55,12 @@ class FormComponentLahan extends Component {
       sort_id_kabupaten: 0,
       sort_id_kecamatan: 0,
       sort_id_kelurahan: 0,
-      disabled_kabupaten: true,
     };
   }
   componentDidMount() {
     this.props.dispatch(getTipeUserList());
     this.props.dispatch(getProvinsiList());
-    this.props.dispatch(getUsersList());
+
   }
   renderField = ({
     input,
@@ -88,7 +86,6 @@ class FormComponentLahan extends Component {
               value={value}
               onChange={(e) => {
                 e.preventDefault();
-
                 this.setState({
                   id_provinsi: e.target.selectedOptions[0].id,
                   id_kabupaten: 0,
@@ -99,16 +96,10 @@ class FormComponentLahan extends Component {
                   sort_id_kecamatan: 0,
                   sort_id_kelurahan: 0,
                 });
-
+                console.log(this.state.id_provinsi);
                 this.props.dispatch(
                   getKabupatenList(e.target.selectedOptions[0].id)
                 );
-                if (this.id_provinsi === 0) {
-                  this.state.disabled_kabupaten = true;
-                } else {
-                  this.state.disabled_kabupaten = false;
-                  console.log(this.state.disabled_kabupaten);
-                }
               }}
             >
               <option value={0}>Provinsi</option>
@@ -131,9 +122,6 @@ class FormComponentLahan extends Component {
               value={value}
               onChange={(e) => {
                 e.preventDefault();
-                {
-                  console.log(this.state.disabled_kabupaten);
-                }
 
                 this.setState({
                   id_kabupaten: e.target.selectedOptions[0].id,
@@ -143,7 +131,7 @@ class FormComponentLahan extends Component {
                   sort_id_kecamatan: 0,
                   sort_id_kelurahan: 0,
                 });
-
+                console.log(this.state.id_provinsi, this.state.id_kabupaten);
                 this.props.dispatch(
                   getKecamatanList(
                     this.state.id_provinsi,
@@ -185,6 +173,11 @@ class FormComponentLahan extends Component {
                   sort_id_kecamatan: e.target.value,
                   sort_id_kelurahan: 0,
                 });
+                console.log(
+                  this.state.id_provinsi,
+                  this.state.id_kabupaten,
+                  this.state.id_kecamatan
+                );
                 this.props.dispatch(
                   getKelurahanList(
                     this.state.id_provinsi,
@@ -224,17 +217,16 @@ class FormComponentLahan extends Component {
                   this.state.sort_id_provinsi,
                   this.state.sort_id_kabupaten,
                   this.state.sort_id_kecamatan,
-                  this.state.sort_id_kelurahan
+                  e.target.value
                 );
                 this.props.dispatch(
                   getUserSort(
                     this.state.sort_id_provinsi,
                     this.state.sort_id_kabupaten,
                     this.state.sort_id_kecamatan,
-                    this.state.sort_id_kelurahan
+                    e.target.value
                   )
                 );
-                // console.log("Id kelurahan : ", e.target.selectedOptions[0].id);
               }}
             >
               <option value={0}>Kelurahan</option>
@@ -244,22 +236,6 @@ class FormComponentLahan extends Component {
                     <option key={i.id} value={item.id} id={item.kelurahan}>
                       {item.nama}
                     </option>
-                  );
-                })}
-            </Input>
-          </>
-        ) : label === "Tipe User" ? (
-          <>
-            <Input {...input} type={type} placeholder={placeholder}>
-              <option value={0}></option>
-              {this.props.master.tipeUser &&
-                this.props.master.tipeUser.map((item, i) => {
-                  return (
-                    <>
-                      <option key={i.id} value={item.id}>
-                        {item.nama}
-                      </option>
-                    </>
                   );
                 })}
             </Input>
@@ -284,6 +260,22 @@ class FormComponentLahan extends Component {
                     <option key={i.id} value={item.id}>
                       {item.nama}
                     </option>
+                  );
+                })}
+            </Input>
+          </>
+        ) : label === "Tipe User" ? (
+          <>
+            <Input {...input} type={type} placeholder={placeholder}>
+              <option value={0}></option>
+              {this.props.master.tipeUser &&
+                this.props.master.tipeUser.map((item, i) => {
+                  return (
+                    <>
+                      <option key={i.id} value={item.id}>
+                        {item.nama}
+                      </option>
+                    </>
                   );
                 })}
             </Input>
@@ -419,16 +411,6 @@ class FormComponentLahan extends Component {
                 name="id_petani"
                 component={this.renderField}
                 label="Petani"
-              />
-            </FormGroup>
-          </Col>
-          <Col md={4}>
-            <FormGroup>
-              <Field
-                type="number"
-                name="kodepos"
-                component={this.renderField}
-                label="Kode Pos"
               />
             </FormGroup>
           </Col>
