@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Form, FormGroup, Col, Label, Input, Row, Button } from "reactstrap";
+import { Form, FormGroup, Col, Label, Input, Row } from "reactstrap";
 import { connect } from "react-redux";
 import { reduxForm, Field } from "redux-form";
 import { putUsersUpdateImage, delleteDataPict } from "../../actions/userAction";
 import swal from "sweetalert";
+import Photo from "../../assets/user.png";
 
 const mapStateToProps = (state) => {
   return {
@@ -191,6 +192,8 @@ class FormPict extends Component {
     </Row>
   );
 
+  baseURL = "localhost:8000";
+
   render() {
     console.log(this.props.image);
     if (
@@ -209,19 +212,52 @@ class FormPict extends Component {
         });
       }
     }
+    {
+      console.log(this.props.initialValues.foto_kk);
+    }
     return (
       <>
         <Form onSubmit={this.props.handleSubmit}>
           <FormGroup row>
             <Col md={4}>
+              {this.props.initialValues.foto_ktp ? (
+                <div style={{ width: "50px", height: "50px" }}>
+                  <img
+                    className=" h-100 w-100"
+                    src={this.baseURL + this.props.initialValues.foto_ktp}
+                  />
+                </div>
+              ) : (
+                <div
+                  style={{ width: "100px", height: "100px" }}
+                  className=" border border-secondary"
+                >
+                  <img className=" h-100 w-100" src={Photo} />
+                </div>
+              )}
               <Field
                 type="file"
                 name="foto_ktp"
                 component={this.renderField}
                 label="Foto KTP"
               />
-            </Col>{" "}
+            </Col>
             <Col md={4}>
+              {this.props.initialValues.foto_profil ? (
+                <div style={{ width: "50px", height: "50px" }}>
+                  <img
+                    className=" h-100 w-100"
+                    src={this.baseURL + this.props.initialValues.foto_profil}
+                  />
+                </div>
+              ) : (
+                <div
+                  style={{ width: "100px", height: "100px" }}
+                  className=" border border-secondary"
+                >
+                  <img className=" h-100 w-100" src={Photo} />
+                </div>
+              )}
               <Field
                 type="file"
                 name="foto_profil"
@@ -230,6 +266,21 @@ class FormPict extends Component {
               />
             </Col>
             <Col md={4}>
+              {this.props.initialValues.foto_kk ? (
+                <div style={{ width: "50px", height: "50px" }}>
+                  <img
+                    className=" h-100 w-100"
+                    src={this.baseURL + this.props.initialValues.foto_kk}
+                  />
+                </div>
+              ) : (
+                <div
+                  style={{ width: "100px", height: "100px" }}
+                  className=" border border-secondary"
+                >
+                  <img className=" h-100 w-100" src={Photo} />
+                </div>
+              )}
               <Field
                 type="file"
                 name="foto_kk"

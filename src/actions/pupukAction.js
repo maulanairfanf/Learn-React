@@ -1,5 +1,7 @@
 import axios from "axios";
 import { getToken } from "../Utils/Common";
+import swal from "sweetalert";
+
 export const GET_PUPUK_LIST = "GET_PUPUK_LIST";
 export const GET_PUPUK_DETAIL = "GET_PUPUK_DETAIL";
 export const POST_PUPUK_CREATE = "POST_PUPUK_CREATE";
@@ -66,12 +68,22 @@ export const postPupukCreate = (data) => {
     })
       .then(function (response) {
         console.log(response.data.data);
+        swal({
+          title: "Pupuk ditambahkan !",
+          icon: "success",
+          button: "Oke",
+        });
         dispatch({
           type: POST_PUPUK_CREATE,
           payload: { data: response.data.data, errorMessage: false },
         });
       })
       .catch((err) => {
+        swal({
+          title: "Pupuk gagal ditambahkan !",
+          icon: "error",
+          button: "Oke",
+        });
         dispatch({
           type: POST_PUPUK_CREATE,
           payload: { data: false, errorMessage: err.errorMessage },
@@ -92,7 +104,11 @@ export const putPupukUpdate = (data) => {
       },
       data: data,
     })
-      .then((response) => {
+      .then((response) => {swal({
+        title: "Pupuk berhasil diperbarui !",
+        icon: "success",
+        button: "Oke",
+      });
         console.log(response);
         dispatch({
           type: PUT_PUPUK_UPDATE,
@@ -103,6 +119,11 @@ export const putPupukUpdate = (data) => {
         });
       })
       .catch((error) => {
+        swal({
+          title: "Pupuk gagal diperbarui !",
+          icon: "error",
+          button: "Oke",
+        });
         dispatch({
           type: PUT_PUPUK_UPDATE,
           payload: {

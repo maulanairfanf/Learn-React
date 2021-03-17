@@ -1,5 +1,7 @@
 import axios from "axios";
 import { getToken } from "../Utils/Common";
+import swal from "sweetalert";
+
 export const GET_PANEN_LIST = "GET_PANEN_LIST";
 export const GET_PANEN_DETAIL = "GET_PANEN_DETAIL";
 export const POST_PANEN_CREATE = "POST_PANEN_CREATE";
@@ -65,6 +67,11 @@ export const postPanenCreate = (data) => {
       data: data,
     })
       .then(function (response) {
+        swal({
+          title: "Panen berhasil ditambahkan !",
+          icon: "success",
+          button: "Oke",
+        });
         console.log(response.data.data);
         dispatch({
           type: POST_PANEN_CREATE,
@@ -73,6 +80,11 @@ export const postPanenCreate = (data) => {
         dispatch(getPanenList());
       })
       .catch((err) => {
+        swal({
+          title: "Panen gagal ditambahkan !",
+          icon: "error",
+          button: "Oke",
+        });
         dispatch({
           type: POST_PANEN_CREATE,
           payload: { data: false, errorMessage: err.errorMessage },
@@ -95,6 +107,11 @@ export const putPanenUpdate = (data) => {
     })
       .then((response) => {
         console.log(response);
+        swal({
+          title: "Panen berhasil diperbarui !",
+          icon: "success",
+          button: "Oke",
+        });
         dispatch({
           type: PUT_PANEN_UPDATE,
           payload: {
@@ -104,6 +121,11 @@ export const putPanenUpdate = (data) => {
         });
       })
       .catch((error) => {
+        swal({
+          title: "Panen gagal diperbarui !",
+          icon: "error",
+          button: "Oke",
+        });
         dispatch({
           type: PUT_PANEN_UPDATE,
           payload: {

@@ -60,6 +60,7 @@ class FormComponentPanen extends Component {
       sort_id_kabupaten: 0,
       sort_id_kecamatan: 0,
       sort_id_kelurahan: 0,
+      disabled: true,
     };
   }
   componentDidMount() {
@@ -73,6 +74,7 @@ class FormComponentPanen extends Component {
     placeholder,
     label,
     value,
+    disabled,
     meta: { touched, error, warning },
   }) => (
     <Row>
@@ -110,7 +112,9 @@ class FormComponentPanen extends Component {
           <>
             <Input {...input} type={type} placeholder={placeholder}>
               <option value={0} key="0"></option>
-              <option value={101}>Kg</option>
+              <option value={101} key="101">
+                Kg
+              </option>
             </Input>
           </>
         ) : label === "Provinsi" ? (
@@ -120,8 +124,8 @@ class FormComponentPanen extends Component {
               type={type}
               placeholder={placeholder}
               value={value}
+              onClick={this.setState({ disabled: false })}
               onChange={(e) => {
-                e.preventDefault();
                 this.setState({
                   id_provinsi: e.target.selectedOptions[0].id,
                   id_kabupaten: 0,
@@ -131,8 +135,9 @@ class FormComponentPanen extends Component {
                   sort_id_kabupaten: 0,
                   sort_id_kecamatan: 0,
                   sort_id_kelurahan: 0,
+                  disabled: false,
                 });
-                console.log(this.state.id_provinsi);
+
                 this.props.dispatch(
                   getKabupatenList(e.target.selectedOptions[0].id)
                 );
@@ -158,7 +163,6 @@ class FormComponentPanen extends Component {
               value={value}
               onChange={(e) => {
                 e.preventDefault();
-
                 this.setState({
                   id_kabupaten: e.target.selectedOptions[0].id,
                   id_kecamatan: 0,
@@ -166,6 +170,7 @@ class FormComponentPanen extends Component {
                   sort_id_kabupaten: e.target.value,
                   sort_id_kecamatan: 0,
                   sort_id_kelurahan: 0,
+                  disabled: false,
                 });
                 console.log(this.state.id_provinsi, this.state.id_kabupaten);
                 this.props.dispatch(

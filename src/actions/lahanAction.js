@@ -1,10 +1,12 @@
 import axios from "axios";
+import swal from "sweetalert";
+
 import { getToken } from "../Utils/Common";
 export const GET_LAHAN_LIST = "GET_LAHAN_LIST";
 export const GET_LAHAN_DETAIL = "GET_LAHAN_DETAIL";
 export const POST_LAHAN_CREATE = "POST_LAHAN_CREATE";
 export const PUT_LAHAN_UPDATE = "PUT_LAHAN_UPDATE";
-export const GET_FILTER_LAHAN = "GET_FILTER_LAHAN"
+export const GET_FILTER_LAHAN = "GET_FILTER_LAHAN";
 
 const token = getToken();
 
@@ -54,7 +56,6 @@ export const getLahanDetail = (id) => {
   };
 };
 
-
 export const getFilterLahan = (id) => {
   return (dispatch) => {
     axios({
@@ -91,6 +92,11 @@ export const postLahanCreate = (data) => {
     })
       .then(function (response) {
         console.log(response.data.data);
+        swal({
+          title: "Lahan berhasil ditambahkan !",
+          icon: "success",
+          button: "Oke",
+        });
         dispatch({
           type: POST_LAHAN_CREATE,
           payload: { data: response.data.data, errorMessage: false },
@@ -98,6 +104,11 @@ export const postLahanCreate = (data) => {
         dispatch(getLahanList());
       })
       .catch((err) => {
+        swal({
+          title: "Lahan gagal ditambahkan !",
+          icon: "error",
+          button: "Oke",
+        });
         dispatch({
           type: POST_LAHAN_CREATE,
           payload: { data: false, errorMessage: err.errorMessage },
@@ -120,6 +131,11 @@ export const putLahanUpdate = (data) => {
     })
       .then((response) => {
         console.log(response);
+        swal({
+          title: "Lahan berhasil diperbarui !",
+          icon: "success",
+          button: "Oke",
+        });
         dispatch({
           type: PUT_LAHAN_UPDATE,
           payload: {
@@ -129,6 +145,11 @@ export const putLahanUpdate = (data) => {
         });
       })
       .catch((error) => {
+        swal({
+          title: "Lahan gagal diperbarui !",
+          icon: "error",
+          button: "Oke",
+        });
         dispatch({
           type: PUT_LAHAN_UPDATE,
           payload: {

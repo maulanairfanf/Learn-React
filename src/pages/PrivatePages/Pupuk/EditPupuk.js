@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import FormComponentPupuk from "../../../component/Form/FormComponentPupuk";
 import { getPupukDetail, putPupukUpdate } from "../../../actions/pupukAction";
-import swal from "sweetalert";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
-    getResponseDataPupuk: state.pupuk.getResponseDataPupuk,
-    errorResponseDataPupuk: state.pupuk.errorResponseDataPupuk,
     getPupukDetail: state.pupuk.getPupukDetail,
     errorResponseDataPupuk: state.pupuk.errorResponseDataPupuk,
   };
@@ -22,17 +19,6 @@ class EditPupuk extends Component {
   }
 
   render() {
-    if (this.props.getResponseDataPupuk || this.props.errorResponseDataPupuk) {
-      if (this.props.errorResponseDataPupuk) {
-        swal("Failed!", this.props.errorResponseDataPupuk, "error");
-      } else {
-        swal({
-          title: "Pupuk Updated !",
-          icon: "success",
-          button: "Oke",
-        });
-      }
-    }
     return (
       <>
         {this.props.getPupukDetail ? (

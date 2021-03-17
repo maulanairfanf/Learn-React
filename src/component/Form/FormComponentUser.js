@@ -86,25 +86,9 @@ class FormComponentUser extends Component {
       id_kabupaten: 0,
       id_kecamatan: 0,
       id_kelurahan: 0,
-      file: null,
-      base64URL: "",
+      disabled: true,
     };
   }
-  getBase64 = (file) => {
-    return new Promise((resolve) => {
-      let fileInfo;
-      let baseURL = "";
-
-      let reader = new FileReader();
-
-      reader.readAsDataURL(file);
-
-      reader.onload = () => {
-        baseURL = reader.result;
-        resolve(baseURL);
-      };
-    });
-  };
 
   renderField = ({
     input,
@@ -112,6 +96,7 @@ class FormComponentUser extends Component {
     placeholder,
     label,
     value,
+    disabled,
     meta: { touched, error, warning },
   }) => (
     <Row>
@@ -241,18 +226,21 @@ class FormComponentUser extends Component {
               value={value}
               onChange={(e) => {
                 e.preventDefault();
-                this.setState({
-                  id_provinsi: e.target.selectedOptions[0].id,
-                  id_kabupaten: 0,
-                  id_kecamatan: 0,
-                  id_kelurahan: 0,
+                this.setState(function () {
+                  return {
+                    id_provinsi: e.target.selectedOptions[0].id,
+                    id_kabupaten: 0,
+                    id_kecamatan: 0,
+                    id_kelurahan: 0,
+                  };
                 });
 
                 this.props.dispatch(
                   getKabupatenList(e.target.selectedOptions[0].id)
                 );
+
                 {
-                  console.log("id provinsi : ", e.target.selectedOptions[0].id);
+                  console.log("id provinsi : ", this.state.id_provinsi);
                 }
               }}
             >
@@ -269,6 +257,7 @@ class FormComponentUser extends Component {
           </>
         ) : label === "Kabupaten" ? (
           <>
+            {this.kabupaten}
             <Input
               {...input}
               type={type}
@@ -290,6 +279,7 @@ class FormComponentUser extends Component {
                 console.log("id kabupaten : ", e.target.selectedOptions[0].id);
               }}
             >
+              {console.log(this.props.master.kabupaten)}
               <option value={0}>Kabupaten / Kota</option>
               {this.props.master.kabupaten &&
                 this.props.master.kabupaten.map((item, i) => {

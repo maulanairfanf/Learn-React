@@ -8,7 +8,7 @@ import {
   getKabupatenList,
   getKecamatanList,
   getKelurahanList,
-  getTipeUserList,
+  getKomoditasList,
 } from "../../actions/masterAction";
 import { getUserSort } from "../../actions/userAction";
 
@@ -35,7 +35,8 @@ const mapStateToProps = (state) => {
       kabupaten: state.master.getKabupatenList,
       kecamatan: state.master.getKecamatanList,
       kelurahan: state.master.getKelurahanList,
-      tipeUser: state.master.getTipeUserList,
+
+      komoditas: state.master.getKomoditasList,
     },
     user: {
       petani: state.users.getUserSort,
@@ -58,9 +59,8 @@ class FormComponentLahan extends Component {
     };
   }
   componentDidMount() {
-    this.props.dispatch(getTipeUserList());
+    this.props.dispatch(getKomoditasList());
     this.props.dispatch(getProvinsiList());
-
   }
   renderField = ({
     input,
@@ -264,12 +264,12 @@ class FormComponentLahan extends Component {
                 })}
             </Input>
           </>
-        ) : label === "Tipe User" ? (
+        ) : label === "Kategori" ? (
           <>
             <Input {...input} type={type} placeholder={placeholder}>
               <option value={0}></option>
-              {this.props.master.tipeUser &&
-                this.props.master.tipeUser.map((item, i) => {
+              {this.props.master.komoditas &&
+                this.props.master.komoditas.map((item, i) => {
                   return (
                     <>
                       <option key={i.id} value={item.id}>
@@ -320,7 +320,7 @@ class FormComponentLahan extends Component {
                 type="select"
                 name="kategori"
                 component={this.renderField}
-                label="Tipe User"
+                label="Kategori"
               />
             </FormGroup>
           </Col>

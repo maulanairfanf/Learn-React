@@ -1,4 +1,6 @@
 import axios from "axios";
+import swal from "sweetalert";
+
 import { getToken } from "../Utils/Common";
 export const GET_USERS_LIST = "GET_USERS_LIST";
 export const GET_USERS_DETAIL = "GET_USERS_DETAIL";
@@ -96,6 +98,11 @@ export const postUserCreate = (data) => {
     })
       .then((response) => {
         console.log(response);
+        swal({
+          title: "Petani berhasil ditambahkan !",
+          icon: "success",
+          button: "Oke",
+        });
         dispatch({
           type: POST_USERS_CREATE,
           payload: { data: response.data.data, errorMessage: false },
@@ -103,6 +110,11 @@ export const postUserCreate = (data) => {
         dispatch(getUsersList());
       })
       .catch((err) => {
+        swal({
+          title: "Petani gagal ditambahkan !",
+          icon: "error",
+          button: "Oke",
+        });
         dispatch({
           type: POST_USERS_CREATE,
           payload: { data: false, errorMessage: err.errorMessage },
@@ -125,6 +137,11 @@ export const putUsersUpdate = (data) => {
       data: data,
     })
       .then(function (response) {
+        swal({
+          title: "Petani berhasil diperbarui !",
+          icon: "success",
+          button: "Oke",
+        });
         dispatch({
           type: PUT_USERS_UPDATE,
           payload: {
@@ -135,6 +152,11 @@ export const putUsersUpdate = (data) => {
       })
       .catch(function (error) {
         console.log(error);
+        swal({
+          title: "Petani gagal diperbarui !",
+          icon: "error",
+          button: "Oke",
+        });
         dispatch({
           type: PUT_USERS_UPDATE,
           payload: {
@@ -213,6 +235,13 @@ export const deleteDataUser = () => {
 
     dispatch({
       type: POST_USERS_CREATE,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+    dispatch({
+      type: PUT_USERS_UPDATE,
       payload: {
         data: false,
         errorMessage: false,

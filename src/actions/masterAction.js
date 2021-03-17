@@ -30,7 +30,6 @@ export const getTotalList = (data) => {
       data: data,
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_TOTAL_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -55,7 +54,6 @@ export const getProvinsiList = (data) => {
       data: data,
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_PROVINSI_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -79,7 +77,6 @@ export const getKabupatenList = (id) => {
       },
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_KABUPATEN_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -103,7 +100,6 @@ export const getKecamatanList = (id_provinsi, id_kabupaten) => {
       },
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_KECAMATAN_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -127,7 +123,6 @@ export const getKelurahanList = (id_provinsi, id_kabupaten, id_kecamtan) => {
       },
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_KELURAHAN_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -151,7 +146,6 @@ export const getGenderList = () => {
       },
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_GENDER_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -175,7 +169,6 @@ export const getAgamaList = () => {
       },
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_AGAMA_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -199,7 +192,6 @@ export const getPendidikanList = () => {
       },
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_PENDIDIKAN_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -223,7 +215,6 @@ export const getGolonganDarahList = () => {
       },
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_GOLONGANDARAH_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -247,7 +238,6 @@ export const getSukuList = () => {
       },
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_SUKU_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -271,7 +261,6 @@ export const getPekerjaanList = () => {
       },
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_PEKERJAAN_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -295,7 +284,6 @@ export const getTipeUserList = () => {
       },
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_TIPEUSER_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -319,7 +307,6 @@ export const getSatuanList = () => {
       },
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_SATUAN_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -343,7 +330,6 @@ export const getKomoditasList = () => {
       },
     })
       .then(function (response) {
-        console.log(response.data.data);
         dispatch({
           type: GET_KOMODITAS_LIST,
           payload: { data: response.data.data, errorMessage: false },
@@ -352,5 +338,105 @@ export const getKomoditasList = () => {
       .catch(function (error) {
         console.log(error);
       });
+  };
+};
+
+export const deleteDataWilayah = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: GET_PROVINSI_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+    dispatch({
+      type: GET_KABUPATEN_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    dispatch({
+      type: GET_KECAMATAN_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+    dispatch({
+      type: GET_KELURAHAN_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+  };
+};
+
+export const deleteDataMaster = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: GET_KOMODITAS_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    dispatch({
+      type: GET_AGAMA_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    dispatch({
+      type: GET_GENDER_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    dispatch({
+      type: GET_GOLONGANDARAH_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    dispatch({
+      type: GET_KOMODITAS_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+    dispatch({
+      type: GET_PEKERJAAN_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+    dispatch({
+      type: GET_PENDIDIKAN_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    dispatch({
+      type: GET_SATUAN_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
   };
 };

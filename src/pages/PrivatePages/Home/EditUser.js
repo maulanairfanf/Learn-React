@@ -24,18 +24,6 @@ class EditUser extends Component {
   }
 
   render() {
-    if (this.props.getResponseDataUser || this.props.errorResponseDataUser) {
-      console.log(this.props);
-      if (this.props.errorResponseDataUser) {
-        swal("Failed!", this.props.errorResponseDataUser, "error");
-      } else {
-        swal({
-          title: "User Updated !",
-          icon: "success",
-          button: "Oke",
-        });
-      }
-    }
     return (
       <>
         {this.props.getUsersDetail ? (

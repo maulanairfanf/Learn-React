@@ -1,10 +1,7 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import {
-  Button,
   Spinner,
-  Table,
-  Badge,
   UncontrolledDropdown,
   DropdownMenu,
   DropdownItem,
@@ -18,7 +15,6 @@ import swal from "sweetalert";
 import { deleteUser, getUsersList } from "../../actions/userAction";
 import { MoreVertical, Edit, Trash, Eye, UserPlus, User } from "react-feather";
 import Photo from "../../assets/user.png";
-import Kirito from "../../assets/tester.jpg";
 
 const handleClick = (dispatch, id, nama) => {
   swal({
@@ -109,12 +105,12 @@ const TableComponentUser = (props) => {
                 {row.foto_profil ? (
                   <img
                     src={url + row.foto_profil}
-                    className="rounded-circle h-100 w-100 border border-primary "
+                    className="rounded-circle h-100 w-100 border border-secondary "
                   ></img>
                 ) : (
                   <img
                     src={Photo}
-                    className="rounded-circle h-100 w-100  border border-primary"
+                    className="rounded-circle h-100 w-100  border border-secondary"
                   ></img>
                 )}
               </div>
