@@ -261,3 +261,15 @@ export const delleteDataPict = () => {
     });
   };
 };
+
+export const deleteDataSort = () => {
+  return (dispatch) => {
+    dispatch({
+      type: GET_USER_SORT,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+  };
+};

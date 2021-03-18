@@ -70,6 +70,14 @@ a:focus {
   background: #6d7fcc;
 }
 
+.active {
+  background: #fff;
+}
+
+.active .nav-link {
+  color: #339966;
+}
+
 .nav-link {
   color: #fff;
 }

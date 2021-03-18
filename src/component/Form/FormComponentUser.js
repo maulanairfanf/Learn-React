@@ -17,6 +17,10 @@ import {
   getPekerjaanList,
   getTipeUserList,
   getSatuanList,
+  deleteDataProvinsi,
+  deleteDataKabupaten,
+  deleteDataKelurahan,
+  deleteDataKecamatan,
 } from "../../actions/masterAction";
 
 const mapStateToProps = (state) => {
@@ -86,7 +90,6 @@ class FormComponentUser extends Component {
       id_kabupaten: 0,
       id_kecamatan: 0,
       id_kelurahan: 0,
-      disabled: true,
     };
   }
 
@@ -234,16 +237,16 @@ class FormComponentUser extends Component {
                     id_kelurahan: 0,
                   };
                 });
-
-                this.props.dispatch(
-                  getKabupatenList(e.target.selectedOptions[0].id)
-                );
-
-                {
-                  console.log("id provinsi : ", this.state.id_provinsi);
+                if (e.target.value != 0) {
+                  this.props.dispatch(
+                    getKabupatenList(e.target.selectedOptions[0].id)
+                  );
+                } else {
+                  this.props.dispatch(deleteDataKabupaten());
                 }
               }}
             >
+              {console.log(this.state.id_provinsi)}
               <option value={0}>Provinsi</option>
               {this.props.master.provinsi &&
                 this.props.master.provinsi.map((item, i) => {
@@ -257,12 +260,12 @@ class FormComponentUser extends Component {
           </>
         ) : label === "Kabupaten" ? (
           <>
-            {this.kabupaten}
             <Input
               {...input}
               type={type}
               placeholder={placeholder}
               value={value}
+              disabled={disabled}
               onChange={(e) => {
                 e.preventDefault();
                 this.setState({
@@ -270,16 +273,21 @@ class FormComponentUser extends Component {
                   id_kecamatan: 0,
                   id_kelurahan: 0,
                 });
-                this.props.dispatch(
-                  getKecamatanList(
-                    this.state.id_provinsi,
-                    e.target.selectedOptions[0].id
-                  )
-                );
+
+                if (e.target.value != 0) {
+                  this.props.dispatch(
+                    getKecamatanList(
+                      this.state.id_provinsi,
+                      e.target.selectedOptions[0].id
+                    )
+                  );
+                } else {
+                  this.props.dispatch(deleteDataKecamatan());
+                }
+
                 console.log("id kabupaten : ", e.target.selectedOptions[0].id);
               }}
             >
-              {console.log(this.props.master.kabupaten)}
               <option value={0}>Kabupaten / Kota</option>
               {this.props.master.kabupaten &&
                 this.props.master.kabupaten.map((item, i) => {
@@ -304,20 +312,24 @@ class FormComponentUser extends Component {
               type={type}
               placeholder={placeholder}
               value={value}
+              disabled={disabled}
               onChange={(e) => {
                 e.preventDefault();
                 this.setState({
                   id_kecamatan: e.target.selectedOptions[0].id,
                   id_kelurahan: 0,
                 });
-                this.props.dispatch(
-                  getKelurahanList(
-                    this.state.id_provinsi,
-                    this.state.id_kabupaten,
-                    e.target.selectedOptions[0].id
-                  )
-                );
-
+                if (e.target.value != 0) {
+                  this.props.dispatch(
+                    getKelurahanList(
+                      this.state.id_provinsi,
+                      this.state.id_kabupaten,
+                      e.target.selectedOptions[0].id
+                    )
+                  );
+                } else {
+                  this.props.dispatch(deleteDataKelurahan());
+                }
                 console.log("id kecamatan : ", e.target.selectedOptions[0].id);
               }}
             >
@@ -339,6 +351,7 @@ class FormComponentUser extends Component {
               type={type}
               placeholder={placeholder}
               value={value}
+              disabled={disabled}
               onChange={(e) => {
                 e.preventDefault();
                 this.setState({
@@ -377,6 +390,11 @@ class FormComponentUser extends Component {
   );
 
   render() {
+    const provinsi = this.props.master.provinsi;
+    const kabupaten = this.props.master.kabupaten;
+    const kecamatan = this.props.master.kecamatan;
+    const kelurahan = this.props.master.kelurahan;
+
     return (
       <>
         <Form onSubmit={this.props.handleSubmit}>
@@ -568,6 +586,7 @@ class FormComponentUser extends Component {
             <Col md={4}>
               <FormGroup>
                 <Field
+                  disabled={kabupaten == false ? true : false}
                   type="select"
                   name="id_kabupaten"
                   component={this.renderField}
@@ -578,6 +597,7 @@ class FormComponentUser extends Component {
             <Col md={4}>
               <FormGroup>
                 <Field
+                  disabled={kecamatan == false ? true : false}
                   type="select"
                   name="id_kecamatan"
                   component={this.renderField}
@@ -588,6 +608,7 @@ class FormComponentUser extends Component {
             <Col md={4}>
               <FormGroup>
                 <Field
+                  disabled={kelurahan == false ? true : false}
                   type="select"
                   name="id_desa"
                   component={this.renderField}

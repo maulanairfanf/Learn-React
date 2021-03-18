@@ -9,8 +9,12 @@ import {
   getKecamatanList,
   getKelurahanList,
   getTipeUserList,
+  deleteDataProvinsi,
+  deleteDataKabupaten,
+  deleteDataKelurahan,
+  deleteDataKecamatan,
 } from "../../actions/masterAction";
-import { getUserSort } from "../../actions/userAction";
+import { deleteDataSort, getUserSort } from "../../actions/userAction";
 
 const mapStateToProps = (state) => {
   return {
@@ -88,23 +92,31 @@ class FormComponentPupuk extends Component {
               value={value}
               onChange={(e) => {
                 e.preventDefault();
-                this.setState({
-                  id_provinsi: e.target.selectedOptions[0].id,
-                  id_kabupaten: 0,
-                  id_kecamatan: 0,
-                  id_kelurahan: 0,
-                  sort_id_provinsi: e.target.value,
-                  sort_id_kabupaten: 0,
-                  sort_id_kecamatan: 0,
-                  sort_id_kelurahan: 0,
+                this.setState(function () {
+                  return {
+                    id_provinsi: e.target.selectedOptions[0].id,
+                    id_kabupaten: 0,
+                    id_kecamatan: 0,
+                    id_kelurahan: 0,
+                    sort_id_provinsi: e.target.value,
+                    sort_id_kabupaten: 0,
+                    sort_id_kecamatan: 0,
+                    sort_id_kelurahan: 0,
+                  };
                 });
-                console.log(this.state.id_provinsi);
-                this.props.dispatch(
-                  getKabupatenList(e.target.selectedOptions[0].id)
-                );
+                if (e.target.value != 0) {
+                  this.props.dispatch(
+                    getKabupatenList(e.target.selectedOptions[0].id)
+                  );
+                } else {
+                  this.props.dispatch(deleteDataKabupaten());
+                  this.props.dispatch(deleteDataSort());
+                }
               }}
             >
-              <option value={0}>Provinsi</option>
+              <option value={0} key={0}>
+                Provinsi
+              </option>
               {this.props.master.provinsi &&
                 this.props.master.provinsi.map((item, i) => {
                   return (
@@ -122,9 +134,9 @@ class FormComponentPupuk extends Component {
               type={type}
               placeholder={placeholder}
               value={value}
+              disabled={disabled}
               onChange={(e) => {
                 e.preventDefault();
-
                 this.setState({
                   id_kabupaten: e.target.selectedOptions[0].id,
                   id_kecamatan: 0,
@@ -133,13 +145,19 @@ class FormComponentPupuk extends Component {
                   sort_id_kecamatan: 0,
                   sort_id_kelurahan: 0,
                 });
-                console.log(this.state.id_provinsi, this.state.id_kabupaten);
-                this.props.dispatch(
-                  getKecamatanList(
-                    this.state.id_provinsi,
-                    e.target.selectedOptions[0].id
-                  )
-                );
+
+                if (e.target.value != 0) {
+                  this.props.dispatch(
+                    getKecamatanList(
+                      this.state.id_provinsi,
+                      e.target.selectedOptions[0].id
+                    )
+                  );
+                } else {
+                  this.props.dispatch(deleteDataKecamatan());
+                  this.props.dispatch(deleteDataSort());
+                }
+
                 console.log("id kabupaten : ", e.target.selectedOptions[0].id);
               }}
             >
@@ -167,6 +185,7 @@ class FormComponentPupuk extends Component {
               type={type}
               placeholder={placeholder}
               value={value}
+              disabled={disabled}
               onChange={(e) => {
                 e.preventDefault();
                 this.setState({
@@ -175,19 +194,18 @@ class FormComponentPupuk extends Component {
                   sort_id_kecamatan: e.target.value,
                   sort_id_kelurahan: 0,
                 });
-                console.log(
-                  this.state.id_provinsi,
-                  this.state.id_kabupaten,
-                  this.state.id_kecamatan
-                );
-                this.props.dispatch(
-                  getKelurahanList(
-                    this.state.id_provinsi,
-                    this.state.id_kabupaten,
-                    e.target.selectedOptions[0].id
-                  )
-                );
-
+                if (e.target.value != 0) {
+                  this.props.dispatch(
+                    getKelurahanList(
+                      this.state.id_provinsi,
+                      this.state.id_kabupaten,
+                      e.target.selectedOptions[0].id
+                    )
+                  );
+                } else {
+                  this.props.dispatch(deleteDataKelurahan());
+                  this.props.dispatch(deleteDataSort());
+                }
                 console.log("id kecamatan : ", e.target.selectedOptions[0].id);
               }}
             >
@@ -209,26 +227,25 @@ class FormComponentPupuk extends Component {
               type={type}
               placeholder={placeholder}
               value={value}
+              disabled={disabled}
               onChange={(e) => {
                 e.preventDefault();
                 this.setState({
                   id_kelurahan: e.target.selectedOptions[0].id,
-                  sort_id_kelurahan: e.target.value,
                 });
-                console.log(
-                  this.state.sort_id_provinsi,
-                  this.state.sort_id_kabupaten,
-                  this.state.sort_id_kecamatan,
-                  e.target.value
-                );
-                this.props.dispatch(
-                  getUserSort(
-                    this.state.sort_id_provinsi,
-                    this.state.sort_id_kabupaten,
-                    this.state.sort_id_kecamatan,
-                    e.target.value
-                  )
-                );
+                if (e.target.value != 0) {
+                  this.props.dispatch(
+                    getUserSort(
+                      this.state.sort_id_provinsi,
+                      this.state.sort_id_kabupaten,
+                      this.state.sort_id_kecamatan,
+                      e.target.value
+                    )
+                  );
+                } else {
+                  this.props.dispatch(deleteDataSort());
+                }
+                console.log("Id kelurahan : ", e.target.selectedOptions[0].id);
               }}
             >
               <option value={0}>Kelurahan</option>
@@ -249,13 +266,14 @@ class FormComponentPupuk extends Component {
               type={type}
               placeholder={placeholder}
               value={value}
+              disabled={disabled}
               onChange={(e) => {
                 this.setState({
                   id_petani: e.target.value,
                 });
               }}
             >
-              <option value={0}></option>
+              <option value={0}>Petani</option>
               {this.props.user.petani &&
                 this.props.user.petani.map((item, i) => {
                   return (
@@ -281,6 +299,11 @@ class FormComponentPupuk extends Component {
     </Row>
   );
   render() {
+    const provinsi = this.props.master.provinsi;
+    const kabupaten = this.props.master.kabupaten;
+    const kecamatan = this.props.master.kecamatan;
+    const kelurahan = this.props.master.kelurahan;
+    const petani = this.props.user.petani;
     return (
       <form onSubmit={this.props.handleSubmit}>
         <FormGroup row>
@@ -314,56 +337,7 @@ class FormComponentPupuk extends Component {
               />
             </FormGroup>
           </Col>
-          <Col md={4}>
-            <FormGroup>
-              <Field
-                type="select"
-                name="id_provinsi"
-                component={this.renderField}
-                label="Provinsi"
-              />
-            </FormGroup>
-          </Col>{" "}
-          <Col md={4}>
-            <FormGroup>
-              <Field
-                type="select"
-                name="id_kabupaten"
-                component={this.renderField}
-                label="Kabupaten"
-              />
-            </FormGroup>
-          </Col>
-          <Col md={4}>
-            <FormGroup>
-              <Field
-                type="select"
-                name="id_kecamatan"
-                component={this.renderField}
-                label="Kecamatan"
-              />
-            </FormGroup>
-          </Col>
-          <Col md={4}>
-            <FormGroup>
-              <Field
-                type="select"
-                name="id_desa"
-                component={this.renderField}
-                label="Kelurahan"
-              />
-            </FormGroup>
-          </Col>
-          <Col md={4}>
-            <FormGroup>
-              <Field
-                type="select"
-                name="id_petani"
-                component={this.renderField}
-                label="Petani"
-              />
-            </FormGroup>
-          </Col>
+
           <Col md={4}>
             <FormGroup>
               <Field
@@ -384,18 +358,61 @@ class FormComponentPupuk extends Component {
               />
             </FormGroup>
           </Col>
-        </FormGroup>
-
+        </FormGroup>{" "}
+        <h5 className="text-secondary">Pilih wilayah untuk memilih petani</h5>
         <FormGroup row>
-          <Col md="12">
+          <Col md={4}>
             <FormGroup>
-              <Button
-                color="info"
-                type="submit"
-                disabled={this.props.submitting}
-              >
-                Simpan
-              </Button>
+              <Field
+                type="select"
+                name="id_provinsi"
+                component={this.renderField}
+                label="Provinsi"
+              />
+            </FormGroup>
+          </Col>
+          <Col md={4}>
+            <FormGroup>
+              <Field
+                disabled={kabupaten == false ? true : false}
+                type="select"
+                name="id_kabupaten"
+                component={this.renderField}
+                label="Kabupaten"
+              />
+            </FormGroup>
+          </Col>
+          <Col md={4}>
+            <FormGroup>
+              <Field
+                disabled={kecamatan == false ? true : false}
+                type="select"
+                name="id_kecamatan"
+                component={this.renderField}
+                label="Kecamatan"
+              />
+            </FormGroup>
+          </Col>
+          <Col md={4}>
+            <FormGroup>
+              <Field
+                disabled={kelurahan == false ? true : false}
+                type="select"
+                name="id_desa"
+                component={this.renderField}
+                label="Kelurahan"
+              />
+            </FormGroup>
+          </Col>
+          <Col md={4}>
+            <FormGroup>
+              <Field
+                disabled={petani == false ? true : false}
+                type="select"
+                name="id_petani"
+                component={this.renderField}
+                label="Petani"
+              />
             </FormGroup>
           </Col>
         </FormGroup>

@@ -341,7 +341,7 @@ export const getKomoditasList = () => {
   };
 };
 
-export const deleteDataWilayah = () => {
+export const deleteDataProvinsi = () => {
   return async (dispatch) => {
     dispatch({
       type: GET_PROVINSI_LIST,
@@ -375,6 +375,63 @@ export const deleteDataWilayah = () => {
   };
 };
 
+export const deleteDataKabupaten = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: GET_KABUPATEN_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+
+    dispatch({
+      type: GET_KECAMATAN_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+    dispatch({
+      type: GET_KELURAHAN_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+  };
+};
+
+export const deleteDataKecamatan = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: GET_KECAMATAN_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+    dispatch({
+      type: GET_KELURAHAN_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+  };
+};
+
+export const deleteDataKelurahan = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: GET_KELURAHAN_LIST,
+      payload: {
+        data: false,
+        errorMessage: false,
+      },
+    });
+  };
+};
 export const deleteDataMaster = () => {
   return async (dispatch) => {
     dispatch({
